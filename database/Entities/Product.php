@@ -2,7 +2,9 @@
 
 namespace App\Database\Entities;
 
-class Product extends \App\Database\Entity
+use App\Database\Entity;
+
+class Product extends Entity
 {
 
     private int $id;

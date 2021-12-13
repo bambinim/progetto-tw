@@ -136,11 +136,11 @@ class User extends Entity {
     }
 
     /**
-     * @param int|null $image_id
+     * @param int|null $imageId
      */
-    public function setImageId(?int $image_id): void
+    public function setImageId(?int $imageId): void
     {
-        $this->imageId = $image_id;
+        $this->imageId = $imageId;
     }
 
     public static function _getColumns(): array
