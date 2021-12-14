@@ -11,6 +11,11 @@ foreach (glob(PROJECT_ROOT . '/database/Entities/*.php') as $file) {
     require_once $file;
 }
 
+// load security manager
+require_once PROJECT_ROOT . "/SecurityManager.php";
+
+session_start();
+
 use App\Database\Database;
 
 Database::setHost('db.matteobambini.net');
