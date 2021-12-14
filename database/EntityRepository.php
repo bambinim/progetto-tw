@@ -4,9 +4,9 @@ namespace App\Database;
 
 class EntityRepository
 {
-    private $table;
-    private $columns;
-    private $entityClass;
+    private string $table;
+    private array $columns;
+    private string $entityClass;
     private EntityRepository $repository;
 
     public function __construct($table, $columns, $class)
@@ -50,12 +50,8 @@ class EntityRepository
             ->setParams($params['paramBinds']);
     }
 
-    public function find($conditions): ?array
+    public function find(array $conditions): ?array
     {
-        if (count($conditions) == 0)
-        {
-            return null;
-        }
         $query = $this->createQueryWithConditions($conditions);
         $data = $query->execute();
         $res = [];
@@ -66,7 +62,7 @@ class EntityRepository
         return $res;
     }
 
-    public function findOne($conditions): ?Entity
+    public function findOne(array $conditions): ?Entity
     {
         if (count($conditions) == 0)
         {

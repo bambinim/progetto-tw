@@ -2,6 +2,7 @@
 
 namespace App\Database\Entities;
 
+use App\Database\Database;
 use App\Database\Entity;
 
 class User extends Entity {
@@ -141,6 +142,14 @@ class User extends Entity {
     public function setImageId(?int $imageId): void
     {
         $this->imageId = $imageId;
+    }
+
+    /**
+     * @return array<int, Order>
+     */
+    public function getOrders(): array
+    {
+        return Database::getRepository(Order::class)->find(['user_id' => $this->getId()]);
     }
 
     public static function _getColumns(): array
