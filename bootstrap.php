@@ -1,22 +1,19 @@
 <?php
-
-// require_once('./database/Database.php');
+const PROJECT_ROOT = __DIR__;
 
 // load database files
-$dbFiles = glob('database/*.php');
-foreach ($dbFiles as $file) {
-    require_once($file);
+foreach (glob(PROJECT_ROOT . '/database/*.php') as $file) {
+    require_once $file;
 }
 
 // load entities
-$dbFiles = glob('database/Entities/*.php');
-foreach ($dbFiles as $file) {
-    require_once($file);
+foreach (glob(PROJECT_ROOT . '/database/Entities/*.php') as $file) {
+    require_once $file;
 }
 
 use App\Database\Database;
 
-Database::setHost('');
+Database::setHost('db.matteobambini.net');
 Database::setDatabase('progettotw');
-Database::setUser('');
-Database::setPassword('');
+Database::setUser('matteo');
+Database::setPassword('password');

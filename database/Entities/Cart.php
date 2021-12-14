@@ -8,9 +8,9 @@ class Cart extends Entity
 {
 
     private int $id;
-    private ?string $cookie;
+    private ?string $cookie = null;
     private int $productId;
-    private ?int $userId;
+    private ?int $userId = null;
 
     /**
      * @return int

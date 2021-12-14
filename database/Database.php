@@ -41,8 +41,10 @@ class Database
 
     public static function getConnection() :PDO
     {
-        return new PDO('mysql:host=' . Database::$host . ';port=' . Database::$port . ';dbname=' . Database::$database,
+        $conn = new PDO('mysql:host=' . Database::$host . ';port=' . Database::$port . ';dbname=' . Database::$database,
             Database::$user, Database::$password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
     }
 
     /**

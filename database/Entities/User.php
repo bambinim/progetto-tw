@@ -12,8 +12,8 @@ class User extends Entity {
     private string $email;
     private string $password;
     private string $registrationDate;
-    private ?string $roles;
-    private ?int $imageId;
+    private ?string $roles = null;
+    private ?int $imageId = null;
 
     /**
      * @return int

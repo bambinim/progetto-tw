@@ -9,10 +9,10 @@ class Product extends Entity
 
     private int $id;
     private string $name;
-    private ?string $description;
+    private ?string $description = null;
     private float $price;
     private string $creationDate;
-    private bool $isSold;
+    private bool $isSold = false;
     private int $condition;
     private int $categoryId;
     private int $shopId;

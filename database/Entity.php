@@ -8,6 +8,11 @@ abstract class Entity
 {
     protected bool $isNew = true;
 
+    public function __construct($isNew = true)
+    {
+        $this->isNew = $isNew;
+    }
+
     /**
      * Converts entity in associative array
      */
@@ -16,7 +21,11 @@ abstract class Entity
         $arr = [];
         $class = get_class($this);
         foreach ($class::_getColumns() as $i) {
-            $arr[$i] = $this->{"get" . ucfirst($i)}();
+            if ($i == $class::_getPrimaryKeyColName() && $this->isNew) {
+                $arr[$i] = -1;
+            } else {
+                $arr[$i] = $this->{Entity::toCamelCase("get" . $i)}();
+            }
         }
         return $arr;
     }
@@ -76,18 +85,18 @@ abstract class Entity
                 }
             }
             $query = substr($query, 0, -2) . ");";
+            $this->isNew = false;
         } else {
             $query = "UPDATE $table SET ";
             foreach ($columns as $i) {
                 $query = $query . "$i = :$i, ";
             }
-            $query = substr($query, 0, -2) . " WHERE $pk = :$pk";
-            $this->isNew = false;
+            $query = substr($query, 0, -2) . " WHERE $pk = :second_$pk";
+            $params[":second_" . $pk] = $values[$pk];
         }
         $conn = Database::getConnection();
         $stmt = $conn->prepare($query);
         $stmt->execute($params);
-        //$this->{"set" . ucfirst($pk)}(intval($conn->lastInsertId()));
         $this->{Entity::toCamelCase("set_" . $pk)}(intval($conn->lastInsertId()));
     }
 
