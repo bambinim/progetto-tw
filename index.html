@@ -10,45 +10,78 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+    <!--rimossa la classe fixed-top-->
+    <nav class="navbar navbar-expand-lg navbar-light" aria-label="Main navigation">
         <div class="container-fluid">
+            <!--Toggle button-->
             <button class="navbar-toggler p-0 border-0" id="navbarSideCollapse" type="button">
                 <span class="fas fa-bars fa-2x"></span>
             </button>
-            <a class="navbar-brand" href="#">Logo</a>
+            <!--Brand-->
+            <a class="navbar-brand" href="#"> <img src="img/logo.png" alt="logo del sito"> </a>
 
             <div class="navbar-collapse offcanvas-collapse">
                 <div class="offcanvas-header">
-                    <!--<h5 class="offcanvas-title">Offcanvas</h5>-->
                     <button type="button" class="btn-close text-reset" aria-label="Close"
                         id="offcanvasCloseButton"></button>
                 </div>
-                <div class="offcanvas-collapse-body">
+
+                <div class="offcanvas-collapse-body col-md-6">
+                    <!--Corpo del menù-->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item ml-2">
+                            <a class="nav-link" href="#">Novit&agrave;</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Notifications</a>
+                            <a class="nav-link" href="#">Categorie</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Switch account</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                                aria-expanded="false">Settings</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                        <!--Link da mostrare solo su smartphone-->
+                        <div class="col-6 d-lg-none">
+                            <hr />
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">I miei ordini</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Il mio account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Carrello</a>
+                            </li>
+                            <!--fisso in fondo alla pagina-->
+                            <div class="col-6 fixed-bottom">
+                                <hr />
+                                <div class="d-flex">
+                                    <a class="nav-link" href="#">
+                                        <div class="name-circle">
+                                            <p>NC</p>
+                                        </div>
+                                    </a>
+                                    <p class="ml-2 mt-2">Nome Cognome</p>
+                                    <span class="fas fa-2x fa-sign-out-alt ml-2 mt-2"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- default d-none (display: none) quando d >= md d-inline-block  -->
+                        <li class="nav-item d-none d-lg-inline-block">
+                            <form class="d-flex p-1">
+                                <select class="form-select" aria-label="Categorie disponibili">
+                                    <option selected disabled>Categorie</option>
+                                    <option value="1">Categoria 1</option>
+                                    <option value="2">Categoria 2</option>
+                                    <option value="3">Categoria 3</option>
+                                </select>
+                                <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca">
+                                <button class="btn btn-outline-success" type="submit">Cerca</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
             </div>
+
             <div id="nav-icons">
                 <span class="fas fa-bell fa-2x me-3 position-relative">
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -66,6 +99,18 @@
             </div>
         </div>
     </nav>
+    <!--Search bar solo su mobile-->
+    <div class="bg-menu-color d-lg-none">
+        <form class="d-flex justify-content-center p-2">
+            <select class="form-select" aria-label="Categorie disponibili">
+                <option selected disabled>Categorie</option>
+                <option value="1">Categoria 1</option>
+                <option value="2">Categoria 2</option>
+                <option value="3">Categoria 3</option>
+            </select>
+            <input class="form-control" type="search" placeholder="Cerca" aria-label="Cerca">
+        </form>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

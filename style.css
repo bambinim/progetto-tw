@@ -1,8 +1,10 @@
 :root {
     --primary-color: #E8B446;
+    --writing-color: #0e555c;
+    --button-bg-color: #2c858d;
 }
 
-nav {
+nav, .bg-menu-color{
     background-color: var(--primary-color);
 }
 
@@ -22,6 +24,36 @@ nav>button {
 
 nav .badge {
     font-size: 8pt;
+}
+
+a{
+    color: var(--writing-color) !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-brand > img{
+    max-height: 50px !important;
+}
+.ml-2{
+    margin-left: 2%;
+}
+.name-circle {
+    background: var(--button-bg-color);
+    border-radius: 40px;
+    color: white;
+    height: 40px;
+    font-weight: bold;
+    width: 40px;
+    display: table;
+    margin: 0 0 5% 5%;
+}
+.name-circle > p{
+    /*vertical-align: middle;*/
+    text-align: center;
+    padding-top: 5px;
+    display: table-cell;
 }
 
 @media (max-width: 991.98px) {
@@ -61,5 +93,8 @@ nav .badge {
     }
     .mobile-hidden {
         display: none !important;
+    }
+    .nav-item{
+        margin-left: 3%;
     }
 }
