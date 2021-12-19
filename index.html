@@ -20,7 +20,7 @@
             <!--Brand-->
             <a class="navbar-brand" href="#"> <img src="img/logo.png" alt="logo del sito"> </a>
 
-            <div class="navbar-collapse offcanvas-collapse">
+            <div class="col-8 navbar-collapse offcanvas-collapse">
                 <div class="offcanvas-header">
                     <button type="button" class="btn-close text-reset" aria-label="Close"
                         id="offcanvasCloseButton"></button>
@@ -39,7 +39,7 @@
                             <a class="nav-link" href="#">Categorie</a>
                         </li>
                         <!--Link da mostrare solo su smartphone-->
-                        <div class="col-6 d-lg-none">
+                        <div class="col-6 d-lg-none ml-2">
                             <hr />
                             <li class="nav-item">
                                 <a class="nav-link" href="#">I miei ordini</a>
@@ -51,18 +51,21 @@
                                 <a class="nav-link" href="#">Carrello</a>
                             </li>
                             <!--fisso in fondo alla pagina-->
-                            <div class="col-6 fixed-bottom">
+                            <div class="col-7 fixed-bottom d-flex d-inline">
                                 <hr />
-                                <div class="d-flex">
+                                <div class="col-2">
                                     <a class="nav-link" href="#">
                                         <div class="name-circle">
                                             <p>NC</p>
                                         </div>
                                     </a>
+                                </div>
+                                <div class="col-8 d-flex justify-content-center">
                                     <p class="ml-2 mt-2">Nome Cognome</p>
+                                </div>
+                                <div class="col-2">
                                     <span class="fas fa-2x fa-sign-out-alt ml-2 mt-2"></span>
                                 </div>
-
                             </div>
                         </div>
                         <!-- default d-none (display: none) quando d >= md d-inline-block  -->
@@ -83,7 +86,7 @@
             </div>
 
             <div id="nav-icons">
-                <span class="fas fa-bell fa-2x me-3 position-relative">
+                <span class="fas fa-bell fa-2x me-3 position-relative" id="notification-bell" >
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         99+
                         <span class="visually-hidden">unread messages</span>
@@ -111,6 +114,26 @@
             <input class="form-control" type="search" placeholder="Cerca" aria-label="Cerca">
         </form>
     </div>
+    <!--Il codice sottostante è puramente a scopo esemplificativo-->
+    <div class="d-none" id="notification-list">
+        <ul class="unstyled">
+            <li>
+                <h5>Titolo notifica</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum. Suspendisse vel fringilla ligula.</p>
+            </li>
+            <hr/>
+            <li>
+                <h5>Titolo notifica</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum. Suspendisse vel fringilla ligula.</p>
+            </li>
+            <hr/>
+            <li>
+                <h5>Titolo notifica</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum. Suspendisse vel fringilla ligula.</p>
+            </li>
+        </ul>
+      </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

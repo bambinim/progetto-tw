@@ -26,3 +26,13 @@ $('#offcanvasCloseButton').click(function() {
     let backdrop = $(offcanvas).next();
     closeOffcanvas(offcanvas, backdrop);
 });
+
+$('#notification-bell').click(()=>{
+    console.log("click");
+    $('#notification-bell').popover({
+        'title' : 'Notifiche', 
+        'html' : true,
+        'placement' : 'bottom',
+        'content' : $("#notification-list").html()
+    });
+});

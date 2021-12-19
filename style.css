@@ -26,7 +26,7 @@ nav .badge {
     font-size: 8pt;
 }
 
-a{
+nav a{
     color: var(--writing-color) !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
@@ -54,6 +54,9 @@ a{
     text-align: center;
     padding-top: 5px;
     display: table-cell;
+}
+select, input[type=search]{
+    min-width: fit-content;
 }
 
 @media (max-width: 991.98px) {
