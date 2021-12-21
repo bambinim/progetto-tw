@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Database\Entities;
@@ -10,7 +9,7 @@ class Notification extends Entity
 
     private int $id;
     private string $title;
-    private ?string $text = 0;
+    private ?string $text = null;
     private int $userId;
 
    
@@ -92,7 +91,7 @@ class Notification extends Entity
         return 'id';
     }
 
-    public static function _getTableName(): int
+    public static function _getTableName(): string
     {
         return 'notifications';
     }

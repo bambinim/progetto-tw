@@ -46,24 +46,6 @@ class Category extends Entity
         $this->name = $name;
     }
 
-    
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-  /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
     /**
      * @return string
      */
@@ -112,7 +94,7 @@ class Category extends Entity
         return 'id';
     }
 
-    public static function _getTableName(): int
+    public static function _getTableName(): string
     {
         return 'categories';
     }

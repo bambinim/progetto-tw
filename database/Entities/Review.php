@@ -12,8 +12,8 @@ class Review extends Entity
     private string $title;
     private ?string $text = null;
     private string $date;
-    int $shopId;
-    int $userId;
+    private int $shopId;
+    private int $userId;
 
    /**
      * @return int
@@ -142,7 +142,7 @@ class Review extends Entity
         return 'id';
     }
 
-    public static function _getTableName()(): int
+    public static function _getTableName(): string
     {
         return 'reviews';
     }

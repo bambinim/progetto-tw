@@ -91,7 +91,7 @@ class ProductImage extends Entity
         return 'id';
     }
 
-    public static function _getTableName(): int
+    public static function _getTableName(): string
     {
         return 'products_images';
     }

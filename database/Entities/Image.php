@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Database\Entities;
@@ -41,7 +40,7 @@ class Image extends Entity
         return 'id';
     }
 
-    public static function _getTableName(): int
+    public static function _getTableName(): string
     {
         return 'images';
     }
