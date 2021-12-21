@@ -6,8 +6,9 @@ use App\Router\SimpleRouter;
 
 $router = new SimpleRouter();
 
-$router->get('/ciao', function() {
-    echo "Hello, World!";
-});
+// load controllers
+foreach (glob(PROJECT_ROOT . '/controllers/*.php') as $file) {
+    require_once $file;
+}
 
 $router->handle($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
