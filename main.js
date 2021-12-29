@@ -28,11 +28,27 @@ $('#offcanvasCloseButton').click(function() {
 });
 
 $('#notification-bell').click(()=>{
-    console.log("click");
     $('#notification-bell').popover({
         'title' : 'Notifiche', 
         'html' : true,
         'placement' : 'bottom',
         'content' : $("#notification-list").html()
+    });
+});
+
+$('#user-icon').click(()=>{
+    $('#user-icon').popover({
+        'html' : true,
+        'placement' : 'bottom',
+        'content' : $("#user-menu").html()
+    });
+});
+
+$('body').on('click', function (e) {
+    $('[data-toggle=popover]').each(function () {
+        // hide any open popovers when the anywhere else in the body is clicked
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
     });
 });

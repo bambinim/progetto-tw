@@ -2,8 +2,16 @@
     --primary-color: #E8B446;
     --writing-color: #0e555c;
     --button-bg-color: #2c858d;
+    --fill-color: #F4F4F4;
 }
 
+.btn-link{
+    padding: 0 0 0 0 !important;
+}
+
+a, p, strong, h1, h2, h3, h4, h5, h6{
+    color: var(--writing-color) !important;
+}
 nav, .bg-menu-color{
     background-color: var(--primary-color);
 }
@@ -27,7 +35,6 @@ nav .badge {
 }
 
 nav a{
-    color: var(--writing-color) !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 20px;
@@ -36,9 +43,7 @@ nav a{
 .navbar-brand > img{
     max-height: 50px !important;
 }
-.ml-2{
-    margin-left: 2%;
-}
+
 .name-circle {
     background: var(--button-bg-color);
     border-radius: 40px;
@@ -55,10 +60,20 @@ nav a{
     padding-top: 5px;
     display: table-cell;
 }
-select, input[type=search]{
+.btn-link{
     min-width: fit-content;
 }
 
+.input-group{
+    min-width: 300px;
+}
+.popover-body{
+    background-color: var(--fill-color);
+}
+
+footer{
+    background-color: var(--primary-color);
+}
 @media (max-width: 991.98px) {
     .offcanvas-collapse {
         top: 0;

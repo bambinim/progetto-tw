@@ -32,14 +32,14 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
-                        <li class="nav-item ml-2">
+                        <li class="nav-item ms-2">
                             <a class="nav-link" href="#">Novit&agrave;</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Categorie</a>
                         </li>
                         <!--Link da mostrare solo su smartphone-->
-                        <div class="col-6 d-lg-none ml-2">
+                        <div class="col-6 d-lg-none ms-2">
                             <hr />
                             <li class="nav-item">
                                 <a class="nav-link" href="#">I miei ordini</a>
@@ -50,55 +50,55 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Carrello</a>
                             </li>
-                            <!--fisso in fondo alla pagina-->
-                            <div class="col-7 fixed-bottom d-flex d-inline">
-                                <hr />
-                                <div class="col-2">
-                                    <a class="nav-link" href="#">
-                                        <div class="name-circle">
-                                            <p>NC</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-8 d-flex justify-content-center">
-                                    <p class="ml-2 mt-2">Nome Cognome</p>
-                                </div>
-                                <div class="col-2">
-                                    <span class="fas fa-2x fa-sign-out-alt ml-2 mt-2"></span>
-                                </div>
-                            </div>
                         </div>
-                        <!-- default d-none (display: none) quando d >= md d-inline-block  -->
+                        <!-- search su display grandi -->
                         <li class="nav-item d-none d-lg-inline-block">
                             <form class="d-flex p-1">
-                                <select class="form-select" aria-label="Categorie disponibili">
-                                    <option selected disabled>Categorie</option>
-                                    <option value="1">Categoria 1</option>
-                                    <option value="2">Categoria 2</option>
-                                    <option value="3">Categoria 3</option>
-                                </select>
-                                <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca">
-                                <button class="btn btn-outline-success" type="submit">Cerca</button>
+                                <div class="input-group">
+                                    <select class="form-select" aria-label="Categorie disponibili">
+                                        <option selected disabled>Categorie</option>
+                                        <option value="1">Categoria 1</option>
+                                        <option value="2">Categoria 2</option>
+                                        <option value="3">Categoria 3</option>
+                                    </select>
+
+                                    <input class="form-control me-2" type="search" placeholder="Cerca"
+                                        aria-label="Inserimento per la ricerca">
+                                </div>
+                                <button class="btn btn-outline-success" type="submit"
+                                    aria-label="bottone cerca">Cerca</button>
                             </form>
                         </li>
                     </ul>
+                    <!--Logout untente bottom smartphone-->
+                    <div class="flex-bottom d-lg-none">
+                        Prova
+                    </div>
                 </div>
             </div>
 
-            <div id="nav-icons">
-                <span class="fas fa-bell fa-2x me-3 position-relative" id="notification-bell" >
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        99+
-                        <span class="visually-hidden">unread messages</span>
+            <div id="nav-icons" class="d-flex">
+                <button type="button" class="btn btn-link link-dark shadow-none" id="notification-bell"
+                    aria-label="bottone delle notifiche">
+                    <span class="fas fa-bell fa-2x me-3 position-relative">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            99+
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
                     </span>
-                </span>
-                <span class="fas fa-shopping-cart fa-2x me-3 position-relative">
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        99+
-                        <span class="visually-hidden">unread messages</span>
+                </button>
+                <button type="button" class="btn btn-link link-dark shadow-none" aria-label="Bottone del carrello">
+                    <span class="fas fa-shopping-cart fa-2x me-3 position-relative">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            99+
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
                     </span>
-                </span>
-                <span class="fas fa-user-circle fa-2x me-2 mobile-hidden"></span>
+                </button>
+                <button type="button" id="user-icon" class="btn btn-link link-dark shadow-none"
+                    aria-label="bottone area personale">
+                    <span class="fas fa-user-circle fa-2x me-2 mobile-hidden"></span>
+                </button>
             </div>
         </div>
     </nav>
@@ -111,29 +111,96 @@
                 <option value="2">Categoria 2</option>
                 <option value="3">Categoria 3</option>
             </select>
-            <input class="form-control" type="search" placeholder="Cerca" aria-label="Cerca">
+            <input class="form-control" type="search" placeholder="Cerca" aria-label="inserimento nome per ricerca">
         </form>
     </div>
+
+    <!--Menù utente si presta bene alla generazione dinamica (da valutare) - da ingrandire -->
+    <div class="d-none" id="user-menu" data-trigger="focus" >
+
+        <div class="d-flex bg-white rounded pt-3 ps-2 pe-2 mb-2">
+            <div class="pb-3 mb-0 w-100">
+                <a href="#" class="text-decoration-none" role="button">
+                    <div class="d-flex justify-content-between">
+                        <strong>Ordini</strong>
+                        <span class="fas fa-angle-right"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-flex  bg-white rounded pt-3 ps-2 pe-2 mb-2">
+            <div class="pb-3 mb-0 w-100">
+                <a href="#" class="text-decoration-none" role="button">
+                    <div class="d-flex justify-content-between">
+                        <strong>Notifiche</strong>
+                        <span class="fas fa-angle-right"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-flex  bg-white rounded pt-3 ps-2 pe-2 mb-2">
+            <div class="pb-3 mb-0 w-100">
+                <a href="#" class="text-decoration-none" role="button">
+                    <div class="d-flex justify-content-between">
+                        <strong>Informazioni </br> personali</strong>
+                        <span class="fas fa-angle-right"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-flex bg-white rounded pt-3 ps-2 pe-2 mb-2">
+            <div class="pb-3 mb-0 w-100">
+                <a href="#" class="text-decoration-none" role="button">
+                    <div class="d-flex justify-content-between">
+                        <strong>Apri un negozio</strong>
+                        <span class="fas fa-angle-right"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-flex  bg-white rounded pt-3 ps-2 pe-2 mb-2">
+            <div class="pb-3 mb-0 w-100">
+                <a href="#" class="text-decoration-none" role="button">
+                    <div class="d-flex justify-content-between">
+                        <strong>Esci</strong>
+                        <span class="fas fa-sign-out-alt"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!--Il codice sottostante è puramente a scopo esemplificativo-->
     <div class="d-none" id="notification-list">
         <ul class="unstyled">
             <li>
                 <h5>Titolo notifica</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum. Suspendisse vel fringilla ligula.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum.
+                    Suspendisse vel fringilla ligula.</p>
             </li>
-            <hr/>
+            <hr />
             <li>
                 <h5>Titolo notifica</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum. Suspendisse vel fringilla ligula.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum.
+                    Suspendisse vel fringilla ligula.</p>
             </li>
-            <hr/>
+            <hr />
             <li>
                 <h5>Titolo notifica</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum. Suspendisse vel fringilla ligula.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum.
+                    Suspendisse vel fringilla ligula.</p>
             </li>
         </ul>
-      </div>
-
+    </div>
+    <footer class="row text-center fixed-bottom pt-2">
+        <div>
+            <p>Copyright 2021 Guariglia - Bambini - Oshodi </p>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
