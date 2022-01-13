@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="/assets/style.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title><?php $template['title']; ?></title>
@@ -19,7 +19,7 @@
             <span class="fas fa-bars fa-2x"></span>
         </button>
         <!--Brand-->
-        <a class="navbar-brand" href="#"> <img src="img/logo.png" alt="logo del sito"> </a>
+        <a class="navbar-brand" href="#"> <img src="/img/logo.png" alt="logo del sito"> </a>
 
         <div class="navbar-collapse offcanvas-collapse">
             <div class="offcanvas-header">
@@ -159,7 +159,7 @@
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/f2efc17350.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-<script src="main.js"></script>
+<script src="/assets/main2.js"></script>
 </body>
 
 </html>
