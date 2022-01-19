@@ -17,11 +17,22 @@ class Route
      */
     private $function;
 
-    public function __construct(string $route, array $methods, callable $function)
+    private ?string $requiredRole;
+
+    /**
+     * @return string|null
+     */
+    public function getRequiredRole(): ?string
+    {
+        return $this->requiredRole;
+    }
+
+    public function __construct(string $route, array $methods, callable $function, string $requiredRole = null)
     {
         $this->route = explode("/", $route);
         $this->methods = $methods;
         $this->function = $function;
+        $this->requiredRole = $requiredRole;
     }
 
     /**

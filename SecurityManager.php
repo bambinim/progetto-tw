@@ -10,11 +10,16 @@ class SecurityManager
 
     public static function getUser(): ?User
     {
-        if (isset($_SESSION['uid']) && !is_null($_SESSION['uid'])) {
-            return Database::getRepository(Database::class)->findOne(['id' => $_SESSION['uid']]);
+        if (isset($_SESSION['uid'])) {
+            return Database::getRepository(User::class)->findOne(['id' => $_SESSION['uid']]);
         } else {
             return null;
         }
+    }
+
+    public static function isUserLogged(): bool
+    {
+        return isset($_SESSION['uid']);
     }
 
     public static function checkCredentials(string $email, string $password): ?User

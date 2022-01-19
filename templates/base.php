@@ -2,11 +2,16 @@
 <html lang="it">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="/assets/style.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+    <?php if (isset($template['css'])) : ?>
+        <?php foreach ($template['css'] as $i) : ?>
+            <link rel="stylesheet" href="<?= $i; ?>"/>
+        <?php endforeach; ?>
+    <?php endif; ?>
     <title><?php $template['title']; ?></title>
 </head>
 
@@ -147,9 +152,15 @@
     </ul>
 </div>
 <main class="container-fluid">
+    <?php if (isset($template['error'])) : ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= $template['error']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
     <?php require_once(PROJECT_ROOT . '/templates/' . $template['template']); ?>
 </main>
-<footer class="row text-center fixed-bottom pt-2">
+<footer class="text-center pt-3 pb-2">
     <div>
         <p>&copy; 2021 Guariglia - Bambini - Oshodi </p>
     </div>
