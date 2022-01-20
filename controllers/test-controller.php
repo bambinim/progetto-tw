@@ -6,7 +6,9 @@ if (!empty($router)) {
     $router->all('/hello', function() {
         $template = [
             'title' => 'Test Page',
-            'template' => 'test/hello.php'
+            'template' => 'test/hello.php',
+            'message' => 'Test Messaggio',
+            'error' => 'Test errore'
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });

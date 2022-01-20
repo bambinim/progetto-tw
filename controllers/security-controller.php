@@ -1,6 +1,8 @@
 <?php
 
 use App\SecurityManager;
+use App\Database\Database;
+use App\Database\Entities\User;
 
 if (!empty($router)) {
     $router->get('/login', function() {
@@ -58,17 +60,49 @@ if (!empty($router)) {
     $router->post('/registration', function() {
         $registrationFields = ['firstName', 'lastName', 'email', 'password', 'password2', 'acceptUseTerms', 'acceptPrivacyPolicy'];
         // check if all fields are in the request
+        $template = [
+            'title' => 'Registrazione',
+            'template' => 'security/registration.php',
+            'css' => ['/assets/login.css']
+        ];
         $allFieldsOk = true;
         foreach ($registrationFields as $i) {
             if (!isset($_POST[$i])) {
                 $allFieldsOk = false;
                 break;
             }
+            $template[$i] = $_POST[$i];
         }
         if (!$allFieldsOk) {
-
+            // if not all fields are sent show error message into registration page
+            $template['error'] = 'Campi mancanti';
+            require_once(PROJECT_ROOT . '/templates/base.php');
+        } else if ($_POST['password'] != $_POST['password2']) {
+            // if two passwords do not match
+            $template['error'] = 'Le password non coincidono';
+            require_once(PROJECT_ROOT . '/templates/base.php');
+        } else if (!is_null(Database::getRepository(User::class)->findOne(['email' => $_POST['email']]))) {
+            // if email has already been used
+            $template['error'] = 'L\'indirizzo email è già stato utilizzato';
+            require_once(PROJECT_ROOT . '/templates/base.php');
         } else {
-
+            $user = new User();
+            $user->setFirstName($_POST['firstName']);
+            $user->setLastName($_POST['lastName']);
+            $user->setEmail($_POST['email']);
+            $user->setPassword(SecurityManager::createPasswordHash($_POST['password']));
+            $user->setRoles('["ROLE_USER"]');
+            $user->save();
+            header('location: /registration/confirm');
         }
     });
+
+    $router->all('/registration/confirm', function() {
+        $template = [
+            'title' => 'Registrazione Completa',
+            'template' => 'security/registration-confirm.php'
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    });
+
 }

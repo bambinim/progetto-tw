@@ -16,6 +16,11 @@ class User extends Entity {
     private ?string $roles = null;
     private ?int $imageId = null;
 
+    public function __construct($isNew = true)
+    {
+        $this->registrationDate = date_format(new \DateTime(), 'Y-m-d H:i:s');
+    }
+
     /**
      * @return int
      */

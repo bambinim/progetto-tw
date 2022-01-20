@@ -12,7 +12,7 @@
             <link rel="stylesheet" href="<?= $i; ?>"/>
         <?php endforeach; ?>
     <?php endif; ?>
-    <title><?php $template['title']; ?></title>
+    <title><?= $template['title']; ?></title>
 </head>
 
 <body>
@@ -158,6 +158,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
+    <?php if (isset($template['message'])) : ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= $template['message']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
     <?php require_once(PROJECT_ROOT . '/templates/' . $template['template']); ?>
 </main>
 <footer class="text-center pt-3 pb-2">
@@ -171,6 +177,11 @@
 <script src="https://kit.fontawesome.com/f2efc17350.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="/assets/main2.js"></script>
+<?php if (isset($template['js'])) : ?>
+    <?php foreach ($template['js'] as $i) : ?>
+        <script src="<?= $i; ?>"></script>
+    <?php endforeach; ?>
+<?php endif; ?>
 </body>
 
 </html>
