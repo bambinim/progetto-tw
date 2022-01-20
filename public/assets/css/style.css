@@ -6,9 +6,16 @@
     --badge-color: #2A1468;
 }
 
-html {
-    min-height: 100%;
-    max-width: 100%;
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer{
+    background-color: var(--bs-body-bg);
+    width: 100%;
+    margin-top: auto;
 }
 
 .btn-link{
@@ -83,17 +90,12 @@ nav a{
     background-color: var(--fill-color);
 }
 
-footer{
-    background-color: var(--primary-color);
-    width: 100%;
-}
-
 hr {
     margin-left: 20px;
     margin-right: 20px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 991.99px) {
     .offcanvas-collapse {
         top: 0;
         left: 0;

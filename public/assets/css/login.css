@@ -1,0 +1,28 @@
+div.card {
+    border-radius: 55px 55px 0 0;
+}
+
+footer {
+    background-color: var(--bs-body-bg);
+}
+
+@media(min-width: 992px) {
+    div.card {
+        border-radius: 55px;
+        min-height: 50vh;
+    }
+
+    div.card {
+        border-radius: 55px;
+    }
+
+    div.card>.row {
+        margin: 70px 0;
+    }
+    div.card>.row>.col-12{
+        padding: 0 30px;
+    }
+    footer {
+        background-color: var(--primary-color);
+    }
+}

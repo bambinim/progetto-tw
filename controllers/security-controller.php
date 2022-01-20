@@ -12,7 +12,7 @@ if (!empty($router)) {
             $template = [
                 'title' => 'Login',
                 'template' => 'security/login.php',
-                'css' => ['/assets/login.css']
+                'css' => ['/assets/css/center-card.css', '/assets/css/login.css']
             ];
             require_once(PROJECT_ROOT . '/templates/base.php');
         }
@@ -34,7 +34,7 @@ if (!empty($router)) {
                 $template = [
                     'title' => 'Login',
                     'template' => 'security/login.php',
-                    'css' => ['/assets/login.css'],
+                    'css' => ['/assets/css/center-card.css', '/assets/css/login.css'],
                     'error' => 'Credenziali non valide',
                     'email' => $_POST['email']
                 ];
@@ -52,7 +52,7 @@ if (!empty($router)) {
         $template = [
             'title' => 'Registrazione',
             'template' => 'security/registration.php',
-            'css' => ['/assets/login.css']
+            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
@@ -63,7 +63,7 @@ if (!empty($router)) {
         $template = [
             'title' => 'Registrazione',
             'template' => 'security/registration.php',
-            'css' => ['/assets/login.css']
+            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css']
         ];
         $allFieldsOk = true;
         foreach ($registrationFields as $i) {
@@ -100,7 +100,8 @@ if (!empty($router)) {
     $router->all('/registration/confirm', function() {
         $template = [
             'title' => 'Registrazione Completa',
-            'template' => 'security/registration-confirm.php'
+            'template' => 'security/registration-confirm.php',
+            'css' => ['/assets/css/center-card.css', '/assets/css/verification-cards.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
