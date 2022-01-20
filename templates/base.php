@@ -1,3 +1,8 @@
+<?php
+use App\Database\Database;
+use App\Database\Entities\Category;
+$categories = Database::getRepository(Category::class)->findAll();
+?>
 <!doctype html>
 <html lang="it">
 
@@ -60,10 +65,10 @@
                         <form class="d-flex p-1">
                             <div class="input-group">
                                 <select class="form-select" aria-label="categoria">
-                                    <option selected disabled>Categorie</option>
-                                    <option value="1">Categoria 1</option>
-                                    <option value="2">Categoria 2</option>
-                                    <option value="3">Categoria 3</option>
+                                    <option selected disabled>Seleziona Categoria</option>
+                                    <?php foreach ($categories as $i): ?>
+                                        <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
+                                    <?php endforeach; ?>
                                 </select>
 
                                 <input class="form-control me-2" type="search" placeholder="Cerca"
@@ -110,10 +115,10 @@
 <div class="bg-menu-color d-lg-none">
     <form class="d-flex justify-content-center p-2">
         <select class="form-select" aria-label="categoria">
-            <option selected disabled>Categorie</option>
-            <option value="1">Categoria 1</option>
-            <option value="2">Categoria 2</option>
-            <option value="3">Categoria 3</option>
+            <option selected disabled>Seleziona Categoria</option>
+            <?php foreach ($categories as $i): ?>
+                <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
+            <?php endforeach; ?>
         </select>
         <input class="form-control" type="search" placeholder="Cerca" aria-label="query ricerca">
     </form>

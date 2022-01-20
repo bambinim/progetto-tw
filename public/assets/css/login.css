@@ -6,6 +6,12 @@ footer {
     background-color: var(--bs-body-bg);
 }
 
+@media(max-width: 991.99px) {
+    div.card {
+        min-height: 70vh;
+    }
+}
+
 @media(min-width: 992px) {
     div.card {
         border-radius: 55px;

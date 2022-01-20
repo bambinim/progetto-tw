@@ -4,16 +4,19 @@
     --button-bg-color: #2c858d;
     --fill-color: #F4F4F4;
     --badge-color: #2A1468;
+    --background-color: #F4F4F4;
 }
 
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    background-color: var(--background-color)!important;
 }
 
 footer{
-    background-color: var(--bs-body-bg);
+    background-color: var(--background-color);
     width: 100%;
     margin-top: auto;
 }
