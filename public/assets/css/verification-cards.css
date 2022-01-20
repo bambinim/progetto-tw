@@ -1,7 +1,4 @@
-div.card>span {}
-
-div.card>p {}
-
-div.card>a {
-
+div.card>p {
+    font-size: 30pt;
+    font-weight: bold;
 }
