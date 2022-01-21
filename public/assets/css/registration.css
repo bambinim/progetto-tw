@@ -6,6 +6,10 @@ footer {
     background-color: var(--bs-body-bg);
 }
 
+div.col-12 {
+    padding: 0;
+}
+
 @media(min-width: 992px) {
     footer {
         background-color: var(--primary-color);

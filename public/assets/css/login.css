@@ -6,6 +6,10 @@ footer {
     background-color: var(--bs-body-bg);
 }
 
+div.col-12 {
+    padding: 0;
+}
+
 @media(max-width: 991.99px) {
     div.card {
         min-height: 70vh;

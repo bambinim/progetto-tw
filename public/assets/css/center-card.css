@@ -2,10 +2,6 @@ body {
     background-color: var(--primary-color)!important;
 }
 
-main.container-fluid {
-    padding: 0;
-}
-
 div.card {
     border-radius: 55px;
 }
