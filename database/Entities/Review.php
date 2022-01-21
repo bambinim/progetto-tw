@@ -2,6 +2,7 @@
 
 namespace App\Database\Entities;
 
+use App\Database\Database;
 use App\Database\Entity;
 
 class Review extends Entity
@@ -126,11 +127,11 @@ class Review extends Entity
     {
         $this->userId = $userId;
     }
-    
 
-
-    
-
+    public function getUser(): User
+    {
+        return Database::getRepository(User::class)->findOne(['id' => $this->getUserId()]);
+    }
 
     public static function _getColumns(): array
     {
