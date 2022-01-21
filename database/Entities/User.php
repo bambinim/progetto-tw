@@ -157,6 +157,11 @@ class User extends Entity {
         return Database::getRepository(Order::class)->find(['user_id' => $this->getId()]);
     }
 
+    public function getShop(): Shop
+    {
+        return Database::getRepository(Shop::class)->findOne(['user_id' => $this->getId()]);
+    }
+
     public static function _getColumns(): array
     {
         return ['id', 'first_name', 'last_name', 'email', 'password', 'registration_date', 'roles', 'image_id'];
