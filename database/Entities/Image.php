@@ -9,7 +9,7 @@ class Image extends Entity
 
     private int $id;
     private string $extension;
-
+    private int $owner_id;
 
     /**
      * @return int
@@ -43,10 +43,25 @@ class Image extends Entity
         $this->extension = $extension;
     }
 
+    /**
+     * @return int
+     */
+    public function getOwnerId(): int
+    {
+        return $this->owner_id;
+    }
+
+    /**
+     * @param int $owner_id
+     */
+    public function setOwnerId(int $owner_id): void
+    {
+        $this->owner_id = $owner_id;
+    }
 
     public static function _getColumns(): array
     {
-        return ['id', 'extension'];
+        return ['id', 'extension', 'owner_id'];
     }
 
     public static function _getPrimaryKeyColName(): string
