@@ -2,7 +2,9 @@
 
 namespace App\Database\Entities;
 
+use App\Database\Database;
 use App\Database\Entity;
+use App\Database\Query;
 
 class Order extends Entity
 {
@@ -108,6 +110,19 @@ class Order extends Entity
     public function setCourierId(int $courierId): void
     {
         $this->courierId = $courierId;
+    }
+
+    public function getProducts(): array
+    {
+        $query = "SELECT * FROM products WHERE id IN (SELECT product_id FROM orders_products WHERE order_id = $this->getId());";
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $products = [];
+        foreach ($stmt->fetchAll() as $i) {
+            array_push($products, Entity::createFromQueryResult($i, Product::class));
+        }
+        return $products;
     }
 
     public static function _getColumns(): array
