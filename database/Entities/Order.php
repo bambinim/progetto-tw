@@ -114,7 +114,7 @@ class Order extends Entity
 
     public function getProducts(): array
     {
-        $query = "SELECT * FROM products WHERE id IN (SELECT product_id FROM orders_products WHERE order_id = $this->getId());";
+        $query = "SELECT * FROM products WHERE id IN (SELECT product_id FROM orders_products WHERE order_id = ".$this->getId().");";
         $conn = Database::getConnection();
         $stmt = $conn->prepare($query);
         $stmt->execute();

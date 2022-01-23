@@ -33,7 +33,7 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     },'ROLE_USER');
 
-    $router->post('/creation', function() {
+    $router->post('/shop/creation', function() {
         $registrationFields = ['name', 'address', 'addressNumber', 'zip', 'city'];
         // check if all fields are in the request
         $template = [
@@ -73,17 +73,7 @@ if (!empty($router)) {
             $template['message'] = 'shop creato';
             require_once(PROJECT_ROOT . '/templates/base.php');
         }
-    });
-
-    $router->get('/shop/create/new', function() {
-        $template = [
-            'title' => 'Apri Shop',
-            'template' => 'shop/shop-new.php',
-            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css']
-            
-        ];
-        require_once(PROJECT_ROOT . '/templates/base.php');
-    },'ROLE_USER');
+    }),'ROLE_USER';
 
     $router->get('/shop/info', function() {
         $template = [
@@ -93,9 +83,9 @@ if (!empty($router)) {
             
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
-    },'ROLE_SELLER');
+    },'["ROLE_USER", "ROLE_SELLER"]');
 
-    $router->post('/update', function() {
+    $router->post('/shop/update', function() {
         $template = [
             'title' => 'Il tuo negozio',
             'template' => 'shop/shop-info.php',
@@ -132,7 +122,7 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
        
     
-    });
+    },'["ROLE_USER", "ROLE_SELLER"]');
 
     $router->get('/shop/products/new', function () {
         $template = [

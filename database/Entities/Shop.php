@@ -148,7 +148,7 @@ class Shop extends Entity
 
     public function getOrders(): array
     {
-        $query = "SELECT * FROM orders WHERE id IN (SELECT order_id FROM orders_products WHERE product_id IN (SELECT id FROM products WHERE shop_id = $this->getId()));";
+        $query = "SELECT * FROM orders WHERE id IN (SELECT order_id FROM orders_products WHERE product_id IN (SELECT id FROM products WHERE shop_id = ".$this->getId()."));";
         $conn = Database::getConnection();
         $stmt = $conn->prepare($query);
         $stmt->execute();

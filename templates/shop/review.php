@@ -1,5 +1,5 @@
 <div class="container-fluid mt-3">
-    <h1 class="mt-3 mb-3">Le tue recensioni</h1>
+    <h1 class="mt-3 mb-3"><?php $template['title']?></h1>
     <div class="card">
         <?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
         <div class="row mt-3">

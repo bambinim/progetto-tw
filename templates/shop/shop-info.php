@@ -9,7 +9,7 @@ $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityMana
     <div class="col-12 col-lg-6">
         <h1 class="ms-3 my-3">Informazioni Shop</h1>
         <div class="card px-4 pt-5 pb-3">
-            <form class="mb-3" method="POST" action="/update">
+            <form class="mb-3" method="POST" action="/shop/update">
                 <div class="mb-3">
                     <label for="input-name" class="form-label">Nome Negozio</label>
                     <input id="input-name" name="name" type="text" class="form-control" 
