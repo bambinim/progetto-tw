@@ -73,17 +73,17 @@ if (!empty($router)) {
             $template['message'] = 'shop creato';
             require_once(PROJECT_ROOT . '/templates/base.php');
         }
-    }),'ROLE_USER';
+    },'ROLE_USER');
 
     $router->get('/shop/info', function() {
         $template = [
             'title' => 'Il tuo negozio',
             'template' => 'shop/shop-info.php',
-            'css' => ['/assets/css/registration.css']
+            'css' =>['']
             
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
-    },'["ROLE_USER", "ROLE_SELLER"]');
+    });
 
     $router->post('/shop/update', function() {
         $template = [

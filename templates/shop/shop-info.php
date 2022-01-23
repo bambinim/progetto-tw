@@ -4,11 +4,14 @@ use App\Database\Entities\Shop;
 use App\SecurityManager;
 $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager :: getUser()->getId()]);
 ?>
+<div class="container-fluid mt-3">
+<div class="card px-4 pt-5 pb-3">
+<?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
 <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-12 col-lg-6">
         <h1 class="ms-3 my-3">Informazioni Shop</h1>
-        <div class="card px-4 pt-5 pb-3">
+        
             <form class="mb-3" method="POST" action="/shop/update">
                 <div class="mb-3">
                     <label for="input-name" class="form-label">Nome Negozio</label>
@@ -41,7 +44,7 @@ $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityMana
                     <button type="submit" class="btn btn-primary">Salva modifiche</button>
                 </div>
             </form>
-        </div>
     </div>
     <div class="col-lg-3"></div>
 </div>
+</div></div>
