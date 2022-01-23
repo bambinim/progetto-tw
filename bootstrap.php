@@ -20,9 +20,9 @@ require_once PROJECT_ROOT . "/Router/Route.php";
 
 use App\Database\Database;
 
-Database::setHost('db.matteobambini.net');
+Database::setHost('127.0.0.1');
 Database::setDatabase('progettotw');
-Database::setUser('matteo');
-Database::setPassword('password');
+Database::setUser('root');
+Database::setPassword('');
 
 session_start();
