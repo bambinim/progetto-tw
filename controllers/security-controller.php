@@ -69,9 +69,9 @@ if (!empty($router)) {
         foreach ($registrationFields as $i) {
             if (!isset($_POST[$i])) {
                 $allFieldsOk = false;
-                break;
+            } else {
+                $template[$i] = $_POST[$i];
             }
-            $template[$i] = $_POST[$i];
         }
         if (!$allFieldsOk) {
             // if not all fields are sent show error message into registration page
