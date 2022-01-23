@@ -5,6 +5,8 @@ use App\Database\Database;
 use App\Database\Entities\Review;
 use App\Database\Entities\Shop;
 use App\Database\Entities\User;
+use App\Database\Entities\Product;
+use App\Database\Entities\ProductImage;
 
 if (!empty($router)) {
     $router->get('/shop/reviews', function () {
@@ -17,14 +19,6 @@ if (!empty($router)) {
             'template' => 'shop/review.php',
             'css' => [''],
             'reviews' => $reviews
-        ];
-        require_once(PROJECT_ROOT . '/templates/base.php');
-    }, 'ROLE_SELLER');
-
-    $router->get('/shop/products/new', function () {
-        $template = [
-            'title' => 'Aggiungi Prodotto',
-            'template' => 'shop/product-new.php'
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
@@ -139,4 +133,51 @@ if (!empty($router)) {
        
     
     });
+
+    $router->get('/shop/products/new', function () {
+        $template = [
+            'title' => 'Aggiungi Prodotto',
+            'template' => 'shop/product-new.php',
+            'js' => ['/assets/js/images-uploader.js'],
+            'css' => ['/assets/css/images-uploader.css']
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    }, 'ROLE_SELLER');
+
+    $router->post('/shop/products/new', function() {
+        $productFields = ['name', 'category', 'price', 'condition', 'description', 'images'];
+        $template = [
+            'title' => 'Aggiungi Prodotto',
+            'template' => 'shop/product-new.php',
+            'js' => ['/assets/js/images-uploader.js'],
+            'css' => ['/assets/css/images-uploader.css']
+        ];
+        // check if all fields are in request
+        $allFieldsPresent = true;
+        foreach ($productFields as $i) {
+            if (!isset($_POST[$i])) {
+                $allFieldsPresent = false;
+            } else {
+                $template[$i] = $_POST[$i];
+            }
+        }
+        if ($allFieldsPresent) {
+            $product = new Product();
+            $product->setName($_POST['name']);
+            $product->setCategoryId($_POST['category']);
+            $product->setPrice($_POST['price']);
+            $product->setCondition($_POST['condition']);
+            $product->setDescription($_POST['description']);
+            $product->setShopId(SecurityManager::getUser()->getShop()->getId());
+            $product->save();
+            foreach ($_POST['images'] as $i) {
+                $prodImage = new ProductImage();
+                $prodImage->setImageId($i);
+                $prodImage->setProductId($product->getId());
+                $prodImage->save();
+            }
+        } else {
+            require_once(PROJECT_ROOT . '/templates/base.php');
+        }
+    }, 'ROLE_SELLER');
 }
