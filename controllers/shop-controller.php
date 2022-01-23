@@ -22,6 +22,19 @@ if (!empty($router)) {
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
+    
+    $router->get('/shop/sales', function () {
+        //get user's shop 
+        $shop = SecurityManager::getUser()->getShop();
+        $template = [
+            'title' => 'Ordini ricevuti',
+            'template' => 'shop/sales.php',
+            'css' => [''],
+            'orders' => $shop->getOrders(),
+            'css' => ['/assets/css/shop-sales.css']
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    }, 'ROLE_SELLER');
 
     $router->get('/shop/create/new', function() {
         $template = [
@@ -92,11 +105,11 @@ if (!empty($router)) {
             'css' => ['/assets/css/registration.css']
             
         ];
-        $shop =  Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager :: getUser()->getId()]);
+        $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager :: getUser()->getId()]);
         $name = $_POST['name'];
         if($name!=""){
             var_dump($name);
-              $shop->setName($name);
+                $shop->setName($name);
         }
         $address = $_POST['address'];
         if($address!=""){

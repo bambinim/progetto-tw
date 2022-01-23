@@ -11,7 +11,7 @@
                         <h3><?php echo $review->getRating(); ?>/5</h3>
                     </div>
                     <p><?php echo $review->getText(); ?></p>
-                    <h6><?php echo $review->getUser()->getFirstName() . " " . $review->getUser()->getLastName(); ?></h6>
+                    <p><?php echo $review->getUser()->getFirstName() . " " . $review->getUser()->getLastName(); ?></p>
                 </div>
                 <div class="col-md-1"></div>
             <?php endforeach; ?>
