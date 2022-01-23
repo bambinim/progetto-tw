@@ -65,7 +65,7 @@ if (!empty($router)) {
             $shop->setZip($_POST['zip']);
             $shop->setCity($_POST['city']);
             $user = SecurityManager :: getUser();
-            $user -> setRoles('["ROLE_SELLER"]');
+            $user -> setRoles('["ROLE_USER", "ROLE_SELLER"]');
             $shop->setUserId($user->getId());
             $shop -> setImageId(NULL);
             $shop->save();
