@@ -1,9 +1,6 @@
 div.card {
     border-radius: 55px 55px 0 0;
 }
-body{
-    overflow-y: scroll !important;
-}
 
 footer {
     background-color: var(--bs-body-bg);

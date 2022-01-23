@@ -1,0 +1,22 @@
+#images-uploader>label, #images-uploader>label>span {
+    color: #FFF!important;
+}
+
+#images-uploader img {
+    max-height: 100px;
+    max-width: 200px;
+}
+
+#images-uploader>ul {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+}
+
+#images-uploader>ul>li {
+    list-style: none;
+}
+
+#images-uploader>ul>li>button>span {
+    color: #FF0000!important;
+}

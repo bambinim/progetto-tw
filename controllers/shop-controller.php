@@ -156,7 +156,7 @@ if (!empty($router)) {
             $product->setName($_POST['name']);
             $product->setCategoryId($_POST['category']);
             $product->setPrice($_POST['price']);
-            $product->setCondition($_POST['condition']);
+            $product->setStatus($_POST['condition']);
             $product->setDescription($_POST['description']);
             $product->setShopId(SecurityManager::getUser()->getShop()->getId());
             $product->save();
@@ -166,8 +166,10 @@ if (!empty($router)) {
                 $prodImage->setProductId($product->getId());
                 $prodImage->save();
             }
+            $template['message'] = 'Il prodotto è stato aggiunto. Vai alla <a href="/shop/products/list">lista dei tuoi prodotti</a>';
         } else {
-            require_once(PROJECT_ROOT . '/templates/base.php');
+            $template['error'] = 'C\'è stato un errore durante il salvataggio';
         }
+        require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
 }
