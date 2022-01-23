@@ -18,6 +18,7 @@ class User extends Entity {
 
     public function __construct($isNew = true)
     {
+        parent::__construct($isNew);
         $this->registrationDate = date_format(new \DateTime(), 'Y-m-d H:i:s');
     }
 

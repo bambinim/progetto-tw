@@ -24,7 +24,7 @@ abstract class Entity
             if ($i == $class::_getPrimaryKeyColName() && $this->isNew) {
                 $arr[$i] = -1;
             } else {
-                $arr[$i] = $this->{Entity::toCamelCase("get" . $i)}();
+                $arr[$i] = $this->{Entity::toCamelCase("get_" . $i)}();
             }
         }
         return $arr;

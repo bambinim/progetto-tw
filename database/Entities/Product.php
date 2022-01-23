@@ -12,10 +12,16 @@ class Product extends Entity
     private ?string $description = null;
     private float $price;
     private string $creationDate;
-    private bool $isSold = false;
-    private int $condition;
+    private int $isSold = 0;
+    private int $status;
     private int $categoryId;
     private int $shopId;
+
+    public function __construct($isNew = true)
+    {
+        parent::__construct($isNew);
+        $this->creationDate = date_format(new \DateTime(), 'Y-m-d H:i:s');
+    }
 
     /**
      * @return int
@@ -98,17 +104,17 @@ class Product extends Entity
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isSold(): bool
+    public function getIsSold(): int
     {
         return $this->isSold;
     }
 
     /**
-     * @param bool $isSold
+     * @param int $isSold
      */
-    public function setIsSold(bool $isSold): void
+    public function setIsSold(int $isSold): void
     {
         $this->isSold = $isSold;
     }
@@ -116,17 +122,17 @@ class Product extends Entity
     /**
      * @return int
      */
-    public function getCondition(): int
+    public function getStatus(): int
     {
-        return $this->condition;
+        return $this->status;
     }
 
     /**
-     * @param int $condition
+     * @param int $status
      */
-    public function setCondition(int $condition): void
+    public function setStatus(int $status): void
     {
-        $this->condition = $condition;
+        $this->status = $status;
     }
 
     /**
@@ -163,7 +169,7 @@ class Product extends Entity
 
     public static function _getColumns(): array
     {
-        return ['id', 'name', 'description', 'price', 'creation_date', 'is_sold', 'condition', 'category_id', 'shop_id'];
+        return ['id', 'name', 'description', 'price', 'creation_date', 'is_sold', 'status', 'category_id', 'shop_id'];
     }
 
     public static function _getPrimaryKeyColName(): string

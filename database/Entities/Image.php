@@ -9,7 +9,7 @@ class Image extends Entity
 
     private int $id;
     private string $extension;
-    private int $owner_id;
+    private ?int $owner_id;
 
     /**
      * @return int
@@ -44,17 +44,17 @@ class Image extends Entity
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getOwnerId(): int
+    public function getOwnerId(): ?int
     {
         return $this->owner_id;
     }
 
     /**
-     * @param int $owner_id
+     * @param ?int $owner_id
      */
-    public function setOwnerId(int $owner_id): void
+    public function setOwnerId(?int $owner_id): void
     {
         $this->owner_id = $owner_id;
     }
