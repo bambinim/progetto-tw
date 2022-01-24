@@ -163,7 +163,7 @@ hr {
     .mobile-hidden {
         display: none !important;
     }
-    .nav-item{
+    .navbar-nav .nav-item{
         margin-left: 3%;
     }
     .sidebar-account-text {
