@@ -96,7 +96,7 @@ if (!empty($router)) {
             
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
-    });
+    },'["ROLE_USER", "ROLE_SELLER"]');
 
     $router->post('/shop/update', function() {
         $template = [

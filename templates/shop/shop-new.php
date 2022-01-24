@@ -1,5 +1,4 @@
 <div class="row">
-<?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
     <div class="col-lg-3"></div>
     <div class="col-12 col-lg-6">
         <h1 class="ms-3 my-3">Apri Shop</h1>
