@@ -39,3 +39,8 @@ $('#notification-bell').click(()=>{
         'content' : $("#notification-list").html()
     });
 });
+
+$('.sidebar-account-button').click(function() {
+    $('.sidebar-account-collapse').collapse('toggle');
+    $('.sidebar-account-collapse-icon').toggleClass('rotate-180');
+});

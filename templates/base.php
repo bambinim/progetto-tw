@@ -1,7 +1,9 @@
 <?php
 use App\Database\Database;
 use App\Database\Entities\Category;
+use App\SecurityManager;
 $categories = Database::getRepository(Category::class)->findAll();
+$user = SecurityManager::getUser();
 ?>
 <!doctype html>
 <html lang="it">
@@ -39,7 +41,7 @@ $categories = Database::getRepository(Category::class)->findAll();
 
             <div class="offcanvas-collapse-body">
                 <!--Corpo del menù-->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
@@ -55,11 +57,13 @@ $categories = Database::getRepository(Category::class)->findAll();
                         <a class="nav-link" href="#">I miei ordini</a>
                     </li>
                     <li class="nav-item d-lg-none ms-2">
-                        <a class="nav-link" href="#">Il mio account</a>
-                    </li>
-                    <li class="nav-item d-lg-none ms-2">
                         <a class="nav-link" href="#">Carrello</a>
                     </li>
+                    <?php if (!is_null($user) && in_array('ROLE_SELLER', json_decode($user->getRoles()))): ?>
+                        <li class="nav-item d-lg-none ms-2">
+                            <a class="nav-link" href="#">Il mio negozio</a>
+                        </li>
+                    <?php endif; ?>
                     <!-- search su display grandi -->
                     <li class="nav-item d-none d-lg-inline-block">
                         <form class="d-flex p-1">
@@ -78,10 +82,32 @@ $categories = Database::getRepository(Category::class)->findAll();
                         </form>
                     </li>
                 </ul>
-                <!--Logout utente bottom smartphone-->
-                <div class="sidebar-account d-lg-none">
-                    <hr/>
-                    <span class="nav-link">Nome Cognome</span>
+                <!--User space in sidebar-->
+                <div class="mt-auto mb-3 d-lg-none px-3">
+                    <?php if (!is_null($user)): ?>
+                        <button class="sidebar-account-button mb-3 p-0">
+                            <div class="avatar-circle">
+                                <span><?= $user->getFirstName()[0] . $user->getLastName()[0]; ?></span>
+                            </div>
+                            <span class="sidebar-account-text ms-2"><?= $user->getFirstName() . " " . $user->getLastName(); ?></span>
+                            <span class="fas fa-chevron-up sidebar-account-collapse-icon ms-2"></span>
+                        </button>
+                        <div class="ms-4 sidebar-account-collapse collapse">
+                            <a class="sidebar-account-text-small d-block" href="/logout">
+                                <span class="fas fa-sign-out-alt fa-lg me-2"></span>
+                                <span>Esci</span>
+                            </a>
+                            <a class="sidebar-account-text-small d-block mt-3" href="#">
+                                <span class="fas fa-user fa-lg me-2"></span>
+                                <span>Il mio account</span>
+                            </a>
+                        </div>
+                    <?php else: ?>
+                        <a href="/login" class="sidebar-account-text">
+                            <span class="fas fa-sign-in-alt fa-lg me-2"></span>
+                            <span>Accedi</span>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

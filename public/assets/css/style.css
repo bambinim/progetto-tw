@@ -101,6 +101,21 @@ hr {
     margin-right: 20px;
 }
 
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    background-color: var(--text-color);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.avatar-circle>span {
+    color: #FFF!important;
+    font-weight: bold;
+    line-height: 40px;
+    text-align: center;
+}
+
 @media (max-width: 991.99px) {
     .offcanvas-collapse {
         top: 0;
@@ -130,6 +145,11 @@ hr {
     }
     .offcanvas-collapse-body {
         height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .offcanvas-collapse-body>ul {
+        width: 100%;
     }
     .navbar-collapse {
         align-items: unset !important;
@@ -146,9 +166,31 @@ hr {
     .nav-item{
         margin-left: 3%;
     }
-    .sidebar-account {
-        /*position: fixed;*/
-        top: auto;
-        bottom: 20px;
+    .sidebar-account-text {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 20px;
+        text-decoration: none;
+        font-weight: normal;
+    }
+    .sidebar-account-text-small {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        text-decoration: none;
+        font-weight: normal;
+    }
+    .sidebar-account-button {
+        background-color: #FFF;
+        width: auto;
+        border: none;
+        display: block;
+    }
+
+    .sidebar-account-collapse-icon {
+        transition: transform .4s;
+
+    }
+
+    .rotate-180 {
+        transform: rotate(180deg);
     }
 }
