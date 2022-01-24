@@ -1,7 +1,9 @@
 <?php
+
 use App\Database\Database;
 use App\Database\Entities\Category;
 use App\SecurityManager;
+
 $categories = Database::getRepository(Category::class)->findAll();
 $user = SecurityManager::getUser();
 ?>
@@ -92,16 +94,20 @@ $user = SecurityManager::getUser();
                             <span class="sidebar-account-text ms-2"><?= $user->getFirstName() . " " . $user->getLastName(); ?></span>
                             <span class="fas fa-chevron-up sidebar-account-collapse-icon ms-2"></span>
                         </button>
-                        <div class="ms-4 sidebar-account-collapse collapse">
-                            <a class="sidebar-account-text-small d-block" href="/logout">
-                                <span class="fas fa-sign-out-alt fa-lg me-2"></span>
-                                <span>Esci</span>
-                            </a>
-                            <a class="sidebar-account-text-small d-block mt-3" href="#">
-                                <span class="fas fa-user fa-lg me-2"></span>
-                                <span>Il mio account</span>
-                            </a>
-                        </div>
+                        <ul class=" sidebar-account-collapse collapse my-0">
+                            <li>
+                                <a class="sidebar-account-text-small" href="/logout">
+                                    <span class="fas fa-sign-out-alt fa-lg me-2"></span>
+                                    <span>Esci</span>
+                                </a>
+                            </li>
+                            <li class="mt-3">
+                                <a class="sidebar-account-text-small" href="#">
+                                    <span class="fas fa-user fa-lg me-2"></span>
+                                    <span>Il mio account</span>
+                                </a>
+                            </li>
+                        </ul>
                     <?php else: ?>
                         <a href="/login" class="sidebar-account-text">
                             <span class="fas fa-sign-in-alt fa-lg me-2"></span>

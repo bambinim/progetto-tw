@@ -184,13 +184,14 @@ hr {
         border: none;
         display: block;
     }
-
     .sidebar-account-collapse-icon {
         transition: transform .4s;
 
     }
-
     .rotate-180 {
         transform: rotate(180deg);
+    }
+    .sidebar-account-collapse li {
+        list-style: none;
     }
 }
