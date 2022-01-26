@@ -80,14 +80,14 @@ $user = SecurityManager::getUser();
                                 <input class="form-control me-2" type="search" placeholder="Cerca"
                                        aria-label="query ricerca">
                             </div>
-                            <button class="btn btn-outline-success" type="submit">Cerca</button>
+                            <button class="btn btn-primary" type="submit">Cerca</button>
                         </form>
                     </li>
                 </ul>
                 <!--User space in sidebar-->
                 <div class="mt-auto mb-3 d-lg-none px-3">
                     <?php if (!is_null($user)): ?>
-                        <button class="sidebar-account-button mb-3 p-0">
+                        <button class="sidebar-account-button mb-3 p-0" aria-label="impostazioni utente">
                             <div class="avatar-circle">
                                 <span><?= $user->getFirstName()[0] . $user->getLastName()[0]; ?></span>
                             </div>
@@ -208,11 +208,11 @@ $user = SecurityManager::getUser();
         <p>&copy; 2021 Guariglia - Bambini - Oshodi </p>
     </div>
 </footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/f2efc17350.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="/assets/js/main2.js"></script>
 <?php if (isset($template['js'])) : ?>
     <?php foreach ($template['js'] as $i) : ?>

@@ -2,6 +2,7 @@
 
 namespace App\Database\Entities;
 
+use App\Database\Database;
 use App\Database\Entity;
 
 class Product extends Entity
@@ -165,6 +166,21 @@ class Product extends Entity
     public function setShopId(int $shopId): void
     {
         $this->shopId = $shopId;
+    }
+
+    public function getShop(): Shop
+    {
+        return Database::getRepository(Shop::class)->findOne(['id' => $this->getShopId()]);
+    }
+
+    public function getImages(): array
+    {
+        $query = "SELECT * FROM images WHERE id IN (SELECT image_id FROM products_images WHERE product_id = {$this->getId()});";
+        $cursor = Database::getConnection()->prepare($query);
+        $cursor->execute();
+        return array_map(function($el) {
+            return Entity::createFromQueryResult($el, Image::class);
+        }, $cursor->fetchAll());
     }
 
     public static function _getColumns(): array

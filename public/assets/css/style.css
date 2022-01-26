@@ -20,6 +20,11 @@ footer{
     margin-top: auto;
 }
 
+.btn-primary {
+    background-color: var(--button-bg-color)!important;
+    border-color: var(--button-bg-color)!important;
+}
+
 .btn-link{
     padding: 0 0 0 0 !important;
 }
@@ -107,13 +112,18 @@ hr {
     background-color: var(--text-color);
     border-radius: 50%;
     display: inline-block;
+    text-align: center;
 }
 
 .avatar-circle>span {
     color: #FFF!important;
     font-weight: bold;
     line-height: 40px;
-    text-align: center;
+}
+
+.shop-circle-link {
+    text-decoration: none;
+    display: block;
 }
 
 @media (max-width: 991.99px) {
