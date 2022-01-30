@@ -138,9 +138,25 @@ class Cart extends Entity
                 $query = "UPDATE carts SET cookie = NULL, user_id = :uid WHERE cookie = :cookie;";
                 $conn = Database::getConnection();
                 $cursor = $conn->prepare($query);
-                echo $query;
                 $cursor->execute([':uid' => $user->getId(), ':cookie' => $_COOKIE['cart']]);
                 $cursor->closeCursor();
+                // search for duplicates
+                $cursor = $conn->prepare("SELECT MAX(id) AS m_id, COUNT(id) AS c_id FROM carts WHERE user_id = :uid GROUP BY product_id HAVING c_id > 1;");
+                $cursor->execute([':uid' => $user->getId()]);
+                $duplicates = $cursor->fetchAll();
+                $cursor->closeCursor();
+                // if there are duplicates, delete them
+                if (count($duplicates) > 0) {
+                    $query = "DELETE FROM carts WHERE id IN (";
+                    foreach ($duplicates as $i) {
+                        $query = $query . "{$i['m_id']}, ";
+                    }
+                    $query = substr($query, 0, -2) . ");";
+                    $cursor = $conn->prepare($query);
+                    echo $query;
+                    $cursor->execute();
+                    $cursor->closeCursor();
+                }
             }
             unset($_COOKIE['cart']);
             setcookie('cart', null, -1, '/');
