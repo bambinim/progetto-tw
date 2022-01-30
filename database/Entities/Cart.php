@@ -104,7 +104,7 @@ class Cart extends Entity
     public static function getProducts(): array
     {
         if (SecurityManager::isUserLogged()) {
-            $query = "SELECT * FROM products WHERE id IN (SELECT products_id FROM carts WHERE user_id = :uid);";
+            $query = "SELECT * FROM products WHERE id IN (SELECT product_id FROM carts WHERE user_id = :uid);";
             $params = [':uid' => SecurityManager::getUser()->getId()];
         } else {
             if (isset($_COOKIE['cart'])) {
@@ -125,6 +125,26 @@ class Cart extends Entity
             return $res;
         }
         return [];
+    }
+
+    public static function convertCookieToUser()
+    {
+        $user = SecurityManager::getUser();
+        if (isset($_COOKIE['cart']) && !is_null($user)) {
+            $products = Database::getRepository(Cart::class)->find([
+                'cookie' => $_COOKIE['cart']
+            ]);
+            if (count($products) > 0) {
+                $query = "UPDATE carts SET cookie = NULL, user_id = :uid WHERE cookie = :cookie;";
+                $conn = Database::getConnection();
+                $cursor = $conn->prepare($query);
+                echo $query;
+                $cursor->execute([':uid' => $user->getId(), ':cookie' => $_COOKIE['cart']]);
+                $cursor->closeCursor();
+            }
+            unset($_COOKIE['cart']);
+            setcookie('cart', null, -1, '/');
+        }
     }
 
     public static function _getColumns(): array

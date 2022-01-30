@@ -3,6 +3,7 @@
 use App\SecurityManager;
 use App\Database\Database;
 use App\Database\Entities\User;
+use App\Database\Entities\Cart;
 
 if (!empty($router)) {
     $router->get('/login', function() {
@@ -28,6 +29,7 @@ if (!empty($router)) {
                     header('location: ' . $_SESSION['loginRedirect']);
                     unset($_SESSION['loginRedirect']);
                 } else {
+                    Cart::convertCookieToUser();
                     header('location: /');
                 }
             } else {
