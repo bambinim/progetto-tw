@@ -31,9 +31,10 @@ class EntityRepository
         $conditionString = '';
         $paramsBind = [];
         foreach ($conditions as $k=>$v) {
-            $conditionString = $conditionString . "{$k} = :{$k}";
+            $conditionString = $conditionString . "{$k} = :{$k} AND ";
             $paramsBind[":{$k}"] = $v;
         }
+        $conditionString = substr($conditionString, 0, -5);
         return [
             'conditionString' => $conditionString,
             'paramBinds' => $paramsBind

@@ -100,6 +100,21 @@ abstract class Entity
         $this->{Entity::toCamelCase("set_" . $pk)}(intval($conn->lastInsertId()));
     }
 
+    public function delete()
+    {
+        $class = get_class($this);
+        $pk = $class::_getPrimaryKeyColName();
+        $table = $class::_getTableName();
+        $values = $this->toArray();
+        if ($values[$pk] != -1) {
+            $query = "DELETE FROM $table WHERE $pk = $values[$pk];";
+            $conn = Database::getConnection();
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            $this->{Entity::toCamelCase("set_" . $pk)}(-1);
+        }
+    }
+
     private static function toCamelCase(string $str): string
     {
         return str_replace(' ', '', ucwords(str_replace('_', ' ', $str)));
