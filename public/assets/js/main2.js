@@ -27,9 +27,11 @@ $('#offcanvasCloseButton').click(function() {
     closeOffcanvas(offcanvas, backdrop);
 });
 
+/*
 $('#account-button').click(function() {
     $('#account-dropdown').toggleClass('show');
 });
+*/
 
 $('#notification-bell').click(()=>{
     $('#notification-bell').popover({

@@ -60,4 +60,8 @@ class SecurityManager
         return $user;
     }
 
+    public static function generateCartCookie(): string
+    {
+        return hash('sha256', $_COOKIE['PHPSESSID'] . date_format(new \DateTime(), 'Y-m-dTH:i:s'));
+    }
 }

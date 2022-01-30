@@ -3,6 +3,7 @@
 use App\Database\Database;
 use App\Database\Entities\Category;
 use App\SecurityManager;
+use App\Database\Entities\Cart;
 
 $categories = Database::getRepository(Category::class)->findAll();
 $user = SecurityManager::getUser();
@@ -45,7 +46,7 @@ $user = SecurityManager::getUser();
                 <!--Corpo del menù-->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/home">Home</a>
                     </li>
                     <li class="nav-item ms-2">
                         <a class="nav-link" href="#">Novit&agrave;</a>
@@ -59,7 +60,7 @@ $user = SecurityManager::getUser();
                         <a class="nav-link" href="#">I miei ordini</a>
                     </li>
                     <li class="nav-item d-lg-none ms-2">
-                        <a class="nav-link" href="#">Carrello</a>
+                        <a class="nav-link" href="/cart/view">Carrello</a>
                     </li>
                     <?php if (!is_null($user) && in_array('ROLE_SELLER', json_decode($user->getRoles()))): ?>
                         <li class="nav-item d-lg-none ms-2">
@@ -71,7 +72,7 @@ $user = SecurityManager::getUser();
                         <form class="d-flex p-1">
                             <div class="input-group">
                                 <select class="form-select" aria-label="categoria">
-                                    <option selected disabled>Seleziona Categoria</option>
+                                    <option selected disabled>Categoria</option>
                                     <?php foreach ($categories as $i): ?>
                                         <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
                                     <?php endforeach; ?>
@@ -128,18 +129,49 @@ $user = SecurityManager::getUser();
                         </span>
                     </span>
             </button>
-            <button type="button" class="btn btn-link link-dark shadow-none" aria-label="carrello">
+            <?php
+                $cartCount = Cart::countProducts();
+            ?>
+            <a href="/cart/view" class="btn btn-link link-dark shadow-none" aria-label="carrello">
                     <span class="fas fa-shopping-cart fa-2x me-3 position-relative">
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            99+
-                            <span class="visually-hidden">unread messages</span>
-                        </span>
+                        <?php if ($cartCount > 0): ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?= $cartCount; ?>
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        <?php endif; ?>
                     </span>
-            </button>
-            <button type="button" id="account-button" class="btn btn-link link-dark shadow-none"
-                    aria-label="account" aria-expanded="false">
-                <span class="fas fa-user-circle fa-2x me-2 mobile-hidden"></span>
-            </button>
+            </a>
+            <?php if (isset($user)): ?>
+                <div class="dropdown mobile-hidden">
+                    <button type="button" id="account-button" class="btn btn-link link-dark shadow-none"
+                            aria-label="account" aria-expanded="false" data-bs-toggle="dropdown">
+                        <span class="fas fa-user-circle fa-2x me-2 mobile-hidden"></span>
+                    </button>
+                    <!-- Account Dropdown -->
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#"><span
+                                        class="fas fa-shopping-basket me-1"></span>Ordini</a></li>
+                        <li><a class="dropdown-item" href="#"><span class="fas fa-bell me-1"></span>Notifiche</a></li>
+                        <li><a class="dropdown-item" href="#"><span class="fas fa-user me-1"></span>Informazioni
+                                personali</a></li>
+                        <li>
+                            <?php if (in_array('ROLE_SELLER', json_decode($user->getRoles()))): ?>
+                                <a class="dropdown-item" href="/shop/info"><span class="fas fa-store me-1"></span>Il mio negozio</a>
+                            <?php else: ?>
+                                <a class="dropdown-item" href="/shop/create/new"><span class="fas fa-store me-1"></span>Apri un negozio</a>
+                            <?php endif; ?>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/logout"><span
+                                        class="fas fa-sign-out-alt me-1"></span>Esci</a></li>
+                    </ul>
+                </div>
+            <?php else: ?>
+                <a href="/login" class="nav-link mobile-hidden">Accedi</a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>
@@ -147,7 +179,7 @@ $user = SecurityManager::getUser();
 <div class="bg-menu-color d-lg-none">
     <form class="d-flex justify-content-center p-2">
         <select class="form-select" aria-label="categoria">
-            <option selected disabled>Seleziona Categoria</option>
+            <option selected disabled>Categoria</option>
             <?php foreach ($categories as $i): ?>
                 <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
             <?php endforeach; ?>
@@ -155,16 +187,6 @@ $user = SecurityManager::getUser();
         <input class="form-control" type="search" placeholder="Cerca" aria-label="query ricerca">
     </form>
 </div>
-
-<!-- Account Dropdown -->
-<ul class="dropdown-menu dropdown-menu-end" id="account-dropdown" aria-haspopup=”true” aria-labelledby="account-button">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li>
-        <hr class="dropdown-divider">
-    </li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-</ul>
 
 <!--Il codice sottostante è puramente a scopo esemplificativo-->
 <div class="d-none" id="notification-list">
@@ -201,6 +223,7 @@ $user = SecurityManager::getUser();
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
+    <div id="alert-container"></div>
     <?php require_once(PROJECT_ROOT . '/templates/' . $template['template']); ?>
 </main>
 <footer class="text-center pt-3 pb-2">

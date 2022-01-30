@@ -39,10 +39,10 @@
             <div class="col-12 col-lg-6 mt-3">
                 <div class="row">
                     <div class="col"><h1><?= $product->getName(); ?></h1></div>
-                    <div class="col text-end mt-1"><h2>&euro;<?= number_format($product->getPrice(), 2); ?></h2></div>
+                    <div class="col text-end mt-1"><span class="fs-3">&euro;<?= number_format($product->getPrice(), 2); ?></span></div>
                 </div>
                 <p><?= $product->getDescription(); ?></p>
-                <a class="btn btn-primary">Aggiungi al carrello</a>
+                <a class="btn btn-primary" href="/cart/products/add?productId=<?= $product->getId(); ?>">Aggiungi al carrello</a>
             </div>
             <div class="col-12 mt-3">
                 <h2>Informazioni sul venditore</h2>
