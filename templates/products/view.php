@@ -22,9 +22,6 @@
                                 <img src="/images/get?id=<?= $images[$i]->getId() ?>" class="d-block w-100" alt="...">
                             </div>
                         <?php endfor; ?>
-                        <div class="carousel-item">
-                            <img src="/images/get?id=6" class="d-block w-100" alt="...">
-                        </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
