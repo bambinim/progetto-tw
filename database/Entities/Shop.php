@@ -159,6 +159,20 @@ class Shop extends Entity
         }
         return $orders;
     }
+    
+    public function getProducts(): array
+    {
+        $query = "SELECT * FROM products WHERE id IN (SELECT id FROM products WHERE shop_id = ".$this->getId().");";
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $res = $stmt->fetchAll();
+        $products = [];
+        foreach ($res as $i) {
+            array_push($products, Entity::createFromQueryResult($i, Product::class));
+        }
+        return $products;
+    }
 
     public static function _getColumns(): array
     {

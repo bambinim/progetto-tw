@@ -99,6 +99,22 @@ if (!empty($router)) {
         }
     });
 
+ $router->all('/payment/confirm', function() {
+        $template = [
+            'title' => 'Pagamento Eseguito',
+            'template' => 'security/payment-confirm.php',
+            'css' => ['/assets/css/center-card.css', '/assets/css/verification-cards.css']
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    });
+    $router->all('/payment/failure', function() {
+        $template = [
+            'title' => 'Pagamento Eseguito',
+            'template' => 'security/payment-failure.php',
+            'css' => ['/assets/css/center-card.css', '/assets/css/failure-payment.css']
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    });
     $router->all('/registration/confirm', function() {
         $template = [
             'title' => 'Registrazione Completa',

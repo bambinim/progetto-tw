@@ -36,6 +36,17 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
 
+    $router->get('/shop/products/list', function () {
+        $shop = SecurityManager::getUser()->getShop();
+        $template = [
+            'title' => 'Prodotti Shop',
+            'template' => 'shop/shop-product-list.php',
+            'products' => $shop->getProducts(),
+            'css' => ['/assets/css/shop-product-list.css']
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    }, 'ROLE_SELLER');
+
     $router->get('/shop/create/new', function() {
         $template = [
             'title' => 'Apri Shop',
@@ -51,7 +62,7 @@ if (!empty($router)) {
         // check if all fields are in the request
         $template = [
             'title' => 'Apri Shop',
-            'template' => 'shop/shop-new.php',
+            'template' => 'shop/shop-info.php',
             'css' => ['/assets/css/center-card.css', '/assets/css/registration.css']
         ];
         $allFieldsOk = true;

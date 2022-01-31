@@ -1,0 +1,13 @@
+div.card{
+    margin:10%;
+     padding:25px;
+ }
+ span{
+     float:right;
+     font-size:30px;
+    
+ }
+ span,h3{
+     display:inline-block;
+ }
+a{text-decoration: none;}

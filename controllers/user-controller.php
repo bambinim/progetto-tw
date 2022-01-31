@@ -18,6 +18,18 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     },'ROLE_USER');
 
+    $router->get('/user/account', function() {
+        $template = [
+            'title' => 'Il mio account',
+            'template' => 'user/user-account.php',
+            'texts' => ['Ordini'=>'#','Notifiche'=>'#','Informazioni Personali'=>'/user/info'],
+            'css' =>['/assets/css/account.css']
+            
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    },'ROLE_USER');
+
+
     $router->post('/user/update', function() {
         $template = [
             'title' => 'I tuoi dati',
