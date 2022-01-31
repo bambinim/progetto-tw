@@ -80,16 +80,19 @@ class Order extends Entity
         $this->status = $status;
     }
 
-    public static function _getStatusAsString(int $status){
+    public function getStatusAsString(){
         $respose = "Sconosciuto";
-        switch ($status) {
+        switch ($this->status ) {
             case 0:
-                $respose = "In lavorazione";
+                $respose = "Accettato";
                 break;
             case 1:
-                $respose = "Spedito";
+                $respose = "Da spedire";
                 break;
             case 2:
+                $respose = "Spedito";
+                break;
+            case 3:
                 $respose = "Consegnato";
                 break;
         }

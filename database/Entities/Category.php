@@ -2,6 +2,7 @@
 
 namespace App\Database\Entities;
 
+use App\Database\Database;
 use App\Database\Entity;
 
 class Category extends Entity
@@ -78,10 +79,11 @@ class Category extends Entity
     {
         $this->imageId = $imageId;
     }
-    
 
-
-    
+    public function getProducts(): array
+    {
+        return Database::getRepository(Product::class)->findAll(['categoryId' => $this->id]);
+    }
 
 
     public static function _getColumns(): array

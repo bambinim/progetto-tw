@@ -11,7 +11,7 @@
 
                         <div class="col-md-3">
                             <h3><?php echo $order->getId(); ?></h3>
-                            <p><?php echo Order::_getStatusAsString($order->getStatus()); ?></p>
+                            <p class=""><?php echo $order->getStatusAsString(); ?></p>
                             <p><?php echo substr($order->getDate(), 0, 10); ?></p>
                             <p><?php echo $order->getTotal(); ?></p>
                         </div>
