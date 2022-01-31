@@ -196,4 +196,82 @@ if (!empty($router)) {
         }
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
+
+    $router->get('/shop/products/edit', function() {
+        $product = isset($_GET['id']) ? Database::getRepository(Product::class)->findOne(['id' => $_GET['id']]) : null;
+        if (!is_null($product) && $product->getShop()->getId() == SecurityManager::getUser()->getShop()->getId()) {
+            $template = [
+                'title' => 'Modifica Prodotto',
+                'template' => 'shop/product-edit.php',
+                'js' => ['/assets/js/images-uploader.js'],
+                'css' => ['/assets/css/images-uploader.css'],
+                'id' => $product->getId(),
+                'name' => $product->getName(),
+                'category' => $product->getCategoryId(),
+                'price' => $product->getPrice(),
+                'condition' => $product->getStatus(),
+                'description' => $product->getDescription(),
+                'images' => array_map(function($el) {
+                    return $el->getId();
+                }, $product->getImages())
+            ];
+            require_once(PROJECT_ROOT . '/templates/base.php');
+        } else {
+            header('location: /shop/products/list');
+        }
+    }, 'ROLE_SELLER');
+
+    $router->post('/shop/products/edit', function() {
+        $product = isset($_POST['id']) ? Database::getRepository(Product::class)->findOne(['id' => $_POST['id']]) : null;
+        if (!is_null($product) && $product->getShop()->getId() == SecurityManager::getUser()->getShop()->getId()) {
+            $productFields = ['id', 'name', 'category', 'price', 'condition', 'description', 'images'];
+            $template = [
+                'title' => 'Aggiungi Prodotto',
+                'template' => 'shop/product-new.php',
+                'js' => ['/assets/js/images-uploader.js'],
+                'css' => ['/assets/css/images-uploader.css']
+            ];
+            // check if all fields are in request
+            $allFieldsPresent = true;
+            foreach ($productFields as $i) {
+                if (!isset($_POST[$i])) {
+                    $allFieldsPresent = false;
+                } else {
+                    $template[$i] = $_POST[$i];
+                }
+            }
+            if ($allFieldsPresent) {
+                $product->setName($_POST['name']);
+                $product->setCategoryId($_POST['category']);
+                $product->setPrice($_POST['price']);
+                $product->setStatus($_POST['condition']);
+                $product->setDescription($_POST['description']);
+                $oldImages = $product->getImages();
+                $removeImages = [];
+                $newImages = [];
+                $sentImages = $_POST['images'];
+                // remove deleted images
+                foreach ($oldImages as $i) {
+                    if (!in_array($i->getId(), $sentImages)) {
+                        Database::getRepository(ProductImage::class)->findOne(['image_id' => $i->getId()])->delete();
+                        unlink(PROJECT_ROOT . "/images/{$i->getId()}.{$i->getExtension()}");
+                        $i->delete();
+                    }
+                }
+                // add new images
+                $oldImages = array_map(function($el) {
+                    return $el->getId();
+                }, $oldImages);
+                foreach ($sentImages as $i) {
+                    if (!in_array($i, $oldImages)) {
+                        $prodImage = new ProductImage();
+                        $prodImage->setProductId($product->getId());
+                        $prodImage->setImageId($i);
+                        $prodImage->save();
+                    }
+                }
+            }
+        }
+        header('location: /shop/products/list');
+    }, 'ROLE_SELLER');
 }
