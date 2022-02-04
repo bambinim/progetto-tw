@@ -205,3 +205,7 @@ hr {
         list-style: none;
     }
 }
+/* notifications dropdown styles */
+#notification-dropdown>.dropdown-menu {
+    width: 20rem;
+}

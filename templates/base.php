@@ -120,15 +120,18 @@ $user = SecurityManager::getUser();
         </div>
 
         <div id="nav-icons" class="d-flex">
-            <button type="button" class="btn btn-link link-dark shadow-none" id="notification-bell"
-                    aria-label="notifiche">
-                    <span class="fas fa-bell fa-2x me-3 position-relative">
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            99+
-                            <span class="visually-hidden">unread messages</span>
-                        </span>
-                    </span>
-            </button>
+            <?php if (!is_null($user)): ?>
+            <div class="dropdown" id="notification-dropdown">
+                <button class="btn btn-link link-dark shadow-none" type="button" id="notification-bell"
+                        aria-label="notifiche" aria-expanded="false" data-bs-toggle="dropdown">
+                    <span class="fas fa-bell fa-2x me-3 position-relative"></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="notification-bell">
+                    <h1 class="fs-4">Notifiche</h1>
+                    <div></div>
+                </div>
+            </div>
+            <?php endif; ?>
             <?php
                 $cartCount = Cart::countProducts();
             ?>
@@ -137,7 +140,7 @@ $user = SecurityManager::getUser();
                         <?php if ($cartCount > 0): ?>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 <?= $cartCount; ?>
-                                <span class="visually-hidden">unread messages</span>
+                                <span class="visually-hidden">prodotti nel carrello</span>
                             </span>
                         <?php endif; ?>
                     </span>
@@ -149,7 +152,7 @@ $user = SecurityManager::getUser();
                         <span class="fas fa-user-circle fa-2x me-2 mobile-hidden"></span>
                     </button>
                     <!-- Account Dropdown -->
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="account-button">
                         <li><a class="dropdown-item" href="#"><span
                                         class="fas fa-shopping-basket me-1"></span>Ordini</a></li>
                         <li><a class="dropdown-item" href="#"><span class="fas fa-bell me-1"></span>Notifiche</a></li>
@@ -187,29 +190,6 @@ $user = SecurityManager::getUser();
         <input class="form-control" type="search" placeholder="Cerca" aria-label="query ricerca">
     </form>
 </div>
-
-<!--Il codice sottostante è puramente a scopo esemplificativo-->
-<div class="d-none" id="notification-list">
-    <ul class="unstyled">
-        <li>
-            <h5>Titolo notifica</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum.
-                Suspendisse vel fringilla ligula.</p>
-            <hr/>
-        </li>
-        <li>
-            <h5>Titolo notifica</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum.
-                Suspendisse vel fringilla ligula.</p>
-        </li>
-        <li>
-            <h5>Titolo notifica</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod tellus id interdum.
-                Suspendisse vel fringilla ligula.</p>
-            <hr/>
-        </li>
-    </ul>
-</div>
 <main class="container-fluid">
     <?php if (isset($template['error'])) : ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -237,6 +217,9 @@ $user = SecurityManager::getUser();
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/f2efc17350.js" crossorigin="anonymous"></script>
 <script src="/assets/js/main2.js"></script>
+<?php if (isset($user)): ?>
+    <script src="/assets/js/notifications.js"></script>
+<?php endif; ?>
 <?php if (isset($template['js'])) : ?>
     <?php foreach ($template['js'] as $i) : ?>
         <script src="<?= $i; ?>"></script>

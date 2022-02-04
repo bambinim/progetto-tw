@@ -27,21 +27,6 @@ $('#offcanvasCloseButton').click(function() {
     closeOffcanvas(offcanvas, backdrop);
 });
 
-/*
-$('#account-button').click(function() {
-    $('#account-dropdown').toggleClass('show');
-});
-*/
-
-$('#notification-bell').click(()=>{
-    $('#notification-bell').popover({
-        'title' : 'Notifiche',
-        'html' : true,
-        'placement' : 'bottom',
-        'content' : $("#notification-list").html()
-    });
-});
-
 $('.sidebar-account-button').click(function() {
     $('.sidebar-account-collapse').collapse('toggle');
     $('.sidebar-account-collapse-icon').toggleClass('rotate-180');

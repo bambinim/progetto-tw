@@ -10,9 +10,8 @@ class Notification extends Entity
     private int $id;
     private string $title;
     private ?string $text = null;
+    private int $viewed = 0;
     private int $userId;
-
-   
 
    /**
      * @return int
@@ -65,6 +64,23 @@ class Notification extends Entity
     /**
      * @return int
      */
+    public function getViewed(): int
+    {
+        return $this->viewed;
+    }
+
+    /**
+     * @param int $viewed
+     */
+    public function setViewed(int $viewed): void
+    {
+        $this->viewed = $viewed;
+    }
+
+
+    /**
+     * @return int
+     */
     public function getUserId(): int
     {
         return $this->userId;
@@ -78,12 +94,10 @@ class Notification extends Entity
         $this->userId = $userId;
     }
 
-    
-
 
     public static function _getColumns(): array
     {
-        return ['id','title','text','userId'];
+        return ['id','title','text', 'viewed', 'user_id'];
     }
 
     public static function _getPrimaryKeyColName(): string
