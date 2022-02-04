@@ -34,7 +34,7 @@
     <div class="col-lg-3"></div>
     <div class="col-12 col-lg-6 card text-center d-block">
         <h2 class="mt-3">Totale: &euro;<?= number_format($sum, 2); ?></h2>
-        <a class="btn btn-primary mb-3 mt-2" href="#">Procedi all'acquisto</a>
+        <a class="btn btn-primary mb-3 mt-2" href="/checkout">Procedi all'acquisto</a>
     </div>
     <div class="col-lg-3"></div>
 </div>

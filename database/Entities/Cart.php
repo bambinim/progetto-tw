@@ -163,6 +163,15 @@ class Cart extends Entity
         }
     }
 
+    public static function clear()
+    {
+        if (SecurityManager::isUserLogged()) {
+            $conn = Database::getConnection();
+            $cursor = $conn->prepare("DELETE FROM carts WHERE user_id = :uid;");
+            $cursor->execute([':uid' => SecurityManager::getUser()->getId()]);
+        }
+    }
+
     public static function _getColumns(): array
     {
         return ['id', 'cookie', 'product_id', 'user_id'];

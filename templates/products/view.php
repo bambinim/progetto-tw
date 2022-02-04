@@ -39,7 +39,11 @@
                     <div class="col text-end mt-1"><span class="fs-3">&euro;<?= number_format($product->getPrice(), 2); ?></span></div>
                 </div>
                 <p><?= $product->getDescription(); ?></p>
-                <a class="btn btn-primary" href="/cart/products/add?productId=<?= $product->getId(); ?>">Aggiungi al carrello</a>
+                <?php if ($product->getIsSold() == 0): ?>
+                    <a class="btn btn-primary" href="/cart/products/add?productId=<?= $product->getId(); ?>">Aggiungi al carrello</a>
+                <?php else: ?>
+                    <span class="text-danger fs-5">Questo prodotto non è più disponibile</span>
+                <?php endif; ?>
             </div>
             <div class="col-12 mt-3">
                 <h2>Informazioni sul venditore</h2>

@@ -14,7 +14,13 @@ class Order extends Entity
     private float $total;
     private int $status = 0;
     private int $userId;
-    private int $courierId;
+    private ?int $courierId = null;
+
+    public function __construct($isNew = true)
+    {
+        parent::__construct($isNew);
+        $this->date = date_format(new \DateTime(), 'Y-m-d H:i:s');
+    }
 
     /**
      * @return int
@@ -80,23 +86,24 @@ class Order extends Entity
         $this->status = $status;
     }
 
-    public function getStatusAsString(){
-        $respose = "Sconosciuto";
-        switch ($this->status ) {
+    public function getStatusAsString(): string
+    {
+        $response = "Sconosciuto";
+        switch ($this->status) {
             case 0:
-                $respose = "Accettato";
+                $response = "Accettato";
                 break;
             case 1:
-                $respose = "Da spedire";
+                $response = "Da spedire";
                 break;
             case 2:
-                $respose = "Spedito";
+                $response = "Spedito";
                 break;
             case 3:
-                $respose = "Consegnato";
+                $response = "Consegnato";
                 break;
         }
-        return $respose;
+        return $response;
     }
 
     /**
@@ -116,17 +123,17 @@ class Order extends Entity
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getCourierId(): int
+    public function getCourierId(): ?int
     {
         return $this->courierId;
     }
 
     /**
-     * @param int $courierId
+     * @param ?int $courierId
      */
-    public function setCourierId(int $courierId): void
+    public function setCourierId(?int $courierId): void
     {
         $this->courierId = $courierId;
     }

@@ -4,9 +4,11 @@ use App\SecurityManager;
 use App\Database\Database;
 use App\Database\Entities\User;
 use App\Database\Entities\Cart;
+use App\Database\Entities\Order;
+use App\Database\Entities\OrderProduct;
 
 if (!empty($router)) {
-    $router->get('/login', function() {
+    $router->get('/login', function () {
         if (SecurityManager::isUserLogged()) {
             header('location: /');
         } else {
@@ -19,7 +21,7 @@ if (!empty($router)) {
         }
     });
 
-    $router->post('/login', function() {
+    $router->post('/login', function () {
         if (SecurityManager::isUserLogged()) {
             header('location: /');
         } else {
@@ -45,12 +47,12 @@ if (!empty($router)) {
         }
     });
 
-    $router->all('/logout', function() {
+    $router->all('/logout', function () {
         SecurityManager::closeSession();
         header('location: /');
     });
 
-    $router->get('/registration', function() {
+    $router->get('/registration', function () {
         $template = [
             'title' => 'Registrazione',
             'template' => 'security/registration.php',
@@ -59,7 +61,7 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
 
-    $router->post('/registration', function() {
+    $router->post('/registration', function () {
         $registrationFields = ['firstName', 'lastName', 'email', 'password', 'password2', 'acceptUseTerms', 'acceptPrivacyPolicy'];
         // check if all fields are in the request
         $template = [
@@ -99,23 +101,7 @@ if (!empty($router)) {
         }
     });
 
- $router->all('/payment/confirm', function() {
-        $template = [
-            'title' => 'Pagamento Eseguito',
-            'template' => 'security/payment-confirm.php',
-            'css' => ['/assets/css/center-card.css', '/assets/css/verification-cards.css']
-        ];
-        require_once(PROJECT_ROOT . '/templates/base.php');
-    });
-    $router->all('/payment/failure', function() {
-        $template = [
-            'title' => 'Pagamento Eseguito',
-            'template' => 'security/payment-failure.php',
-            'css' => ['/assets/css/center-card.css', '/assets/css/failure-payment.css']
-        ];
-        require_once(PROJECT_ROOT . '/templates/base.php');
-    });
-    $router->all('/registration/confirm', function() {
+    $router->all('/registration/confirm', function () {
         $template = [
             'title' => 'Registrazione Completa',
             'template' => 'security/registration-confirm.php',
@@ -124,4 +110,63 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
 
+    $router->all('/payment/confirm', function () {
+        $template = [
+            'title' => 'Pagamento Eseguito',
+            'template' => 'security/payment-confirm.php',
+            'css' => ['/assets/css/center-card.css', '/assets/css/verification-cards.css']
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    }, 'ROLE_USER');
+
+    $router->all('/payment/failure', function () {
+        $template = [
+            'title' => 'Pagamento Eseguito',
+            'template' => 'security/payment-failure.php',
+            'css' => ['/assets/css/center-card.css', '/assets/css/failure-payment.css']
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    }, 'ROLE_USER');
+
+    $router->post('/payment/check', function () {
+        $user = SecurityManager::getUser();
+        $prods = Cart::getProducts();
+        $shopsIds = array_unique(array_map(function($el) {
+            return $el->getShopId();
+        }, $prods));
+
+        foreach ($shopsIds as $i) {
+            $total = 0;
+            $order = new Order();
+            $order->setUserId($user->getId());
+            $order->setTotal(0);
+            $order->save();
+            foreach ($prods as $p) {
+                if ($p->getShopId() == $i) {
+                    $total += $p->getPrice();
+                    $op = new OrderProduct();
+                    $op->setOrderId($order->getId());
+                    $op->setProductId($p->getId());
+                    $op->save();
+                    $p->setIsSold(1);
+                    $p->save();
+                }
+            }
+            $order->setTotal($total);
+            $order->save();
+        }
+        Cart::clear();
+        header('location: /payment/confirm');
+    }, 'ROLE_USER');
+
+    $router->get('/checkout', function () {
+        $template = [
+            'title' => 'Checkout',
+            'template' => 'security/checkout.php',
+            'total' => array_reduce(Cart::getProducts(), function ($carry, $item) {
+                return $carry + $item->getPrice();
+            })
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    }, 'ROLE_USER');
 }
