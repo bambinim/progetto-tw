@@ -4,9 +4,10 @@ use App\Database\Entities\Shop;
 use App\SecurityManager;
 $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager :: getUser()->getId()]);
 ?>
-<div class="container-fluid mt-3">
-<div class="card px-4 pt-5 pb-3">
+<h1 class="mt-3 mb-3"><?php $template['title'] ?></h1>
+<div class="card">
 <?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
+<div class="container">
 <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-12 col-lg-6">
