@@ -1,0 +1,11 @@
+.img-box {
+    height: 160px;
+    width: 100%;
+    position: relative;
+}
+
+.img-box>img {
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+}
