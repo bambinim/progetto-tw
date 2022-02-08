@@ -183,6 +183,26 @@ class Product extends Entity
         }, $cursor->fetchAll());
     }
 
+    public static function search(string $searchQuery, ?int $categoryId = null): array
+    {
+        $searchQuery = "%" . str_replace(" ", "%", trim($searchQuery)) . "%";
+        $params = [
+            ':str' => $searchQuery
+        ];
+        $query = "SELECT * FROM products WHERE (name LIKE :str OR description LIKE :str) AND is_sold = 0";
+        if (!is_null($categoryId)) {
+            $query = $query . " AND category_id = :cat";
+            $params[':cat'] = $categoryId;
+        }
+        $query = $query . ";";
+        $conn = Database::getConnection();
+        $cursor = $conn->prepare($query);
+        $cursor->execute($params);
+        return array_map(function($el) {
+            return Entity::createFromQueryResult($el, Product::class);
+        }, $cursor->fetchAll());
+    }
+
     public static function _getColumns(): array
     {
         return ['id', 'name', 'description', 'price', 'creation_date', 'is_sold', 'status', 'category_id', 'shop_id'];

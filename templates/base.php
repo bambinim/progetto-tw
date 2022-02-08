@@ -69,17 +69,17 @@ $user = SecurityManager::getUser();
                     <?php endif; ?>
                     <!-- search su display grandi -->
                     <li class="nav-item d-none d-lg-inline-block">
-                        <form class="d-flex p-1">
+                        <form class="d-flex p-1 search-form" action="/search">
                             <div class="input-group">
-                                <select class="form-select" aria-label="categoria">
+                                <select class="form-select" aria-label="categoria" name="category">
                                     <option selected disabled>Categoria</option>
                                     <?php foreach ($categories as $i): ?>
                                         <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
                                     <?php endforeach; ?>
                                 </select>
 
-                                <input class="form-control me-2" type="search" placeholder="Cerca"
-                                       aria-label="query ricerca">
+                                <input class="form-control me-2" type="search" name="query" placeholder="Cerca"
+                                       aria-label="query ricerca" required />
                             </div>
                             <button class="btn btn-primary" type="submit">Cerca</button>
                         </form>
@@ -121,19 +121,19 @@ $user = SecurityManager::getUser();
 
         <div id="nav-icons" class="d-flex">
             <?php if (!is_null($user)): ?>
-            <div class="dropdown" id="notification-dropdown">
-                <button class="btn btn-link link-dark shadow-none" type="button" id="notification-bell"
-                        aria-label="notifiche" aria-expanded="false" data-bs-toggle="dropdown">
-                    <span class="fas fa-bell fa-2x me-3 position-relative"></span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="notification-bell">
-                    <h1 class="fs-4">Notifiche</h1>
-                    <div></div>
+                <div class="dropdown" id="notification-dropdown">
+                    <button class="btn btn-link link-dark shadow-none" type="button" id="notification-bell"
+                            aria-label="notifiche" aria-expanded="false" data-bs-toggle="dropdown">
+                        <span class="fas fa-bell fa-2x me-3 position-relative"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="notification-bell">
+                        <h1 class="fs-4">Notifiche</h1>
+                        <div></div>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
             <?php
-                $cartCount = Cart::countProducts();
+            $cartCount = Cart::countProducts();
             ?>
             <a href="/cart/view" class="btn btn-link link-dark shadow-none" aria-label="carrello">
                     <span class="fas fa-shopping-cart fa-2x me-3 position-relative">
@@ -160,9 +160,11 @@ $user = SecurityManager::getUser();
                                 personali</a></li>
                         <li>
                             <?php if (in_array('ROLE_SELLER', json_decode($user->getRoles()))): ?>
-                                <a class="dropdown-item" href="/shop/info"><span class="fas fa-store me-1"></span>Il mio negozio</a>
+                                <a class="dropdown-item" href="/shop/info"><span class="fas fa-store me-1"></span>Il mio
+                                    negozio</a>
                             <?php else: ?>
-                                <a class="dropdown-item" href="/shop/create/new"><span class="fas fa-store me-1"></span>Apri un negozio</a>
+                                <a class="dropdown-item" href="/shop/create/new"><span class="fas fa-store me-1"></span>Apri
+                                    un negozio</a>
                             <?php endif; ?>
                         </li>
                         <li>
@@ -180,14 +182,17 @@ $user = SecurityManager::getUser();
 </nav>
 <!--Search bar solo su mobile-->
 <div class="bg-menu-color d-lg-none">
-    <form class="d-flex justify-content-center p-2">
-        <select class="form-select" aria-label="categoria">
-            <option selected disabled>Categoria</option>
-            <?php foreach ($categories as $i): ?>
-                <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
-            <?php endforeach; ?>
-        </select>
-        <input class="form-control" type="search" placeholder="Cerca" aria-label="query ricerca">
+    <form class="d-flex justify-content-center p-2 search-form" action="/search">
+        <div class="input-group">
+            <select class="form-select" aria-label="categoria" name="category">
+                <option selected disabled>Categoria</option>
+                <?php foreach ($categories as $i): ?>
+                    <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
+                <?php endforeach; ?>
+            </select>
+            <input class="form-control" type="search" placeholder="Cerca" aria-label="query ricerca" name="query"
+                   required>
+        </div>
     </form>
 </div>
 <div id="alert-container">

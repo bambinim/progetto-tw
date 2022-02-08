@@ -204,6 +204,13 @@ hr {
     .sidebar-account-collapse li {
         list-style: none;
     }
+    .search-form>div>select {
+        width: 40%!important;
+    }
+
+    .search-form>div>input {
+        width: 60%!important;
+    }
 }
 /* notifications dropdown styles */
 #notification-dropdown>.dropdown-menu {
