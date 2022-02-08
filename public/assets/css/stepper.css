@@ -1,0 +1,32 @@
+.steps-container {
+    display: flex;
+    flex-flow: column;
+}
+
+.steps-container>.step {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.steps-container>.step>span {
+    margin-left: 10px;
+}
+
+.steps-container>.step-connector {
+    background-color: #D3D3D3;
+    width: 3px;
+    height: 80px;
+    margin-left: 13px;
+}
+
+.steps-container>.step>.step-circle {
+    background-color: #D3D3D3;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.steps-container>.step.active>.step-circle, .steps-container>.step-connector.active {
+    background-color: var(--button-bg-color);
+}

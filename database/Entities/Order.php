@@ -4,7 +4,6 @@ namespace App\Database\Entities;
 
 use App\Database\Database;
 use App\Database\Entity;
-use App\Database\Query;
 
 class Order extends Entity
 {
@@ -149,6 +148,15 @@ class Order extends Entity
             array_push($products, Entity::createFromQueryResult($i, Product::class));
         }
         return $products;
+    }
+
+    public function getShop(): Shop
+    {
+        $query = "SELECT * FROM shops WHERE id = (SELECT shop_id FROM products WHERE id = (SELECT product_id FROM orders_products WHERE order_id = :oid LIMIT 1));";
+        $conn = Database::getConnection();
+        $cursor = $conn->prepare($query);
+        $cursor->execute([':oid' => $this->getId()]);
+        return Entity::createFromQueryResult($cursor->fetchAll()[0], Shop::class);
     }
 
     public static function _getColumns(): array

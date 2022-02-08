@@ -190,7 +190,7 @@ $user = SecurityManager::getUser();
         <input class="form-control" type="search" placeholder="Cerca" aria-label="query ricerca">
     </form>
 </div>
-<main class="container-fluid">
+<div id="alert-container">
     <?php if (isset($template['error'])) : ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <?= $template['error']; ?>
@@ -203,7 +203,8 @@ $user = SecurityManager::getUser();
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
-    <div id="alert-container"></div>
+</div>
+<main class="container-fluid">
     <?php require_once(PROJECT_ROOT . '/templates/' . $template['template']); ?>
 </main>
 <footer class="text-center pt-3 pb-2">

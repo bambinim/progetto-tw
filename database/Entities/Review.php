@@ -16,6 +16,12 @@ class Review extends Entity
     private int $shopId;
     private int $userId;
 
+    public function __construct($isNew = true)
+    {
+        parent::__construct($isNew);
+        $this->date = date_format(new \DateTime(), 'Y-m-d H:i:s');
+    }
+
    /**
      * @return int
      */
