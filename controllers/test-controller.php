@@ -1,25 +1,14 @@
 <?php
 
 use App\SecurityManager;
+use App\Database\Entities\Product;
+use App\Database\Database;
 
 if (!empty($router)) {
-    $router->all('/hello', function() {
-        $template = [
-            'title' => 'Test Page',
-            'template' => 'test/hello.php',
-            'message' => 'Test Messaggio',
-            'error' => 'Test errore'
-        ];
-        require_once(PROJECT_ROOT . '/templates/base.php');
+    $router->get('/test', function() {
+        $products = Database::getRepository(Product::class)->find(['shop_id' => 1], ['id' => 'DESC'], 1);
+        echo json_encode(array_map(function($el) {
+            return $el->toArray();
+        }, $products));
     });
-
-    $router->get('/userinfo', function() {
-        $user = SecurityManager::getUser();
-        echo json_encode([
-            'firstName' => $user->getFirstName(),
-            'lastName' => $user->getLastName(),
-            'email' => $user->getEmail(),
-            'roles' => $user->getRoles()
-        ]);
-    }, 'ROLE_USER');
 }

@@ -51,9 +51,21 @@ class EntityRepository
             ->setParams($params['paramBinds']);
     }
 
-    public function find(array $conditions): ?array
+    public function find(array $conditions, array $orderBy = [], ?int $limit = null): ?array
     {
         $query = $this->createQueryWithConditions($conditions);
+        // create order by query string
+        if (count($orderBy) > 0) {
+            $orderString = "";
+            foreach ($orderBy as $k=>$v) {
+                $orderString = $orderString . "$k $v, ";
+            }
+            $orderString = substr($orderString, 0, -2);
+            $query->orderBy($orderString);
+        }
+        if (!is_null($limit)) {
+            $query->limit($limit);
+        }
         $data = $query->execute();
         $res = [];
         foreach ($data as $i)

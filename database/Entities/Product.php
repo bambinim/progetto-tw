@@ -4,6 +4,7 @@ namespace App\Database\Entities;
 
 use App\Database\Database;
 use App\Database\Entity;
+use App\Database\Query;
 
 class Product extends Entity
 {
@@ -194,7 +195,7 @@ class Product extends Entity
             $query = $query . " AND category_id = :cat";
             $params[':cat'] = $categoryId;
         }
-        $query = $query . ";";
+        $query = $query . " ORDER BY creation_date DESC LIMIT 100;";
         $conn = Database::getConnection();
         $cursor = $conn->prepare($query);
         $cursor->execute($params);
