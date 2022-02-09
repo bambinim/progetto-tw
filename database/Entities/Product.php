@@ -184,6 +184,20 @@ class Product extends Entity
         }, $cursor->fetchAll());
     }
 
+    public function renderCard(): string
+    {
+        $price = number_format($this->getPrice(), 2);
+        return "<a class=\"card product-card p-2\" href=\"/products/view?id={$this->getId()}\">
+            <div>
+                <img src=\"/images/get?id={$this->getImages()[0]->getId()}\" />
+            </div>
+            <div class=\"mt-2\">
+                <span class=\"fs-5 me-2\">{$this->getName()}</span>
+                <span>&euro;{$price}</span>
+            </div>
+        </a>";
+    }
+
     public static function search(string $searchQuery, ?int $categoryId = null): array
     {
         $searchQuery = "%" . str_replace(" ", "%", trim($searchQuery)) . "%";
