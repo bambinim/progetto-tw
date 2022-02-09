@@ -20,7 +20,7 @@
                      <h3><?php echo ($product->getName()); ?></h3>
                    <div class="row">
                        <div class="col">
-                     <p><?php echo("€".$product->getPrice());?></p>
+                       <p>&euro;<?= number_format($product->getPrice(), 2);?></p>
                   </div>
                   
          </div>

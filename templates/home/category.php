@@ -4,8 +4,7 @@
    use App\Database\Entities\Category;
    use App\SecurityManager;
    $category=$template['category'];
-   $idCategory = (Database::getRepository(Category::class)->find(['name'=>$template["category"]])[0]->getId());
-   $products = Database::getRepository(Product::class)->findAll(['category_id' => $idCategory]);
+   $products = $template['products'];
    ?>
 
     <div class="d-flex justify-content-between mt-5 ms-4 me-4">
@@ -14,7 +13,7 @@
 	<div class="container">
 	
     <div class="row">
-        <?php foreach ($products as $product) : ?>
+        <?php if(!is_null($products)): foreach ($products as $product) : ?>
             <?php $images = $product->getImages(); ?>
             <div class="col-lg-3 text-center mb-2 mt-2 card">
                 <div class="img-box">
@@ -22,10 +21,10 @@
                 </div>
                 <div class="">
                     <h4><?php echo $product->getName();?></h4>
-                    <p><?php echo $product->getPrice();?>€</p>
+                    <p>&euro;<?= number_format($product->getPrice(), 2);?></p>
                     
                 </div>
             </div>
-        <?php endforeach; ?><div class="col-3"></div>
+        <?php  endforeach; endif;?><div class="col-3"></div>
 		</div>
 	</div>

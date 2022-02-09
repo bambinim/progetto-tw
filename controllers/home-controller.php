@@ -1,7 +1,9 @@
 <?php
 
 use App\Database\Entities\Product;
-
+use App\Database\Database;
+use App\Database\Entities\Category;
+use App\SecurityManager;
 if (!empty($router)) {
     $router->get('/home', function() {
         $template = [
@@ -13,10 +15,18 @@ if (!empty($router)) {
     });
     
     $router->get('/category', function() {
+        $idCategory=$_GET["category"];
+        $category = Database::getRepository(Category::class)->findOne(['id'=>(int)$idCategory]);
+        $products= NULL;
+        if(!is_null($category))
+        {$category = $category->getName();
+        $products = Database::getRepository(Product::class)->find(['category_id' => $idCategory,'is_sold'=>0]);
+        }
         $template = [
             'title' => 'Categorie',
             'template' => 'home/category.php',
-            'category'=> $_GET["category"],
+            'category'=> $category,
+            'products'=> $products,
             'css' =>['/assets/css/category.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
