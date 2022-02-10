@@ -47,17 +47,14 @@
                             <div class="step-circle"></div>
                             <span>Ordine accettato</span>
                         </li>
-                        <div class="step-connector <?= $order->getStatus() > 0 ? ' active' : ''; ?>"></div>
                         <li class="step <?= $order->getStatus() >= 1 ? ' active' : ''; ?>" <?= $order->getStatus() == 1 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>In preparazione</span>
                         </li>
-                        <div class="step-connector <?= $order->getStatus() > 1 ? ' active' : ''; ?>"></div>
                         <li class="step <?= $order->getStatus() >= 2 ? ' active' : ''; ?>" <?= $order->getStatus() == 3 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>Spedito</span>
                         </li>
-                        <div class="step-connector <?= $order->getStatus() > 2 ? ' active' : ''; ?>"></div>
                         <li class="step <?= $order->getStatus() >= 3 ? ' active' : ''; ?>" <?= $order->getStatus() == 3 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>Consegnato</span>

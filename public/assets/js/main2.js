@@ -1,17 +1,17 @@
 function closeOffcanvas(offcanvas, backdrop) {
-    $(backdrop).removeClass('show').delay(300).queue(function() {
+    $(backdrop).removeClass('show').delay(300).queue(function () {
         $(backdrop).remove();
     });
     $(offcanvas).toggleClass('open');
 }
 
-$('#navbarSideCollapse').click(function() {
+$('#navbarSideCollapse').click(function () {
     let offcanvas = $('.offcanvas-collapse');
     $(offcanvas).toggleClass('open');
     if ($(offcanvas).hasClass('open')) {
         $(offcanvas).after(`<div class="offcanvas-backdrop fade show"></div>`);
         let backdrop = $(offcanvas).next();
-        $(backdrop).click(function(e) {
+        $(backdrop).click(function (e) {
             closeOffcanvas(offcanvas, backdrop);
         });
     } else {
@@ -21,13 +21,32 @@ $('#navbarSideCollapse').click(function() {
     }
 });
 
-$('#offcanvasCloseButton').click(function() {
+$('#offcanvasCloseButton').click(function () {
     let offcanvas = $('.offcanvas-collapse');
     let backdrop = $(offcanvas).next();
     closeOffcanvas(offcanvas, backdrop);
 });
 
-$('.sidebar-account-button').click(function() {
+$('.sidebar-account-button').click(function () {
     $('.sidebar-account-collapse').collapse('toggle');
     $('.sidebar-account-collapse-icon').toggleClass('rotate-180');
+});
+
+$(document).ready(function () {
+    $('.scroll-row').each(function () {
+        const scrollRow = this;
+        const innerRow = $(scrollRow).find('.row')[0];
+        if (innerRow.scrollWidth > innerRow.clientWidth) {
+            let html = $(scrollRow).html();
+            html += '<button aria-label="scorri verso sinistra"><span class="fas fa-chevron-left fa-lg"></span></button><button aria-label="scorri verso destra"><span class="fas fa-chevron-right fa-lg"></span></button>';
+            $(scrollRow).html(html);
+            let buttons = $(scrollRow).find('button');
+            $(buttons[0]).click(function () {
+                $(scrollRow).find('.row')[0].scrollLeft -= $(scrollRow).width();
+            });
+            $(buttons[1]).click(function () {
+                $(scrollRow).find('.row')[0].scrollLeft += $(scrollRow).width();
+            });
+        }
+    });
 });

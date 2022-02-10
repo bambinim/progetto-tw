@@ -11,7 +11,7 @@ if (!empty($router)) {
             'title' => 'Home',
             'template' => 'home/home.php',
             'categories' => Database::getRepository(Category::class)->findAll(),
-            'products' => Database::getRepository(Product::class)->find([], ['creation_date' => 'DESC'], 8),
+            'products' => Database::getRepository(Product::class)->find(['is_sold' => 0], ['creation_date' => 'DESC'], 10),
             'css' => ['/assets/css/home.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
