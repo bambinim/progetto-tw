@@ -6,7 +6,7 @@
         <ul>
             <?php foreach($template['products'] as $i): ?>
                 <li class="mt-3 mx-3">
-                    <img class="ms-0" src="/images/get?id=<?= $i->getImages()[0]->getId(); ?>" />
+                    <img alt="" class="ms-0" src="/images/get?id=<?= $i->getImages()[0]->getId(); ?>" />
                     <div class="ms-2">
                         <h2><?= $i->getName(); ?></h2>
                         <span class="fs-4">&euro;<?= number_format($i->getPrice(), 2); ?></span>

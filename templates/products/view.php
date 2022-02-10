@@ -19,7 +19,7 @@
                     <div class="carousel-inner">
                         <?php for ($i = 0; $i < count($images); $i++): ?>
                             <div class="carousel-item <?= $i == 0 ? 'active' : '' ?>">
-                                <img src="/images/get?id=<?= $images[$i]->getId() ?>" class="d-block w-100" alt="...">
+                                <img src="/images/get?id=<?= $images[$i]->getId() ?>" class="d-block w-100" alt="">
                             </div>
                         <?php endfor; ?>
                     </div>

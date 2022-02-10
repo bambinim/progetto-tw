@@ -31,7 +31,7 @@
                             <ul class="products-list mt-2">
                                 <?php foreach ($order->getProducts() as $product): ?>
                                     <li>
-                                        <img src="/images/get?id=<?= $product->getImages()[0]->getId(); ?>" />
+                                        <img alt="" src="/images/get?id=<?= $product->getImages()[0]->getId(); ?>" />
                                         <span class="fw-bold mx-2"><?= $product->getName(); ?></span>
                                         <span>&euro;<?= number_format($product->getPrice(), 2); ?></span>
                                     </li>
@@ -42,27 +42,27 @@
                 </div>
                 <div class="col-12 col-lg-6 card mt-2 pt-2 pb-3">
                     <h1 class="fs-2">Stato ordine</h1>
-                    <div class="steps-container">
-                        <div class="step active">
+                    <ul aria-label="progress" class="steps-container">
+                        <li class="step active" <?= $order->getStatus() == 0 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>Ordine accettato</span>
-                        </div>
+                        </li>
                         <div class="step-connector <?= $order->getStatus() > 0 ? ' active' : ''; ?>"></div>
-                        <div class="step <?= $order->getStatus() >= 1 ? ' active' : ''; ?>">
+                        <li class="step <?= $order->getStatus() >= 1 ? ' active' : ''; ?>" <?= $order->getStatus() == 1 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>In preparazione</span>
-                        </div>
+                        </li>
                         <div class="step-connector <?= $order->getStatus() > 1 ? ' active' : ''; ?>"></div>
-                        <div class="step <?= $order->getStatus() >= 2 ? ' active' : ''; ?>">
+                        <li class="step <?= $order->getStatus() >= 2 ? ' active' : ''; ?>" <?= $order->getStatus() == 3 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>Spedito</span>
-                        </div>
+                        </li>
                         <div class="step-connector <?= $order->getStatus() > 2 ? ' active' : ''; ?>"></div>
-                        <div class="step <?= $order->getStatus() >= 3 ? ' active' : ''; ?>">
+                        <li class="step <?= $order->getStatus() >= 3 ? ' active' : ''; ?>" <?= $order->getStatus() == 3 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>Consegnato</span>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-12 card mt-2 pt-2 pb-3 d-block">
                     <h1 class="fs-2">Informazioni sul venditore</h1>
