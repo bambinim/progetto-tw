@@ -4,14 +4,17 @@ use App\Database\Entities\Product;
 use App\Database\Database;
 use App\Database\Entities\Category;
 use App\SecurityManager;
+
 if (!empty($router)) {
     $router->get('/home', function() {
         $template = [
             'title' => 'Home',
-            'template' => 'home/home.php'
+            'template' => 'home/home.php',
+            'categories' => Database::getRepository(Category::class)->findAll(),
+            'products' => Database::getRepository(Product::class)->find([], ['creation_date' => 'DESC'], 8),
+            'css' => ['/assets/css/home.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
-    
     });
     
     $router->get('/category', function() {

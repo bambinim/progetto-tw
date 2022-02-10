@@ -10,7 +10,13 @@ if (!empty($router)) {
             $image = Database::getRepository(Image::class)->findOne(['id' => $_GET['id']]);
             if (!is_null($image)) {
                 $fp = fopen(PROJECT_ROOT . '/images/' . $image->getId() . '.' . $image->getExtension(), 'rb');
-                header('Content-Type: image/' . $image->getExtension() == 'png' ? 'png' : 'jpeg');
+                if ($image->getExtension() == 'png') {
+                    header('Content-Type: image/png');
+                } else if ($image->getExtension() == 'jpg' || $image->getExtension() == 'jpeg') {
+                    header('Content-Type: image/jpeg');
+                } else if ($image->getExtension() == 'svg') {
+                    header('Content-Type: image/svg+xml');
+                }
                 fpassthru($fp);
                 exit;
             } else {

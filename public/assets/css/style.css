@@ -254,3 +254,8 @@ hr {
         text-align: left;
     }
 }
+
+.scroll-row {
+    flex-wrap: nowrap!important;
+    overflow-x: scroll;
+}

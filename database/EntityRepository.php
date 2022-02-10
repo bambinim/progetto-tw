@@ -26,29 +26,34 @@ class EntityRepository
         return substr($selectString, 0, -2);
     }
 
-    private function processQueryConditions($conditions): array
+    private function processQueryConditions($conditions): ?array
     {
-        $conditionString = '';
-        $paramsBind = [];
-        foreach ($conditions as $k=>$v) {
-            $conditionString = $conditionString . "{$k} = :{$k} AND ";
-            $paramsBind[":{$k}"] = $v;
+        if (count($conditions) > 0) {
+            $conditionString = '';
+            $paramsBind = [];
+            foreach ($conditions as $k=>$v) {
+                $conditionString = $conditionString . "{$k} = :{$k} AND ";
+                $paramsBind[":{$k}"] = $v;
+            }
+            $conditionString = substr($conditionString, 0, -5);
+            return [
+                'conditionString' => $conditionString,
+                'paramBinds' => $paramsBind
+            ];
+        } else {
+            return null;
         }
-        $conditionString = substr($conditionString, 0, -5);
-        return [
-            'conditionString' => $conditionString,
-            'paramBinds' => $paramsBind
-        ];
     }
 
     private function createQueryWithConditions($conditions): Query
     {
         $params = $this->processQueryConditions($conditions);
-        $query = new Query();
-        return Query::create()->select($this->createSelectString())
-            ->from($this->table)
-            ->where($params['conditionString'])
-            ->setParams($params['paramBinds']);
+        $query = Query::create()->select($this->createSelectString())
+            ->from($this->table);
+        if (!is_null($params)) {
+            $query->where($params['conditionString'])->setParams($params['paramBinds']);
+        }
+        return $query;
     }
 
     public function find(array $conditions, array $orderBy = [], ?int $limit = null): ?array
