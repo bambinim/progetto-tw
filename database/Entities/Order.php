@@ -93,7 +93,7 @@ class Order extends Entity
                 $response = "Accettato";
                 break;
             case 1:
-                $response = "Da spedire";
+                $response = "In preparazione";
                 break;
             case 2:
                 $response = "Spedito";
@@ -135,6 +135,11 @@ class Order extends Entity
     public function setCourierId(?int $courierId): void
     {
         $this->courierId = $courierId;
+    }
+
+    public function getUser(): User
+    {
+        return Database::getRepository(User::class)->findOne(['id' => $this->getUserId()]);
     }
 
     public function getProducts(): array

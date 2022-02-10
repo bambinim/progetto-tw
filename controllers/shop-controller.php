@@ -4,9 +4,10 @@ use App\SecurityManager;
 use App\Database\Database;
 use App\Database\Entities\Review;
 use App\Database\Entities\Shop;
-use App\Database\Entities\User;
 use App\Database\Entities\Product;
 use App\Database\Entities\ProductImage;
+use App\Database\Entities\Order;
+use App\Database\Entities\Notification;
 
 if (!empty($router)) {
     $router->get('/shop/reviews', function () {
@@ -34,6 +35,40 @@ if (!empty($router)) {
             'css' => ['/assets/css/shop-sales.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
+    }, 'ROLE_SELLER');
+
+    $router->get('/shop/sales/view', function() {
+        $order = isset($_GET['id']) ?  Database::getRepository(Order::class)->findOne(['id' => $_GET['id']]) : null;
+        if (!is_null($order) && $order->getShop()->getId() != SecurityManager::getUser()->getShop()->getId()) {
+            $order = null;
+        }
+        $template = [
+            'title' => 'Informazioni ordine',
+            'template' => 'shop/sales-view.php',
+            'css' => ['/assets/css/order-view.css'],
+            'order' => $order
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    }, 'ROLE_SELLER');
+
+    $router->post('/shop/sales/change-status', function() {
+        $order = isset($_POST['order']) && isset($_POST['status']) ? Database::getRepository(Order::class)->findOne(['id' => $_POST['order']]) : null;
+        if (!is_null($order) && $order->getShop()->getId() == SecurityManager::getUser()->getShop()->getId()) {
+            $status = intval($_POST['status']);
+            if ($status >= 0 && $status <= 3) {
+                $order->setStatus($status);
+                $order->save();
+                // create notification for order status change
+                $notification = new Notification();
+                $notification->setTitle('Stato ordine cambiato');
+                $notification->setText("Lo stato del suo ordine numero {$order->getId()} è cambiato in \"{$order->getStatusAsString()}\"");
+                $notification->setUserId($order->getUserId());
+                $notification->save();
+            }
+            header("location: /shop/sales/view?id={$order->getId()}");
+        } else {
+            header('location: /');
+        }
     }, 'ROLE_SELLER');
 
     $router->get('/shop/products/list', function () {
