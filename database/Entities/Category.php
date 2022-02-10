@@ -80,9 +80,17 @@ class Category extends Entity
         $this->imageId = $imageId;
     }
 
-    public function getProducts(): array
+    public function getProducts($quantity = -1): array
     {
-        return Database::getRepository(Product::class)->findAll(['categoryId' => $this->id]);
+        $res = null;
+        if($quantity < 0){
+            $res = Database::getRepository(Product::class)->find(['category_id' => $this->id], ['creation_date' => 'DESC']);
+        }
+        else{
+            $res = Database::getRepository(Product::class)->find(['category_id' => $this->id], ['creation_date' => 'DESC'], $quantity);
+        }
+        return $res;
+        
     }
 
 

@@ -52,7 +52,7 @@ $user = SecurityManager::getUser();
                         <a class="nav-link" href="#">Novit&agrave;</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Categorie</a>
+                        <a class="nav-link" href="/categories/all">Categorie</a>
                     </li>
                     <!--Link da mostrare solo su smartphone-->
                     <li class="nav-item d-lg-none ms-2">
@@ -153,7 +153,7 @@ $user = SecurityManager::getUser();
                     </button>
                     <!-- Account Dropdown -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="account-button">
-                        <li><a class="dropdown-item" href="#"><span
+                        <li><a class="dropdown-item" href="/user/orders"><span
                                         class="fas fa-shopping-basket me-1"></span>Ordini</a></li>
                         <li><a class="dropdown-item" href="#"><span class="fas fa-bell me-1"></span>Notifiche</a></li>
                         <li><a class="dropdown-item" href="#"><span class="fas fa-user me-1"></span>Informazioni

@@ -3,6 +3,6 @@ main span{
     margin-top: 100%;
 }
 main a:hover {
-    color: red !important;
+    text-decoration: none;
   }
   
