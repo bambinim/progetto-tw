@@ -14,7 +14,7 @@
                         <div class="col-2">
                             <img <?php
                             echo("src=/images/get?id=" . $images[0]->getID());
-                            ?> alt="...">
+                            ?> alt="">
                         </div>
                         <div class="col-6 items">
                             <h3><?php echo($product->getName()); ?></h3>

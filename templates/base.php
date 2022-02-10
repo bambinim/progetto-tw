@@ -34,7 +34,7 @@ $user = SecurityManager::getUser();
             <span class="fas fa-bars fa-2x"></span>
         </button>
         <!--Brand-->
-        <a class="navbar-brand" href="#"> <img src="/img/logo.png" alt="logo del sito"> </a>
+        <a class="navbar-brand" href="#"> <img src="/img/logo.png" alt=""> </a>
 
         <div class="navbar-collapse offcanvas-collapse">
             <div class="offcanvas-header">

@@ -8,7 +8,6 @@
         <div class="col mb-2">
             <a href="#" class="category-card p-2" style="background-color: #<?= $cat->getColor(); ?>;">
                 <div>
-                    <!--<img src="/images/get?id=<?= $cat->getImageId(); ?>" />-->
                     <?= file_get_contents(PROJECT_ROOT . "/images/{$cat->getImageId()}.svg"); ?>
                 </div>
                 <span class="fs-5 fw-bold mt-3 text-center"><?= $cat->getName(); ?></span>

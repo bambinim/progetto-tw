@@ -45,7 +45,7 @@
                         <?php foreach ($template['images'] as $i) : ?>
                             <li id="uploaded-image-<?= $i; ?>" class="position-relative m-2">
                                 <input name="images[]" value="<?= $i; ?>" class="d-none">
-                                <img src="/images/get?id=<?= $i; ?>" class="image-preview">
+                                <img alt="" src="/images/get?id=<?= $i; ?>" class="image-preview">
                                 <button type="button" class="btn btn-link shadow-none position-absolute top-0 start-100 translate-middle"
                                         aria-label="elimina immagine" onclick="removeUploadedImage(<?= $i; ?>)">
                                     <span class="fas fa-times"></span>

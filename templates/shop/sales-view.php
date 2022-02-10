@@ -31,7 +31,7 @@
                             <ul class="products-list mt-2">
                                 <?php foreach ($order->getProducts() as $product): ?>
                                     <li>
-                                        <img src="/images/get?id=<?= $product->getImages()[0]->getId(); ?>" />
+                                        <img alt="" src="/images/get?id=<?= $product->getImages()[0]->getId(); ?>" />
                                         <span class="fw-bold mx-2"><?= $product->getName(); ?></span>
                                         <span>&euro;<?= number_format($product->getPrice(), 2); ?></span>
                                     </li>
