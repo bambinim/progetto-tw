@@ -4,6 +4,7 @@ namespace App\Database\Entities;
 
 use App\Database\Database;
 use App\Database\Entity;
+use App\Database\Query;
 
 class Review extends Entity
 {
@@ -132,6 +133,17 @@ class Review extends Entity
     public function setUserId(int $userId): void
     {
         $this->userId = $userId;
+    }
+    public function getRatingsAVG($shop): array
+    {
+        $conn = Database::getConnection();
+        $cursor = $conn->prepare("SELECT AVG(rating) AS rating_avg FROM REVIEWS WHERE shop_id=".$shop."");
+        $cursor->execute();
+        
+        
+        return $cursor->fetch();
+       
+         
     }
 
     public function getUser(): User

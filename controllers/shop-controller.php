@@ -85,7 +85,8 @@ if (!empty($router)) {
         $template = [
             'title' => 'Apri Shop',
             'template' => 'shop/shop-new.php',
-            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css']
+            'js' => ['/assets/js/images-uploader-profile.js'],
+            'css' => ['/assets/css/center-card.css','/assets/css/images-uploader.css', '/assets/css/registration.css']
             
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
@@ -126,6 +127,7 @@ if (!empty($router)) {
             $user -> setRoles('["ROLE_USER", "ROLE_SELLER"]');
             $shop->setUserId($user->getId());
             $shop -> setImageId(NULL);
+            
             $shop->save();
             $user->save();
             $template['message'] = 'shop creato';
@@ -137,7 +139,9 @@ if (!empty($router)) {
         $template = [
             'title' => 'Il tuo negozio',
             'template' => 'shop/shop-info.php',
-            'css' =>['']
+            'js' => ['/assets/js/images-uploader-profile.js'],
+            'css' => [ '/assets/css/images-uploader.css'],
+            
             
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
@@ -147,7 +151,8 @@ if (!empty($router)) {
         $template = [
             'title' => 'Il tuo negozio',
             'template' => 'shop/shop-info.php',
-            'css' => ['/assets/css/registration.css']
+            'js' => ['/assets/js/images-uploader-profile.js'],
+            'css' => ['/assets/css/images-uploader.css', '/assets/css/registration.css'],
             
         ];
         $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager :: getUser()->getId()]);
