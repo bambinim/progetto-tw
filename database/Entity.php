@@ -85,7 +85,6 @@ abstract class Entity
                 }
             }
             $query = substr($query, 0, -2) . ");";
-            $this->isNew = false;
         } else {
             $query = "UPDATE $table SET ";
             foreach ($columns as $i) {
@@ -97,7 +96,10 @@ abstract class Entity
         $conn = Database::getConnection();
         $stmt = $conn->prepare($query);
         $stmt->execute($params);
-        $this->{Entity::toCamelCase("set_" . $pk)}(intval($conn->lastInsertId()));
+        if ($this->isNew) {
+            $this->{Entity::toCamelCase("set_" . $pk)}(intval($conn->lastInsertId()));
+            $this->isNew = false;
+        }
     }
 
     public function delete()
