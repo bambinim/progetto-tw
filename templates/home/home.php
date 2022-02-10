@@ -3,7 +3,7 @@
         <h1>Categorie</h1>
     </div>
 </div>
-<div class="row scroll-row mt-2">
+<div class="row mt-2">
     <?php foreach ($template['categories'] as $cat): ?>
         <div class="col mb-2">
             <a href="#" class="category-card p-2" style="background-color: #<?= $cat->getColor(); ?>;">
@@ -21,10 +21,12 @@
         <h1>Ultimi Aggiunti</h1>
     </div>
 </div>
-<div class="row scroll-row mt-2">
-    <?php foreach ($template['products'] as $prod): ?>
-        <div class="col-8 col-lg-2 mb-2">
-            <?= $prod->renderCard(); ?>
-        </div>
-    <?php endforeach; ?>
+<div class="scroll-row mt-2">
+    <div class="row">
+        <?php foreach ($template['products'] as $prod): ?>
+            <div class="col-8 col-lg-2 mb-2">
+                <?= $prod->renderCard(); ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
