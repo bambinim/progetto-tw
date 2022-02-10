@@ -5,7 +5,7 @@
 </div>
 <div class="row scroll-row mt-2">
     <?php foreach ($template['categories'] as $cat): ?>
-        <div class="col">
+        <div class="col mb-2">
             <a href="#" class="category-card p-2" style="background-color: #<?= $cat->getColor(); ?>;">
                 <div>
                     <!--<img src="/images/get?id=<?= $cat->getImageId(); ?>" />-->
@@ -24,7 +24,7 @@
 </div>
 <div class="row scroll-row mt-2">
     <?php foreach ($template['products'] as $prod): ?>
-        <div class="col-8 col-lg-2">
+        <div class="col-8 col-lg-2 mb-2">
             <?= $prod->renderCard(); ?>
         </div>
     <?php endforeach; ?>
