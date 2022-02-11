@@ -56,7 +56,8 @@ if (!empty($router)) {
         $template = [
             'title' => 'Registrazione',
             'template' => 'security/registration.php',
-            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css']
+            'js' => ['/assets/js/images-uploader-profile.js'],
+            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css','/assets/css/images-uploader.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
@@ -67,7 +68,8 @@ if (!empty($router)) {
         $template = [
             'title' => 'Registrazione',
             'template' => 'security/registration.php',
-            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css']
+            'js' => ['/assets/js/images-uploader-profile.js'],
+            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css','/assets/css/images-uploader.css']
         ];
         $allFieldsOk = true;
         foreach ($registrationFields as $i) {
@@ -96,6 +98,10 @@ if (!empty($router)) {
             $user->setEmail($_POST['email']);
             $user->setPassword(SecurityManager::createPasswordHash($_POST['password']));
             $user->setRoles('["ROLE_USER"]');
+            $image=$_POST['images'];
+            if($image!=""){
+                $user->setImageId($image[0]);
+            }
             $user->save();
             header('location: /registration/confirm');
         }

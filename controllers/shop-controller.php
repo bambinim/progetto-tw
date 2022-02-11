@@ -126,12 +126,19 @@ if (!empty($router)) {
             $user = SecurityManager :: getUser();
             $user -> setRoles('["ROLE_USER", "ROLE_SELLER"]');
             $shop->setUserId($user->getId());
-            $shop -> setImageId(NULL);
+            $images=$_POST['images'];
+            if($images!=""){
+                $shop -> setImageId($images[0]);
+            }else{
+                $shop -> setImageId(NULL);
+            }
+            
             
             $shop->save();
             $user->save();
+            
+            header('location: /shop/info');
             $template['message'] = 'shop creato';
-            require_once(PROJECT_ROOT . '/templates/base.php');
         }
     },'ROLE_USER');
 
@@ -152,13 +159,12 @@ if (!empty($router)) {
             'title' => 'Il tuo negozio',
             'template' => 'shop/shop-info.php',
             'js' => ['/assets/js/images-uploader-profile.js'],
-            'css' => ['/assets/css/images-uploader.css', '/assets/css/registration.css'],
+            'css' => ['/assets/css/images-uploader.css'],
             
         ];
         $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager :: getUser()->getId()]);
         $name = $_POST['name'];
         if($name!=""){
-            var_dump($name);
                 $shop->setName($name);
         }
         $address = $_POST['address'];
@@ -167,7 +173,7 @@ if (!empty($router)) {
         }
         $addressNum = $_POST['addressNumber'];
         if($addressNum!="")
-        {var_dump($addressNum);
+        {
              $shop->setStreetNumber($addressNum);
         }
         $zip = $_POST['zip'];
@@ -179,6 +185,11 @@ if (!empty($router)) {
         if($city!="")
         {
              $shop->setCity($city);
+        }
+        $image=$_POST['images'];
+        if($image!="")
+        {
+             $shop->setImageId($image[0]);
         }
         $shop->save();
         $template['message'] = 'informazioni shop aggiornate';

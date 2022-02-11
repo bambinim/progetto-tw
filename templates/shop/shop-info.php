@@ -12,8 +12,31 @@ $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityMana
     <div class="col-lg-3"></div>
     <div class="col-12 col-lg-6">
         <h1 class="ms-3 my-3">Informazioni Shop</h1>
-        
+       
+        <?php  if(!is_null($shop)):
+                        if(!is_null($shop->getImageId())): 
+                           echo ( "<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=".$shop->getImageId())."alt=\"foto-profilo\" id=\"uploaded-image-profile\"class=\" rounded-circle  w-100 h-100\" ></div></div>";
+                            endif;endif; ?></span>
             <form class="mb-3" method="POST" action="/shop/update">
+            <div class=" mb-3" id="images-uploader">
+<input id="input-upload" type="file" name=images class="d-none" accept=".jpg,.jpeg,.png" />
+                <label for="input-upload" class="btn btn-primary"><span class="fas fa-upload me-2"></span>Aggiungi Immagine</label>
+                <ul class="mt-3">
+                    <?php if (isset($template['images'])):?>
+                        
+                            <li id="uploaded-image-<?= $template['images']; ?>" class="position-relative m-2">
+                                <input name="images" <?php echo "value=\"${template['images']};\"" ?>class="d-none">
+                                <img src="/images/get?id=<?= $template['images']; ?>" class="image-preview">
+                                <button type="button" class="btn btn-link shadow-none position-absolute top-0 start-100 translate-middle"
+                                        aria-label="elimina immagine" onclick="removeUploadedImage(<?= $template['images']; ?>)">
+                                    <span class="fas fa-times"></span>
+                                </button>
+                            </li>
+                    <?php endif; ?>
+                </ul>
+
+
+             </div>
                 <div class="mb-3">
                     <label for="input-name" class="form-label">Nome Negozio</label>
                     <input id="input-name" name="name" type="text" class="form-control" 
