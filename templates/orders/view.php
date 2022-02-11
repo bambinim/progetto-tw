@@ -63,21 +63,21 @@
                 </div>
                 <div class="col-12 card mt-2 pt-2 pb-3 d-block">
                     <h1 class="fs-2">Informazioni sul venditore</h1>
-                    <div class="shop-circle-link">
-                        <a href="/user/shop/info?id=<?= $shop->getId() ?>" class="avatar-circle">
+                    <a class="shop-circle-link" href="#">
+                        <div class="avatar-circle">
                             <?php if (!is_null($shop->getImageId())): ?>
                                 <img src="/images/get?id=<?= $shop->getImageId(); ?>" alt=""/>
                             <?php else: ?>
                                 <span><?= $shop->getName()[0]; ?></span>
                             <?php endif; ?>
-                        </a>
-                        <a href="/user/shop/info?id=<?= $shop->getId() ?>">
+                        </div>
+                        <div>
                             <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
                             <?php if (!is_null($shop->getAverageRating())): ?>
                                 <span class="sidebar-account-text ms-2"><?= number_format($shop->getAverageRating(), 1); ?>/5</span>
                             <?php endif; ?>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#review-modal">
                         Scrivi una recensione
                     </button>
@@ -94,7 +94,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="review-modal-label">Scrivi una recensione</h5>
+                <h1 class="modal-title fs-5" id="review-modal-label">Scrivi una recensione</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -106,7 +106,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="input-text" class="form-label">Testo</label>
-                        <textarea class="form-control" id="input-text" name="text" text></textarea>
+                        <textarea class="form-control" id="input-text" name="text"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="input-title" class="form-label">Valutazione</label>

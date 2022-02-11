@@ -134,16 +134,15 @@ hr {
     align-items: center;
 }
 
-.shop-circle-link>a {
+.shop-circle-link {
     text-decoration: none;
-    display: block;
 }
 
-.shop-circle-link>a:nth-child(2)>span:nth-child(1) {
+.shop-circle-link>div:nth-child(2)>span:nth-child(1) {
     font-weight: bold;
 }
 
-.shop-circle-link>a:nth-of-type(2) {
+.shop-circle-link>div:nth-of-type(2) {
     display: flex;
     flex-flow: column;
     justify-content: center;
