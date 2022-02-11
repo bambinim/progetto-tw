@@ -38,7 +38,7 @@ if (!empty($router)) {
     $router->get('/user/shop/info', function() {
         $shop = Database::getRepository(Shop::class)->findOne(['id'=>$_GET['id']]);
         $user = Database::getRepository(User::class)->findOne(['id'=>$shop->getUserId()]);
-        $review = Database::getRepository(Review::class)->find(['shop_id'=>$shop->getID()]);
+        $review = Database::getRepository(Review::class)->find(['shop_id'=>$shop->getID()],['date' => 'DESC']);
         $rating=null;
         if(count($review)>0){$rating=$shop->getAverageRating();
             }
@@ -98,7 +98,15 @@ if (!empty($router)) {
         }
         $images=$_POST['images'];
         if($images!=""){
-          $user->setImageId($images[0]); 
+
+            $oldImage=Database::getRepository(Image::class)->findOne(['id' => $user->getImageId()]);
+            if(!is_null($oldImage))
+            {$user->setImageId(null);
+            $user->save();
+            unlink(PROJECT_ROOT . "/images/{$oldImage->getId()}.{$oldImage->getExtension()}");
+            $oldImage->delete();}
+          $user->setImageId($images[0]);
+
         }
     
         $user->save();

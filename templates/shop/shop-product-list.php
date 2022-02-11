@@ -12,7 +12,7 @@ use App\Database\Entities\Order;
             $products = $template['products'];
             if(!is_null($products)):
             foreach ($products as $product) : ?>
-                <div class="col-md-4 mb-lg-3 products">
+                <div class="col-lg-4 mb-lg-3 products">
 
                     <div class="row prodotto">
                         <?php $images = $product->getImages();
@@ -32,7 +32,7 @@ use App\Database\Entities\Order;
                             </div>
                             <div class="col ">
                                 <?php if ($product->getIsSold() == 0) : ?>
-                                    <a href="/shop/products/edit?id=<?= $product->getId(); ?>" type="info" class="btn btn-primary">Modifica</a>
+                                    <a href="/shop/products/edit?id=<?= $product->getId(); ?>" class="btn btn-primary">Modifica</a>
                                 <?php else : ?>
                                     <span class="text-danger">Il prodotto è stato venduto</span>
                                 <?php endif; ?>

@@ -8,6 +8,7 @@ use App\Database\Entities\Product;
 use App\Database\Entities\ProductImage;
 use App\Database\Entities\Order;
 use App\Database\Entities\Notification;
+use App\Database\Entities\Image;
 
 if (!empty($router)) {
     $router->get('/shop/reviews', function () {
@@ -147,7 +148,7 @@ if (!empty($router)) {
             'title' => 'Il tuo negozio',
             'template' => 'shop/shop-info.php',
             'js' => ['/assets/js/images-uploader-profile.js'],
-            'css' => [ '/assets/css/images-uploader.css'],
+            'css' => [ '/assets/css/images-uploader.css','/assets/css/info.css'],
             
             
         ];
@@ -187,9 +188,18 @@ if (!empty($router)) {
              $shop->setCity($city);
         }
         $image=$_POST['images'];
+        $oldImage=Database::getRepository(Image::class)->findOne(['id' => $shop->getImageId()]);
         if($image!="")
         {
+            if(!is_null($oldImage)){
+            $shop->setImageId(null);
+            $shop->save();
+            
+                        unlink(PROJECT_ROOT . "/images/{$oldImage->getId()}.{$oldImage->getExtension()}");
+                        $oldImage->delete();}
+            
              $shop->setImageId($image[0]);
+
         }
         $shop->save();
         $template['message'] = 'informazioni shop aggiornate';

@@ -18,7 +18,7 @@ $user = SecurityManager::getUser();
 
                 <?php if (!is_null($user)) :
                     if (!is_null($user->getImageId())) :
-                        echo ("<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=" . $user->getImageId()) . "alt=\"foto-profilo\" id=\"uploaded-image-profile\"class=\" rounded-circle  w-100 h-100\" ></div></div>";
+                        echo ("<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=" . $user->getImageId()) . " alt=\"foto-profilo\" id=\"uploaded-image-profile\"class=\"circle  w-100 h-100\" ></div></div>";
                     endif;
                 endif; ?>
 

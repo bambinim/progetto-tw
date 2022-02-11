@@ -10,7 +10,7 @@ $products = $template['products'];
 ?>
 
 <div class="d-flex justify-content-between mt-5 ms-4 me-4">
-    <h4><?php echo $category; ?></h4>
+    <h1 class="fw-3"><?php echo $category; ?></h1>
 </div>
 <div class="container">
 
