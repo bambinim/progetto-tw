@@ -6,6 +6,11 @@
     margin: 5%;
 }
 
-span {
-    text-align: center;
+div.card {
+    margin: 10%;
+    padding: 25px;
+}
+
+a {
+    text-decoration: none;
 }

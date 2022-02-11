@@ -7,6 +7,7 @@ use App\Database\Entities\Order;
     <?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
     <div class="container">
         <div class="row mt-3">
+             <a class="mt-3 mb-5 text-center "href="/shop/products/new">  <span class="fas fa-plus"> aggiungi un nuovo prodotto</a></span>
             <?php
             $products = $template['products'];
             if(!is_null($products)):
