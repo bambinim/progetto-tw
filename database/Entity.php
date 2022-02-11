@@ -95,7 +95,11 @@ abstract class Entity
         }
         $conn = Database::getConnection();
         $stmt = $conn->prepare($query);
-        $stmt->execute($params);
+        try {
+            $stmt->execute($params);
+        } catch (\Exception $e) {
+            echo $stmt->debugDumpParams();
+        }
         if ($this->isNew) {
             $this->{Entity::toCamelCase("set_" . $pk)}(intval($conn->lastInsertId()));
             $this->isNew = false;

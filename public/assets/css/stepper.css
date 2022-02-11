@@ -7,10 +7,30 @@
     display: flex;
     flex-flow: row;
     align-items: center;
+    position: relative;
+    margin-bottom: 80px;
 }
 
 .steps-container>.step>span {
     margin-left: 10px;
+}
+
+.steps-container>.step::before {
+    content: '';
+    background-color: #D3D3D3;
+    width: 3px;
+    height: 80px;
+    margin-left: 13px;
+    position: absolute;
+    bottom: 30px;
+}
+
+.steps-container>.step:first-child::before {
+    content: none;
+}
+
+.steps-container>.step:last-child {
+    margin-bottom: 0;
 }
 
 .steps-container>.step-connector {
@@ -29,4 +49,12 @@
 
 .steps-container>.step.active>.step-circle, .steps-container>.step-connector.active {
     background-color: var(--button-bg-color);
+}
+
+.steps-container>.step.active::before {
+    background-color: var(--button-bg-color);
+}
+
+.steps-container>li {
+    list-style: none;
 }

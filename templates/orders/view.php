@@ -47,17 +47,14 @@
                             <div class="step-circle"></div>
                             <span>Ordine accettato</span>
                         </li>
-                        <div class="step-connector <?= $order->getStatus() > 0 ? ' active' : ''; ?>"></div>
                         <li class="step <?= $order->getStatus() >= 1 ? ' active' : ''; ?>" <?= $order->getStatus() == 1 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>In preparazione</span>
                         </li>
-                        <div class="step-connector <?= $order->getStatus() > 1 ? ' active' : ''; ?>"></div>
                         <li class="step <?= $order->getStatus() >= 2 ? ' active' : ''; ?>" <?= $order->getStatus() == 3 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>Spedito</span>
                         </li>
-                        <div class="step-connector <?= $order->getStatus() > 2 ? ' active' : ''; ?>"></div>
                         <li class="step <?= $order->getStatus() >= 3 ? ' active' : ''; ?>" <?= $order->getStatus() == 3 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
                             <span>Consegnato</span>
@@ -66,12 +63,21 @@
                 </div>
                 <div class="col-12 card mt-2 pt-2 pb-3 d-block">
                     <h1 class="fs-2">Informazioni sul venditore</h1>
-                    <a href="#" class="shop-circle-link">
-                        <div class="avatar-circle">
-                            <span><?= $shop->getName()[0]; ?></span>
-                        </div>
-                        <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
-                    </a>
+                    <div class="shop-circle-link">
+                        <a href="/user/shop/info?id=<?= $shop->getId() ?>" class="avatar-circle">
+                            <?php if (!is_null($shop->getImageId())): ?>
+                                <img src="/images/get?id=<?= $shop->getImageId(); ?>" alt=""/>
+                            <?php else: ?>
+                                <span><?= $shop->getName()[0]; ?></span>
+                            <?php endif; ?>
+                        </a>
+                        <a href="/user/shop/info?id=<?= $shop->getId() ?>">
+                            <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
+                            <?php if (!is_null($shop->getAverageRating())): ?>
+                                <span class="sidebar-account-text ms-2"><?= number_format($shop->getAverageRating(), 1); ?>/5</span>
+                            <?php endif; ?>
+                        </a>
+                    </div>
                     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#review-modal">
                         Scrivi una recensione
                     </button>

@@ -19,7 +19,9 @@
                     <div class="carousel-inner">
                         <?php for ($i = 0; $i < count($images); $i++): ?>
                             <div class="carousel-item <?= $i == 0 ? 'active' : '' ?>">
-                                <img src="/images/get?id=<?= $images[$i]->getId() ?>" class="d-block w-100" alt="">
+                                <div>
+                                    <img src="/images/get?id=<?= $images[$i]->getId() ?>" class="d-block" alt="">
+                                </div>
                             </div>
                         <?php endfor; ?>
                     </div>
@@ -47,15 +49,33 @@
             </div>
             <div class="col-12 mt-3">
                 <h2>Informazioni sul venditore</h2>
-                <a href="#" class="shop-circle-link">
-                    <div class="avatar-circle">
-                        <span><?= $shop->getName()[0]; ?></span>
-                    </div>
-                    <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
-                </a>
+                <div class="shop-circle-link">
+                    <a href="/user/shop/info?id=<?= $shop->getId() ?>" class="avatar-circle">
+                        <?php if (!is_null($shop->getImageId())): ?>
+                            <img src="/images/get?id=<?= $shop->getImageId(); ?>" alt=""/>
+                        <?php else: ?>
+                            <span><?= $shop->getName()[0]; ?></span>
+                        <?php endif; ?>
+                    </a>
+                    <a href="#">
+                        <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
+                        <?php if (!is_null($shop->getAverageRating())): ?>
+                            <span class="sidebar-account-text ms-2"><?= number_format($shop->getAverageRating(), 1); ?>/5</span>
+                        <?php endif; ?>
+                    </a>
+                </div>
             </div>
             <div class="col-12 mt-3">
                 <h2>Prodotti correlati</h2>
+                <div class="scroll-row">
+                    <div class="row">
+                        <?php foreach ($template['recommended'] as $prod): ?>
+                            <div class="col-8 col-lg-2 mb-2">
+                                <?= $prod->renderCard(); ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

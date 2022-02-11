@@ -39,9 +39,13 @@ if (!empty($router)) {
         $shop = Database::getRepository(Shop::class)->findOne(['id'=>$_GET['id']]);
         $user = Database::getRepository(User::class)->findOne(['id'=>$shop->getUserId()]);
         $review = Database::getRepository(Review::class)->find(['shop_id'=>$shop->getID()]);
-        $rating=$review[0]->getRatingsAVG($shop->getId());
+        $rating=null;
+        if(count($review)>0){$rating=$review[0]->getRatingsAVG($shop->getId());
+            $rating=$rating[0];}
+            else{$review=null;
+            $rating=null;}
         $products = Database::getRepository(Product::class)->find(['shop_id' => $shop->getId(),'is_sold'=>0],['creation_date' => 'DESC']);
-       $rating=$rating[0];
+    
         $city = $shop->getCity();
 
         $template = [
