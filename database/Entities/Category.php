@@ -92,6 +92,13 @@ class Category extends Entity
         return $res;
         
     }
+    public function getActiveProducts($quantity = null): array
+    {
+        
+        return Database::getRepository(Product::class)->find(['category_id' => $this->id, 'status' => 0], ['creation_date' => 'DESC'], $quantity);
+    
+    }
+
 
 
     public static function _getColumns(): array
