@@ -75,7 +75,7 @@ if (!empty($router)) {
         $template = [
             'title' => 'Prodotti Shop',
             'template' => 'shop/shop-product-list.php',
-            'products' => Database::getRepository(Product::class)->find(['shop_id' => SecurityManager::getUser()->getShop()->getId()], ['creation_date' => 'DESC', 'is_sold' => 'ASC']),
+            'products' => Database::getRepository(Product::class)->find(['shop_id' => SecurityManager::getUser()->getShop()->getId()], ['is_sold' => 'ASC', 'creation_date' => 'DESC']),
             'css' => ['/assets/css/shop-product-list.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
