@@ -9,9 +9,3 @@
 span {
     text-align: center;
 }
-
-@media(min-width: 992px) {
-    span.fs-4 {
-        margin-right: -300px !important;
-    }
-}

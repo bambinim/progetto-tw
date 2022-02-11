@@ -66,9 +66,15 @@ $products = $template['products'];
             if ($i < count($review)) {
 
                echo (" <div class=\"row\">
-               <div class=\"col text-center float-start\">
+               <div class=\"col text-center float-start\">");
+               if(!is_null($review[$i]->getUser()->getImageId())){echo("
                <img src=/images/get?id=" . $review[$i]->getUser()->getImageId() . "alt=\"foto-user\" class=\"img-avatar me-0\" >
-               <div class=\"col-6 float-end mt-4\"><span class=\"me-lg-5 mt-4  fw-bold fs-4 \">" . $review[$i]->getUser()->getFirstName() . " " . $review[$i]->getUser()->getLastName() . "</span></div></div>
+               <div class=\"col-6 float-end mt-4\"><span class=\"me-lg-5 mt-4  fw-bold fs-4 \">" . $review[$i]->getUser()->getFirstName() . " " . $review[$i]->getUser()->getLastName() . "</span></div></div>");
+            }else{
+               echo "<span class=\"float-start ms-lg-4 fw-bold fs-4 \">" . $review[$i]->getUser()->getFirstName() . " " . $review[$i]->getUser()->getLastName() . "</span></div>";
+            }
+               echo("
+               
                <p class=\"fw-bold fs-4 ms-3 mt-3\">" . $review[$i]->getTitle() . " (" . $review[$i]->getRating() . "/5)</p>
               <p class=\"ms-3 mt-3\">" . ($review[$i]->getText()) . "</p></div>
             <hr>");}} echo("
