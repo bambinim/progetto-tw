@@ -58,7 +58,7 @@ if (!empty($router)) {
             'rating'=>$rating,
             'products'=>$products,
            
-            'css' =>['/assets/css/account.css','/assets/css/user-shop-info.css']
+            'css' =>['/assets/css/user-shop-info.css']
             
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
