@@ -26,12 +26,15 @@
                     <?php foreach ($order->getProducts() as $product) : ?>
                         <div class="col-3">
                             <?php $imgs = $product->getImages(); ?>
-                            <img src=<?php echo "/images/get?id={$imgs[0]->getId()}"; ?> alt="immagine del prodotto" class="w-100 mt-2">
+                            <a href="/products/view?id=<?php echo $product->getId();?>">
+                                <img src=<?php echo "/images/get?id={$imgs[0]->getId()}"; ?> alt="immagine di un prodotto ordinato" class="w-100 mt-2">
+                            </a>
                         </div>
                     <?php endforeach; ?>
                 </div>
                 <hr>
-                <button type="button" class="btn btn-primary btn-sm w-50 mb-4">Dettagli ordine</button>
+                <a href="/user/orders/view?id=<?php echo $order->getId(); ?>" class="btn btn-primary btn-sm w-50 mb-4">Dettagli ordine</a>
+
             </div>
         </div>
     <?php endforeach; ?>

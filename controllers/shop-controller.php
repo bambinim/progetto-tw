@@ -14,7 +14,7 @@ if (!empty($router)) {
         //get user's shop 
         $shop =SecurityManager::getUser()->getShop();
         //get all shop's reviews
-        $reviews = Database::getRepository(Review::class)->findAll(['shop_id' => $shop->getId()]);
+        $reviews = Database::getRepository(Review::class)->find(['shop_id' => $shop->getId()], ['date' => 'DESC']);
         $template = [
             'title' => 'Recensioni negozio',
             'template' => 'shop/review.php',

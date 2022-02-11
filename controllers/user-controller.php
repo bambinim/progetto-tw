@@ -5,6 +5,7 @@ use App\Database\Database;
 use App\Database\Query;
 use App\Database\Entities\User;
 use App\Database\Entities\Image;
+use App\Database\Entities\Notification;
 use App\Database\Entities\Shop;
 use App\Database\Entities\Review;
 use App\Database\Entities\Product;
@@ -119,7 +120,15 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     },'ROLE_USER');
    
-       
+    $router->get('/user/notifications', function() {
+       $notifications = Database::getRepository(Notification::class)->find(['user_id' => SecurityManager::getUser()->getId()], ['id' => 'DESC']);
+        $template = [
+            'title' => 'Le tue notifiche',
+            'template' => 'user/user-notifications.php',
+            'notifications' => $notifications
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    },'ROLE_USER');
         
 }
 ?>
