@@ -16,6 +16,17 @@ if (!empty($router)) {
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
+
+    $router->get('/novita', function() {
+        $template = [
+            'title' => 'Home',
+            'template' => 'home/novita.php',
+            'products' => Database::getRepository(Product::class)->find(['is_sold' => 0], ['creation_date' => 'DESC'], 30),
+            'css' => ['/assets/css/home.css']
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    });
+    
     
     $router->get('/category', function() {
         $idCategory=$_GET["category"];

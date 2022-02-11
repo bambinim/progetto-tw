@@ -47,7 +47,7 @@ $user = SecurityManager::getUser();
                             <a class="nav-link active" aria-current="page" href="/home">Home</a>
                         </li>
                         <li class="nav-item ms-2">
-                            <a class="nav-link" href="#">Novit&agrave;</a>
+                            <a class="nav-link" href="/novita">Novit&agrave;</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/categories/all">Categorie</a>
