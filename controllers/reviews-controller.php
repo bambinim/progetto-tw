@@ -2,6 +2,8 @@
 
 use App\Database\Entities\Review;
 use App\SecurityManager;
+use App\Database\Database;
+use App\Database\Entities\Shop;
 
 if (!empty($router)) {
     $router->post('/api/reviews/new', function() {
@@ -24,6 +26,9 @@ if (!empty($router)) {
                 $review->setText($_POST['text']);
             }
             $review->save();
+            $shop = Database::getRepository(Shop::class)->findOne(['id' => $_POST['shop']]);
+            $shop->calculateAverageRating();
+            $shop->save();
             echo json_encode(['status' => 200, 'message' => 'The review has been added']);
         } else {
             http_response_code(400);

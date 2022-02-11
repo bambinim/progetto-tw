@@ -191,6 +191,17 @@ class Shop extends Entity
         return $products;
     }
 
+    public function calculateAverageRating()
+    {
+        if (!$this->isNew) {
+            $query = "SELECT AVG(rating) AS average_rating FROM reviews WHERE shop_id = :sid GROUP BY shop_id;";
+            $conn = Database::getConnection();
+            $cursor = $conn->prepare($query);
+            $cursor->execute([':sid' => $this->getId()]);
+            $this->setAverageRating($cursor->fetchAll()[0]['average_rating']);
+        }
+    }
+
     public static function _getColumns(): array
     {
         return ['id', 'name', 'street', 'street_number', 'zip', 'city', 'average_rating', 'user_id', 'image_id'];
