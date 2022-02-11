@@ -87,7 +87,11 @@ $user = SecurityManager::getUser();
                         <?php if (!is_null($user)) : ?>
                             <button class="sidebar-account-button mb-3 p-0" aria-label="impostazioni utente">
                                 <div class="avatar-circle">
-                                    <span><?= $user->getFirstName()[0] . $user->getLastName()[0]; ?></span>
+                                    <?php if (!is_null($user->getImageId())): ?>
+                                        <img src="/images/get?id=<?= $user->getImageId(); ?>" alt=""/>
+                                    <?php else: ?>
+                                        <span><?= $user->getFirstName()[0] . $user->getLastName()[0]; ?></span>
+                                    <?php endif; ?>
                                 </div>
                                 <span class="sidebar-account-text ms-2"><?= $user->getFirstName() . " " . $user->getLastName(); ?></span>
                                 <span class="fas fa-chevron-up sidebar-account-collapse-icon ms-2"></span>

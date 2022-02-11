@@ -51,7 +51,11 @@
                 <h2>Informazioni sul venditore</h2>
                 <div class="shop-circle-link">
                     <a href="/user/shop/info?id=<?= $shop->getId() ?>" class="avatar-circle">
-                        <span><?= $shop->getName()[0]; ?></span>
+                        <?php if (!is_null($shop->getImageId())): ?>
+                            <img src="/images/get?id=<?= $shop->getImageId(); ?>" alt=""/>
+                        <?php else: ?>
+                            <span><?= $shop->getName()[0]; ?></span>
+                        <?php endif; ?>
                     </a>
                     <a href="#">
                         <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
