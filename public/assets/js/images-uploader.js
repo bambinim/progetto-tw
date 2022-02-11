@@ -30,7 +30,7 @@ function createImageListElement(imageId) {
     return `
         <li id="uploaded-image-${imageId}" class="position-relative m-2">
             <input name="images[]" value="${imageId}" class="d-none">
-            <img src="/images/get?id=${imageId}" class="image-preview">
+            <img src="/images/get?id=${imageId}" class="image-preview" alt="">
             <button type="button" class="btn btn-link shadow-none position-absolute top-0 start-100 translate-middle"
                 aria-label="elimina immagine" onclick="removeUploadedImage(${imageId})">
                 <span class="fas fa-times"></span>
