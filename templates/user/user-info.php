@@ -33,7 +33,7 @@ $user = SecurityManager::getUser();
 
                             <li id="uploaded-image-<?= $template['images']; ?>" class="position-relative m-2">
                                 <input name="images" <?php echo "value=\"${template['images']};\"" ?>class="d-none">
-                                <img src="/images/get?id=<?= $template['images']; ?>" class="image-preview">
+                                <img src="/images/get?id=<?= $template['images']; ?>" class="image-preview" alt="uploaded-image">
                                 <button type="button" class="btn btn-link shadow-none position-absolute top-0 start-100 translate-middle" aria-label="elimina immagine" onclick="removeUploadedImage(<?= $template['images']; ?>)">
                                     <span class="fas fa-times"></span>
                                 </button>

@@ -1,14 +1,17 @@
 <?php
 
-use App\Database\Entities\Order; ?>
+use App\Database\Entities\Order;
+?>
 <h1 class="mt-3 mb-3"><?php $template['title'] ?></h1>
 <div class="card">
     <?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
     <div class="container">
         <div class="row mt-3">
             <?php
-            foreach ($template['products'] as $product) : ?>
-                <div class="col-md-4 md-mb-3 products">
+            $products = $template['products'];
+            if(!is_null($products)):
+            foreach ($products as $product) : ?>
+                <div class="col-md-4 mb-lg-3 products">
 
                     <div class="row prodotto">
                         <?php $images = $product->getImages();
@@ -26,7 +29,7 @@ use App\Database\Entities\Order; ?>
                                 </div>
 
                             </div>
-                            <div class="col-lg-3 md-3">
+                            <div class="col ">
                                 <?php if ($product->getIsSold() == 0) : ?>
                                     <a href="/shop/products/edit?id=<?= $product->getId(); ?>" type="info" class="btn btn-primary">Modifica</a>
                                 <?php else : ?>
@@ -40,7 +43,7 @@ use App\Database\Entities\Order; ?>
                     </div>
                     <hr>
                 </div>
-            <?php endforeach; ?>
+            <?php endforeach; endif;?>
         </div>
     </div>
 </div>
