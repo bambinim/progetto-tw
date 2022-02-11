@@ -19,7 +19,9 @@
                     <div class="carousel-inner">
                         <?php for ($i = 0; $i < count($images); $i++): ?>
                             <div class="carousel-item <?= $i == 0 ? 'active' : '' ?>">
-                                <img src="/images/get?id=<?= $images[$i]->getId() ?>" class="d-block w-100" alt="">
+                                <div>
+                                    <img src="/images/get?id=<?= $images[$i]->getId() ?>" class="d-block" alt="">
+                                </div>
                             </div>
                         <?php endfor; ?>
                     </div>
@@ -56,6 +58,15 @@
             </div>
             <div class="col-12 mt-3">
                 <h2>Prodotti correlati</h2>
+                <div class="scroll-row">
+                    <div class="row">
+                        <?php foreach ($template['recommended'] as $prod): ?>
+                            <div class="col-8 col-lg-2 mb-2">
+                                <?= $prod->renderCard(); ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
