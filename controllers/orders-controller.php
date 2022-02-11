@@ -5,7 +5,7 @@ use App\Database\Entities\Order;
 use App\Database\Database;
 
 if (!empty($router)) {
-    $router->get('/orders/view', function() {
+    $router->get('/user/orders/view', function() {
         $user = SecurityManager::getUser();
         $order = isset($_GET['id']) ? Database::getRepository(Order::class)->findOne(['id' => $_GET['id']]) : null;
         $template = [
@@ -21,4 +21,17 @@ if (!empty($router)) {
         }
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_USER');
+
+    
+    $router->get('/user/orders', function() {
+        $orders = SecurityManager::getUser()->getOrders();
+        $template = [
+            'title' => 'I tuoi ordini',
+            'template' => 'user/orders.php',
+            'css' => ['/assets/css/user-orders.css'],
+            'orders' => $orders
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    },'ROLE_USER');
+   
 }

@@ -1,18 +1,23 @@
-<h1 class="mt-3 mb-3"><?php $template['title'] ?></h1>
 <div class="card">
     <?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
     <div class="row mt-3">
         <?php foreach ($template['reviews'] as $review) : ?>
-            <div class="col-lg-1"></div>
-            <div class="col-lg-2 mt-3 mb-3">
-                <div class="d-flex justify-content-between">
-                    <h3><?php echo $review->getTitle(); ?></h3>
-                    <h3><?php echo $review->getRating(); ?>/5</h3>
+            <div class="col-12 col-lg-4">
+                <div class="mx-3">
+                    <div class="d-flex">
+                        <p class="fw-bold ml-2">Valutazione: &nbsp;</p>
+                        <p><?php echo $review->getRating(); ?>/5</p>
+                    </div>
+                    <p class="fw-bold fs-2 overflow-hidden"><?php echo $review->getTitle(); ?></p>
+
+                    <p class="overflow-hidden"><?php echo $review->getText(); ?></p>
+                    <p><?php echo $review->getUser()->getFirstName() . " " . $review->getUser()->getLastName(); ?></p>
+                    <p><?php echo date_format(new DateTime($review->getDate()), 'd/m/Y'); ?></p>
+                    <hr>
                 </div>
-                <p><?php echo $review->getText(); ?></p>
-                <p><?php echo $review->getUser()->getFirstName() . " " . $review->getUser()->getLastName(); ?></p>
+
             </div>
-            <div class="col-lg-1"></div>
+
         <?php endforeach; ?>
     </div>
 </div>
