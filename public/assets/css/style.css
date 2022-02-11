@@ -122,8 +122,24 @@ hr {
 }
 
 .shop-circle-link {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.shop-circle-link>a {
     text-decoration: none;
     display: block;
+}
+
+.shop-circle-link>a:nth-child(2)>span:nth-child(1) {
+    font-weight: bold;
+}
+
+.shop-circle-link>a:nth-of-type(2) {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 
 @media (max-width: 991.99px) {

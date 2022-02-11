@@ -63,12 +63,17 @@
                 </div>
                 <div class="col-12 card mt-2 pt-2 pb-3 d-block">
                     <h1 class="fs-2">Informazioni sul venditore</h1>
-                    <a href="#" class="shop-circle-link">
-                        <div class="avatar-circle">
+                    <div class="shop-circle-link">
+                        <a href="/user/shop/info?id=<?= $shop->getId() ?>" class="avatar-circle">
                             <span><?= $shop->getName()[0]; ?></span>
-                        </div>
-                        <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
-                    </a>
+                        </a>
+                        <a href="/user/shop/info?id=<?= $shop->getId() ?>">
+                            <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
+                            <?php if (!is_null($shop->getAverageRating())): ?>
+                                <span class="sidebar-account-text ms-2"><?= number_format($shop->getAverageRating(), 1); ?>/5</span>
+                            <?php endif; ?>
+                        </a>
+                    </div>
                     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#review-modal">
                         Scrivi una recensione
                     </button>

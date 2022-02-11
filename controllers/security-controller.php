@@ -6,6 +6,8 @@ use App\Database\Entities\User;
 use App\Database\Entities\Cart;
 use App\Database\Entities\Order;
 use App\Database\Entities\OrderProduct;
+use App\Database\Entities\Notification;
+use App\Database\Entities\Shop;
 
 if (!empty($router)) {
     $router->get('/login', function () {
@@ -57,7 +59,7 @@ if (!empty($router)) {
             'title' => 'Registrazione',
             'template' => 'security/registration.php',
             'js' => ['/assets/js/images-uploader-profile.js'],
-            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css','/assets/css/images-uploader.css']
+            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css', '/assets/css/images-uploader.css']
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
@@ -69,7 +71,7 @@ if (!empty($router)) {
             'title' => 'Registrazione',
             'template' => 'security/registration.php',
             'js' => ['/assets/js/images-uploader-profile.js'],
-            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css','/assets/css/images-uploader.css']
+            'css' => ['/assets/css/center-card.css', '/assets/css/registration.css', '/assets/css/images-uploader.css']
         ];
         $allFieldsOk = true;
         foreach ($registrationFields as $i) {
@@ -98,8 +100,8 @@ if (!empty($router)) {
             $user->setEmail($_POST['email']);
             $user->setPassword(SecurityManager::createPasswordHash($_POST['password']));
             $user->setRoles('["ROLE_USER"]');
-            $image=$_POST['images'];
-            if($image!=""){
+            $image = $_POST['images'];
+            if ($image != "") {
                 $user->setImageId($image[0]);
             }
             $user->save();
@@ -137,7 +139,7 @@ if (!empty($router)) {
     $router->post('/payment/check', function () {
         $user = SecurityManager::getUser();
         $prods = Cart::getProducts();
-        $shopsIds = array_unique(array_map(function($el) {
+        $shopsIds = array_unique(array_map(function ($el) {
             return $el->getShopId();
         }, $prods));
 
@@ -160,6 +162,18 @@ if (!empty($router)) {
             }
             $order->setTotal($total);
             $order->save();
+            // create user's notification
+            $notification = new Notification();
+            $notification->setTitle('Conferma Ordine');
+            $notification->setText("Il tuo pagamento è andato a buon fine e il venditore ha ricevuto il tuo ordine numero {$order->getId()}");
+            $notification->setUserId($user->getId());
+            $notification->save();
+            // create shop's notification
+            $notification = new Notification();
+            $notification->setTitle("Ordine Ricevuto");
+            $notification->setText("Hai ricevuto un nuovo ordine<br />Numoer ordine: {$order->getId()}<br />Acquirente: {$user->getFirstName()} {$user->getLastName()}");
+            $notification->setUserId(Database::getRepository(Shop::class)->findOne(['id' => $i])->getUserId());
+            $notification->save();
         }
         Cart::clear();
         header('location: /payment/confirm');

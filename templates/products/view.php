@@ -49,12 +49,17 @@
             </div>
             <div class="col-12 mt-3">
                 <h2>Informazioni sul venditore</h2>
-                <a href=<?php echo "/user/shop/info?id=".$shop->getId() ?> class="shop-circle-link">
-                    <div class="avatar-circle">
+                <div class="shop-circle-link">
+                    <a href="/user/shop/info?id=<?= $shop->getId() ?>" class="avatar-circle">
                         <span><?= $shop->getName()[0]; ?></span>
-                    </div>
-                    <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
-                </a>
+                    </a>
+                    <a href="#">
+                        <span class="sidebar-account-text ms-2"><?= $shop->getName(); ?></span>
+                        <?php if (!is_null($shop->getAverageRating())): ?>
+                            <span class="sidebar-account-text ms-2"><?= number_format($shop->getAverageRating(), 1); ?>/5</span>
+                        <?php endif; ?>
+                    </a>
+                </div>
             </div>
             <div class="col-12 mt-3">
                 <h2>Prodotti correlati</h2>
