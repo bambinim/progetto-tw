@@ -21,7 +21,7 @@
                 <div class="d-flex flex-row">
                     <?php foreach ($order->getProducts() as $product) : ?>
                         <a target="_blank" class="product-image" href="/products/view?id=<?php echo $product->getId();?>">
-                            <img src="/images/get?id=<?= $product->getImages()[0]->getId(); ?>" alt="immagine di un prodotto ordinato">
+                            <img src="/images/get?id=<?= $product->getImages()[0]->getId(); ?>" alt="">
                         </a>
                     <?php endforeach; ?>
                 </div>

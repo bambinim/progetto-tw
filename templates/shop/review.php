@@ -6,15 +6,19 @@
             <?php foreach ($template['reviews'] as $review) : ?>
                 <div class="col-12 col-lg-4">
                     <div class="mx-3">
-                        <div class="d-flex">
-                            <p class="fw-bold ml-2">Valutazione: &nbsp;</p>
-                            <p><?php echo $review->getRating(); ?>/5</p>
-                        </div>
-                        <p class="fw-bold fs-3 overflow-hidden rew-title"><?php echo $review->getTitle(); ?></p>
+
+                        <label class="fw-bold ml-2">Valutazione: &nbsp;</label>
+                        <label><?php echo $review->getRating(); ?>/5</label>
+
+                        <h2 class="fw-bold fs-3 overflow-hidden rew-title"><?php echo $review->getTitle(); ?></h2>
 
                         <p class="overflow-hidden rew-text"><?php echo $review->getText(); ?></p>
-                        <p><?php echo $review->getUser()->getFirstName() . " " . $review->getUser()->getLastName(); ?></p>
-                        <p><?php echo date_format(new DateTime($review->getDate()), 'd/m/Y'); ?></p>
+                        <div class="row">
+                            <span><?php echo $review->getUser()->getFirstName() . " " . $review->getUser()->getLastName(); ?></span>
+                        </div>
+                        <div class="row">
+                            <span><?php echo date_format(new DateTime($review->getDate()), 'd/m/Y'); ?></span>
+                        </div>
                         <hr>
                     </div>
 
