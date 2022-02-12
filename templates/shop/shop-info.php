@@ -14,7 +14,7 @@ $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityMana
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-12 col-lg-6">
-            <h1 class="mt-3 mb-3"><?=$template['title'];?></h1>
+                <h1 class="mt-3 mb-3"><?= $template['title']; ?></h1>
 
                 <?php if (!is_null($shop)) :
                     if (!is_null($shop->getImageId())) :
