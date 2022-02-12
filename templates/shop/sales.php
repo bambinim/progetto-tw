@@ -11,7 +11,7 @@
                             <p class="fs-3">ID: <?php echo $order->getId(); ?></p>
                             <p class="text-nowrap"><?php echo $order->getStatusAsString(); ?></p>
                             <p class="text-nowrap"><?php echo date_format(new DateTime($order->getDate()), 'd/m/Y'); ?></p>
-                            <p><?php echo number_format($order->getTotal(), 2); ?> €</p>
+                            <span><?php echo number_format($order->getTotal(), 2); ?> €</span>
                         </div>
                         <div class="col">
                             <a href="/shop/sales/view?id=<?php echo $order->getId();?>">

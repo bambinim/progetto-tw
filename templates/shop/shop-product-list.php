@@ -25,11 +25,11 @@ use App\Database\Entities\Order;
                             </div>
                             <div class="col-6 items">
                                 <a class="text-decoration-none" href="/products/view?id=<?= $product->getId(); ?>" target="_blank">
-                                    <h3><?php echo ($product->getName()); ?></h3>
+                                    <span class="fa-3"><?php echo ($product->getName()); ?></span>
                                 </a>
                                 <div class="row">
                                     <div class="col">
-                                        <p>&euro;<?= number_format($product->getPrice(), 2); ?></p>
+                                        <span>&euro;<?= number_format($product->getPrice(), 2); ?></span>
                                     </div>
 
                                 </div>
