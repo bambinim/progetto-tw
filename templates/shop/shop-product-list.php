@@ -21,7 +21,7 @@ use App\Database\Entities\Order;
                             <div class="col-2">
                                 <img <?php
                                         echo ("src=/images/get?id=" . $images[0]->getID());
-                                        ?> alt="imagine-prodotto">
+                                        ?> alt="">
                             </div>
                             <div class="col-6 items">
                                 <a class="text-decoration-none" href="/products/view?id=<?= $product->getId(); ?>" target="_blank">

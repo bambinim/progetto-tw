@@ -18,7 +18,7 @@ $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityMana
 
                 <?php if (!is_null($shop)) :
                     if (!is_null($shop->getImageId())) :
-                        echo ("<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=" . $shop->getImageId()) . " alt=\"foto-profilo\" id=\"uploaded-image-profile\"class=\"\" ></div></div>";
+                        echo ("<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=" . $shop->getImageId()) . " alt=\"foto profilo\" id=\"uploaded-image-profile\"class=\"\" ></div></div>";
                     endif;
                 endif; ?>
                 <form class="mb-3" method="POST" action="/shop/update">
@@ -30,7 +30,7 @@ $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityMana
 
                                 <li id="uploaded-image-<?= $template['images']; ?>" class="position-relative m-2">
                                     <input name="images" <?php echo "value=\"${template['images']};\"" ?>class="d-none">
-                                    <img src="/images/get?id=<?= $template['images']; ?>" class="image-preview" alt="uploaded-image">
+                                    <img src="/images/get?id=<?= $template['images']; ?>" class="image-preview" alt="uploaded image">
                                     <button type="button" class="btn btn-link shadow-none position-absolute top-0 start-100 translate-middle" aria-label="elimina immagine" onclick="removeUploadedImage(<?= $template['images']; ?>)">
                                         <span class="fas fa-times"></span>
                                     </button>

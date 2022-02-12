@@ -13,7 +13,7 @@ $products = $template['products'];
    <?php if (!is_null($shop)) :
       if (!is_null($shop->getImageId())) :
 
-         echo ("<img src=/images/get?id=" . $shop->getImageId()) . " alt=\"foto-shop\" class=\"img-avatar mt-5  mx-auto d-block\" >";
+         echo ("<img src=/images/get?id=" . $shop->getImageId()) . " alt=\"foto shop\" class=\"img-avatar mt-5  mx-auto d-block\" >";
       endif;
    endif;
    echo ("<h2 class=\"text-center mt-2\">" . $shop->getName() . "</h2>");
@@ -75,7 +75,7 @@ $products = $template['products'];
                <div class=\"col text-center float-start\">");
                   if (!is_null($review[$i]->getUser()->getImageId())) {
                      echo ("
-               <img src=/images/get?id=" . $review[$i]->getUser()->getImageId() . " alt=\"foto-user\" class=\"img-avatar me-0\" >
+               <img src=/images/get?id=" . $review[$i]->getUser()->getImageId() . " alt=\"foto user\" class=\"img-avatar me-0\" >
                <div class=\"col-6 float-end mt-4\"><span class=\"me-lg-5 mt-5  fw-bold fs-4 \">" . $review[$i]->getUser()->getFirstName() . " " . $review[$i]->getUser()->getLastName() . "</span></div></div>");
                   } else {
                      echo "<span class=\"float-start ms-lg-4 fw-bold fs-4 \">" . $review[$i]->getUser()->getFirstName() . " " . $review[$i]->getUser()->getLastName() . "</span></div>";
