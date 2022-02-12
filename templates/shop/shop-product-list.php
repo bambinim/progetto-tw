@@ -24,7 +24,9 @@ use App\Database\Entities\Order;
                                         ?> alt="imagine-prodotto">
                             </div>
                             <div class="col-6 items">
-                                <h3><?php echo ($product->getName()); ?></h3>
+                                <a class="text-decoration-none" href="/products/view?id=<?= $product->getId(); ?>" target="_blank">
+                                    <h3><?php echo ($product->getName()); ?></h3>
+                                </a>
                                 <div class="row">
                                     <div class="col">
                                         <p>&euro;<?= number_format($product->getPrice(), 2); ?></p>

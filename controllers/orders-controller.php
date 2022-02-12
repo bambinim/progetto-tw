@@ -24,12 +24,11 @@ if (!empty($router)) {
 
     
     $router->get('/user/orders', function() {
-        $orders = SecurityManager::getUser()->getOrders();
         $template = [
             'title' => 'I tuoi ordini',
             'template' => 'user/orders.php',
             'css' => ['/assets/css/user-orders.css'],
-            'orders' => $orders
+            'orders' => Database::getRepository(Order::class)->find(['user_id' => SecurityManager::getUser()->getId()], ['date' => 'DESC'])
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     },'ROLE_USER');

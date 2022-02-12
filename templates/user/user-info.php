@@ -18,7 +18,7 @@ $user = SecurityManager::getUser();
 
                 <?php if (!is_null($user)) :
                     if (!is_null($user->getImageId())) :
-                        echo ("<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=" . $user->getImageId()) . " alt=\"foto-profilo\" id=\"uploaded-image-profile\"class=\"circle  w-100 h-100\" ></div></div>";
+                        echo ("<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=" . $user->getImageId()) . " alt=\"foto-profilo\" id=\"uploaded-image-profile\" ></div></div>";
                     endif;
                 endif; ?>
 
@@ -46,21 +46,21 @@ $user = SecurityManager::getUser();
                 <div class="mb-3">
                     <label for="input-name" class="form-label">Nome</label>
                     <input id="input-name" name="name" type="text" class="form-control" <?php if (!is_null($user)) {
-                                                                                            echo ("placeholder=" . $user->getFirstName());
+                                                                                              echo (" placeholder=\"{$user->getFirstName()}\"");
                                                                                         }
                                                                                         if (isset($template['name'])) echo "value=\"${template['name']}\"" ?> />
                 </div>
                 <div class="mb-3">
                     <label for="input-lastname" class="form-label">Cognome</label>
                     <input id="input-lastname" name="lastname" type="text" class="form-control" <?php if (!is_null($user)) {
-                                                                                                    echo ("placeholder=" . $user->getLastName());
+                                                                                                      echo (" placeholder=\"{$user->getLastName()}\"");
                                                                                                 }
                                                                                                 if (isset($template['lastname'])) echo "value=\"${template['lastname']}\"" ?> />
                 </div>
                 <div class="mb-3">
                     <label for="input-email" class="form-label">Email</label>
                     <input id="input-email" name="email" type="email" class="form-control" <?php if (!is_null($user)) {
-                                                                                                echo ("placeholder=" . $user->getEmail());
+                                                                                                 echo (" placeholder=\"{$user->getEmail()}\"");
                                                                                             }
                                                                                             if (isset($template['email'])) echo "value=\"${template['email']}\"" ?> />
                 </div>
