@@ -7,8 +7,9 @@ $rating = $template['rating'];
 $rating = number_format($rating, 2);
 $products = $template['products'];
 ?>
+
 <div class="col-lg-3"></div>
-<div class="row mt-3">
+<div class="row mx-auto">
    <div class="col">
       <?php if (!is_null($shop)) :
          if (!is_null($shop->getImageId())) :
@@ -99,7 +100,7 @@ $products = $template['products'];
                }
                echo ("
          <div class=\"d-flex justify-content-center\">
-            <a href=\"/shop/reviews\">
+            <a href=\"/user/shop/reviews?shopId=".$shop->getId()."\">
                <span class=\" fs-6 \">vai alle recensioni </span>
             </a>
          </div>
@@ -112,5 +113,6 @@ $products = $template['products'];
 
          </div>
       </div>
-
+          
       <div class="col-lg-3"></div>
+     </div>

@@ -124,16 +124,20 @@ if (!empty($router)) {
             $shop->setStreetNumber($_POST['addressNumber']);
             $shop->setZip($_POST['zip']);
             $shop->setCity($_POST['city']);
-            $user = SecurityManager:: getUser();
-            $user->setRoles('["ROLE_USER", "ROLE_SELLER"]');
+            $user = SecurityManager :: getUser();
+            $user -> setRoles('["ROLE_USER", "ROLE_SELLER"]');
             $shop->setUserId($user->getId());
-           if(isset($_POST['images']) && $_POST['images']!=""){
+            $images=$_POST['images'];
+            if($images!=""){
                 $shop -> setImageId($images[0]);
             }else{
                 $shop -> setImageId(NULL);
             }
+            
+            
             $shop->save();
             $user->save();
+            
             header('location: /shop/info');
             $template['message'] = 'shop creato';
         }
@@ -183,18 +187,18 @@ if (!empty($router)) {
         {
              $shop->setCity($city);
         }
-       
+        $image=$_POST['images'];
         $oldImage=Database::getRepository(Image::class)->findOne(['id' => $shop->getImageId()]);
-        if(isset($_POST['images'])&& $_POST['images']!="")
+        if($image!="")
         {
             if(!is_null($oldImage)){
             $shop->setImageId(null);
             $shop->save();
             
                         unlink(PROJECT_ROOT . "/images/{$oldImage->getId()}.{$oldImage->getExtension()}");
-                        $oldImage->delete();
-            }
-             $shop->setImageId($_POST['images']);
+                        $oldImage->delete();}
+            
+             $shop->setImageId($image[0]);
 
         }
         $shop->save();
@@ -246,7 +250,7 @@ if (!empty($router)) {
                 $prodImage->setProductId($product->getId());
                 $prodImage->save();
             }
-            $template['message'] = 'Il prodotto è stato aggiunto. Vai alla <a href="/shop/products/list">lista dei tuoi prodotti</a>';
+        header("location: /shop/products/list");
         } else {
             $template['error'] = 'C\'è stato un errore durante il salvataggio';
         }

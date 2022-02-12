@@ -56,6 +56,17 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
 
+    $router->get('/user/shop/reviews', function() {
+        $shop = isset($_GET['shopId']) ? Database::getRepository(Shop::class)->findOne(['id' => $_GET['shopId']]) : null;
+        $template = [
+            'title' => 'Recensioni Negozio',
+            'template' => 'user/view-reviews.php',
+            'reviews' => is_null($shop) ? [] : Database::getRepository(Review::class)->find(['shop_id' => $shop->getId()], ['id' => 'DESC']),
+            'shop_name' => $shop->getName()
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    });
+
     $router->post('/user/update', function() {
         $template = [
             'title' => 'I tuoi dati',
