@@ -8,7 +8,7 @@
                 <li class="mt-3 mx-3">
                     <img alt="" class="ms-0" src="/images/get?id=<?= $i->getImages()[0]->getId(); ?>" />
                     <div class="ms-2">
-                        <h2><?= $i->getName(); ?></h2>
+                        <span class="fs-3 d-block"><?= $i->getName(); ?></span>
                         <span class="fs-4">&euro;<?= number_format($i->getPrice(), 2); ?></span>
                     </div>
                     <a href="/cart/products/remove?productId=<?= $i->getId(); ?>" class="btn btn-link shadow-none ms-auto" aria-label="rimuovi dal carrello" title="rimuovi dal carrello">

@@ -109,7 +109,7 @@
                         <textarea class="form-control" id="input-text" name="text"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="input-title" class="form-label">Valutazione</label>
+                        <label for="select-rating" class="form-label">Valutazione</label>
                         <select class="form-select" id="select-rating" name="rating" required>
                             <option value="1">1</option>
                             <option value="2">2</option>
