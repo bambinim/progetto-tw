@@ -6,14 +6,15 @@ use App\SecurityManager;
 
 $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager::getUser()->getId()]);
 ?>
-<h1 class="mt-3 mb-3"><?php $template['title'] ?></h1>
+
 <div class="card">
+
     <?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
     <div class="container">
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-12 col-lg-6">
-                <h1 class="ms-3 my-3">Informazioni Shop</h1>
+            <h1 class="mt-3 mb-3"><?=$template['title'];?></h1>
 
                 <?php if (!is_null($shop)) :
                     if (!is_null($shop->getImageId())) :

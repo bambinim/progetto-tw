@@ -2,11 +2,12 @@
 
 use App\Database\Entities\Order;
 ?>
-<h1 class="mt-3 mb-3"><?php $template['title'] ?></h1>
 <div class="card">
+
     <?php require_once(PROJECT_ROOT . '/templates/shop/shop-nav-tab.php'); ?>
     <div class="container">
         <div class="row mt-3">
+        <h1 class="mt-3 mb-3"><?= $template['title']?></h1>
              <a class="mt-3 mb-5 text-center "href="/shop/products/new">  <span class="fas fa-plus"> aggiungi un nuovo prodotto</a></span>
             <?php
             $products = $template['products'];

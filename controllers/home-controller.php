@@ -45,7 +45,15 @@ if (!empty($router)) {
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
-    
+    $router->get('/error404', function() {
+        $template = [
+                'title' => 'errore',
+                'template' => 'security/error.php',
+                'css' =>['/assets/css/error.css']
+           
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    });
     
 
     $router->get('/search', function() {

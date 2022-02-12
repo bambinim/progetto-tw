@@ -145,7 +145,7 @@ if (!empty($router)) {
 
     $router->get('/shop/info', function() {
         $template = [
-            'title' => 'Il tuo negozio',
+            'title' => 'Informazioni Shop',
             'template' => 'shop/shop-info.php',
             'js' => ['/assets/js/images-uploader-profile.js'],
             'css' => [ '/assets/css/images-uploader.css','/assets/css/info.css'],
