@@ -8,6 +8,7 @@ $rating = number_format($rating, 2);
 $products = $template['products'];
 ?>
 <div class="col-lg-3"></div>
+<div class="row mt-3">
 <div class="col">
    <?php if (!is_null($shop)) :
       if (!is_null($shop->getImageId())) :
@@ -38,10 +39,12 @@ $products = $template['products'];
 
       <!--colonna prodotto-->
 
-      <div class="card col-lg-6 mt-0 float-lg-start ">
+      <div class="card col-lg-9 mt-0 float-lg-start ">
          <h3 class="mb-4 mt-0">Prodotti del negozio</h3>
-         <div class="scroll-row">
-            <div class="row">
+         <div class="col-lg-6 mx-auto">
+            <div class="scroll-row">
+            
+               <div class="row">
                <?php
                for ($i = 0; $i < 5; $i++) {
 
@@ -52,6 +55,7 @@ $products = $template['products'];
 
                ?>
             </div>
+            </div> 
          </div>
       </div>
 
@@ -96,6 +100,6 @@ $products = $template['products'];
          ?>
 
 
-      </div>
+</div></div>
 
       <div class="col-lg-3"></div>

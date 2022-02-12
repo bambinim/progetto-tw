@@ -18,7 +18,7 @@ $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityMana
 
                 <?php if (!is_null($shop)) :
                     if (!is_null($shop->getImageId())) :
-                        echo ("<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=" . $shop->getImageId()) . "alt=\"foto-profilo\" id=\"uploaded-image-profile\"class=\"\" ></div></div>";
+                        echo ("<div class=\"row mt-0\"><div class=\"col-6 mb-3\"><img src=/images/get?id=" . $shop->getImageId()) . " alt=\"foto-profilo\" id=\"uploaded-image-profile\"class=\"\" ></div></div>";
                     endif;
                 endif; ?>
                 <form class="mb-3" method="POST" action="/shop/update">
@@ -43,35 +43,35 @@ $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityMana
                     <div class="mb-3">
                         <label for="input-name" class="form-label">Nome Negozio</label>
                         <input id="input-name" name="name" type="text" class="form-control" <?php if (!is_null($shop)) {
-                                                                                                echo ("placeholder=" . $shop->getName());
+                                                                                                echo (" placeholder=\"{$shop->getName()}\"");
                                                                                             }
                                                                                             if (isset($template['name'])) echo " value=\"${template['name']}\"" ?> />
                     </div>
                     <div class="mb-3">
                         <label for="input-address" class="form-label">Via</label>
                         <input id="input-address" name="address" type="text" class="form-control" <?php if (!is_null($shop)) {
-                                                                                                        echo ("placeholder=" . $shop->getStreet());
+                                                                                                      echo (" placeholder=\"{$shop->getStreet()}\"");
                                                                                                     }
                                                                                                     if (isset($template['address'])) echo " value=\"${template['address']}\"" ?> />
                     </div>
                     <div class="mb-3">
                         <label for="input-addNumber" class="form-label">Civico</label>
                         <input id="input-addNumber" name="addressNumber" type="number" class="form-control" <?php if (!is_null($shop)) {
-                                                                                                                echo ("placeholder=" . $shop->getStreetNumber());
+                                                                                                               echo (" placeholder=\"{$shop->getStreetNumber()}\"");
                                                                                                             }
                                                                                                             if (isset($template['addressNumber'])) echo " value=\"${template['addressNumber']}\"" ?> />
                     </div>
                     <div class="mb-3">
                         <label for="input-zip" class="form-label">CAP</label>
                         <input id="input-zip" name="zip" type="number" class="form-control" <?php if (!is_null($shop)) {
-                                                                                                echo ("placeholder=" . $shop->getZip());
+                                                                                                echo (" placeholder=\"{$shop->getZip()}\"");
                                                                                             }
                                                                                             if (isset($template['zip'])) echo " value=\"${template['zip']}\"" ?> />
                     </div>
                     <div class="mb-3">
                         <label for="input-city" class="form-label">Città</label>
                         <input id="input-city" name="city" type="text" class="form-control" <?php if (!is_null($shop)) {
-                                                                                                echo ("placeholder=" . $shop->getCity());
+                                                                                                  echo (" placeholder=\"{$shop->getCity()}\"");
                                                                                             }
                                                                                             if (isset($template['city'])) echo " value=\"${template['city']}\"" ?> />
                     </div>

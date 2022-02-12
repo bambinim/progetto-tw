@@ -63,7 +63,7 @@ if (!empty($router)) {
             
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
-    },'ROLE_USER');
+    });
 
     $router->post('/user/update', function() {
         $template = [
