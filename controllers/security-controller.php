@@ -29,13 +29,16 @@ if (!empty($router)) {
         } else {
             $user = SecurityManager::authenticateUser($_POST['email'], $_POST['password']);
             if (!is_null($user)) {
+                if (isset($_POST['rememberMe'])) {
+                    SecurityManager::createRememberMeCookie($user);
+                }
                 if (isset($_SESSION['loginRedirect'])) {
                     header('location: ' . $_SESSION['loginRedirect']);
                     unset($_SESSION['loginRedirect']);
                 } else {
-                    Cart::convertCookieToUser();
                     header('location: /');
                 }
+                Cart::convertCookieToUser();
             } else {
                 $template = [
                     'title' => 'Login',
@@ -51,6 +54,7 @@ if (!empty($router)) {
 
     $router->all('/logout', function () {
         SecurityManager::closeSession();
+        SecurityManager::deleteRememberMeCookie();
         header('location: /');
     });
 
