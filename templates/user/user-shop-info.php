@@ -41,7 +41,7 @@ $products = $template['products'];
 
       <div class="card col-lg-9 mt-0 float-lg-start ">
          <h3 class="mb-4 mt-0">Prodotti del negozio</h3>
-         <div class="col-lg-6 mx-auto">
+         <div class="col-lg-6 col-6 mx-auto">
             <div class="scroll-row">
             
                <div class="row">
