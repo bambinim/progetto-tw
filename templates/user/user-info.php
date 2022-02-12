@@ -25,11 +25,11 @@ $user = SecurityManager::getUser();
 
 
 
-            <div class=" mb-3" id="images-uploader">
-                        <input id="input-upload" type="file" class="d-none" accept=".jpg,.jpeg,.png" />
-                        <label for="input-upload" class="btn btn-primary"><span class="fas fa-upload me-2"></span>Aggiungi Immagine</label>
-                        <ul class="mt-3">
-                            <?php if (isset($template['images'])) : ?>
+                <div class=" mb-3" id="images-uploader">
+                    <input id="input-upload" type="file" class="d-none" accept=".jpg,.jpeg,.png" />
+                    <label for="input-upload" class="btn btn-primary"><span class="fas fa-upload me-2"></span>Aggiungi Immagine</label>
+                    <ul class="mt-3">
+                        <?php if (isset($template['images'])) : ?>
 
                                 <li id="uploaded-image-<?= $template['images']; ?>" class="position-relative m-2">
                                     <input name="images" <?php echo "value=\"${template['images']};\"" ?>class="d-none">

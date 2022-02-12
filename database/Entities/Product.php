@@ -169,6 +169,12 @@ class Product extends Entity
         $this->shopId = $shopId;
     }
 
+    public function getStatusString(): string
+    {
+        $STATUS_STRINGS = ['Nuovo', 'Usato in ottime condizioni', 'Usato'];
+        return $STATUS_STRINGS[$this->getStatus()];
+    }
+
     public function getShop(): Shop
     {
         return Database::getRepository(Shop::class)->findOne(['id' => $this->getShopId()]);

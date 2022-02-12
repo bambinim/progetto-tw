@@ -2,7 +2,6 @@
     <div class="col-lg-1"></div>
     <div class="col-12 col-lg-10">
         <div class="row">
-            <!-- Main Container for Content -->
             <div class="col-12 col-lg-6">
                 <?php
                     $product = $template['product'];
@@ -40,6 +39,7 @@
                     <div class="col"><h1><?= $product->getName(); ?></h1></div>
                     <div class="col text-end mt-1"><span class="fs-3">&euro;<?= number_format($product->getPrice(), 2); ?></span></div>
                 </div>
+                <span class="fw-bold">Condizione: </span><span><?= $product->getStatusString(); ?></span>
                 <p><?= $product->getDescription(); ?></p>
                 <?php if ($product->getIsSold() == 0): ?>
                     <a class="btn btn-primary" href="/cart/products/add?productId=<?= $product->getId(); ?>">Aggiungi al carrello</a>
