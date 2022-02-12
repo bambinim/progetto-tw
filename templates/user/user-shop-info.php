@@ -100,7 +100,7 @@ $products = $template['products'];
                }
                echo ("
          <div class=\"d-flex justify-content-center\">
-            <a href=\"/shop/reviews\">
+            <a href=\"/user/shop/reviews?shopId=".$shop->getId()."\">
                <span class=\" fs-6 \">vai alle recensioni </span>
             </a>
          </div>
