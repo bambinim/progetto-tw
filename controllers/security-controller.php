@@ -171,7 +171,7 @@ if (!empty($router)) {
             // create shop's notification
             $notification = new Notification();
             $notification->setTitle("Ordine Ricevuto");
-            $notification->setText("Hai ricevuto un nuovo ordine<br />Numoer ordine: {$order->getId()}<br />Acquirente: {$user->getFirstName()} {$user->getLastName()}");
+            $notification->setText("Hai ricevuto un nuovo ordine<br />Numero ordine: {$order->getId()}<br />Acquirente: {$user->getFirstName()} {$user->getLastName()}");
             $notification->setUserId(Database::getRepository(Shop::class)->findOne(['id' => $i])->getUserId());
             $notification->save();
         }
