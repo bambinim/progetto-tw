@@ -21,10 +21,10 @@ require_once PROJECT_ROOT . "/Router/Route.php";
 use App\Database\Database;
 use App\SecurityManager;
 
-Database::setHost('db.matteobambini.net');
-Database::setDatabase('ptwprod');
-Database::setUser('matteo');
-Database::setPassword('password');
+Database::setHost('localhost');
+Database::setDatabase('progettotw');
+Database::setUser('root');
+Database::setPassword('');
 
 session_start();
 

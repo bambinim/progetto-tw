@@ -7,8 +7,9 @@ $rating = $template['rating'];
 $rating = number_format($rating, 2);
 $products = $template['products'];
 ?>
+
 <div class="col-lg-3"></div>
-<div class="row mt-3">
+<div class="row mx-auto">
    <div class="col">
       <?php if (!is_null($shop)) :
          if (!is_null($shop->getImageId())) :
@@ -112,5 +113,6 @@ $products = $template['products'];
 
          </div>
       </div>
-
+          
       <div class="col-lg-3"></div>
+     </div>
