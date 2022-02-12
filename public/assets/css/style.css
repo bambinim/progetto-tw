@@ -14,7 +14,7 @@ body {
     background-color: var(--background-color)!important;
 }
 
-footer{
+footer {
     background-color: var(--background-color);
     width: 100%;
     margin-top: auto;
@@ -25,11 +25,23 @@ footer{
     border-color: var(--button-bg-color)!important;
 }
 
-.btn-link{
+.btn-link {
     padding: 0 0 0 0 !important;
 }
 
-a, p, strong, h1, h2, h3, h4, h5, h6, span, label, td, th{
+a,
+p,
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+label,
+td,
+th {
     color: var(--text-color) !important;
 }
 
@@ -42,7 +54,14 @@ span.badge {
     color: #fff !important;
 }
 
-nav, .bg-menu-color{
+.logo {
+    background-image: url("/img/logo.png");
+    width: 132px;
+    height: 47px;
+}
+
+nav,
+.bg-menu-color {
     background-color: var(--primary-color);
 }
 
@@ -64,13 +83,13 @@ nav .badge {
     font-size: 8pt;
 }
 
-nav a{
+nav a {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 20px;
 }
 
-.navbar-brand > img{
+.navbar-brand>img {
     max-height: 50px !important;
 }
 
@@ -84,20 +103,23 @@ nav a{
     display: table;
     margin: 0 0 5% 5%;
 }
-.name-circle > p{
+
+.name-circle>p {
     /*vertical-align: middle;*/
     text-align: center;
     padding-top: 5px;
     display: table-cell;
 }
-.btn-link{
+
+.btn-link {
     min-width: fit-content;
 }
 
-.input-group{
+.input-group {
     min-width: 300px;
 }
-.popover-body{
+
+.popover-body {
     background-color: var(--fill-color);
 }
 
@@ -195,7 +217,7 @@ hr {
     .mobile-hidden {
         display: none !important;
     }
-    .navbar-nav .nav-item{
+    .navbar-nav .nav-item {
         margin-left: 3%;
     }
     .sidebar-account-text {
@@ -218,7 +240,6 @@ hr {
     }
     .sidebar-account-collapse-icon {
         transition: transform .4s;
-
     }
     .rotate-180 {
         transform: rotate(180deg);
@@ -229,17 +250,21 @@ hr {
     .search-form>div>select {
         width: 40%!important;
     }
-
     .search-form>div>input {
         width: 60%!important;
     }
 }
+
+
 /* notifications dropdown styles */
+
 #notification-dropdown>.dropdown-menu {
     width: 20rem;
 }
 
+
 /* product card */
+
 .product-card>div:nth-child(1) {
     width: 100%;
     height: 150px;
