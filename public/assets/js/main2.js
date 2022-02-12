@@ -28,6 +28,13 @@ $('#offcanvasCloseButton').click(function () {
 });
 
 $('.sidebar-account-button').click(function () {
+    let ariaExpanded = $('.sidebar-account-button').attr('aria-expanded');
+    if (ariaExpanded == 'false') {
+        ariaExpanded = 'true';
+    } else {
+        ariaExpanded = 'false';
+    }
+    $('.sidebar-account-button').attr('aria-expanded', ariaExpanded);
     $('.sidebar-account-collapse').collapse('toggle');
     $('.sidebar-account-collapse-icon').toggleClass('rotate-180');
 });

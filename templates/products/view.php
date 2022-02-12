@@ -49,7 +49,7 @@
             </div>
             <div class="col-12 mt-3">
                 <h2>Informazioni sul venditore</h2>
-                <a class="shop-circle-link" href="#">
+                <a class="shop-circle-link" href="/user/shop/info?id=<?= $shop->getId(); ?>">
                     <div class="avatar-circle">
                         <?php if (!is_null($shop->getImageId())): ?>
                             <img src="/images/get?id=<?= $shop->getImageId(); ?>" alt=""/>

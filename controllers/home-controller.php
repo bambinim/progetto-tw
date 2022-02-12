@@ -34,7 +34,7 @@ if (!empty($router)) {
         $products= NULL;
         if(!is_null($category))
         {$category = $category->getName();
-        $products = Database::getRepository(Product::class)->find(['category_id' => $idCategory,'is_sold'=>0]);
+        $products = Database::getRepository(Product::class)->find(['category_id' => $idCategory,'is_sold'=>0],['creation_date' => 'DESC']);
         }
         $template = [
             'title' => 'Categorie',
@@ -45,6 +45,16 @@ if (!empty($router)) {
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
+    $router->get('/error404', function() {
+        $template = [
+                'title' => 'errore',
+                'template' => 'security/error.php',
+                'css' =>['/assets/css/error.css']
+           
+        ];
+        require_once(PROJECT_ROOT . '/templates/base.php');
+    });
+    
 
     $router->get('/search', function() {
         if (!isset($_GET['query'])) {
