@@ -29,7 +29,7 @@ $user = SecurityManager::getUser();
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <!--Toggle button-->
-            <button class="navbar-toggler p-0 border-0" id="navbarSideCollapse" type="button">
+            <button class="navbar-toggler p-0 border-0" id="navbarSideCollapse" type="button" aria-label="apri sidebar">
                 <span class="fas fa-bars fa-2x"></span>
             </button>
             <!--Brand-->
@@ -64,6 +64,10 @@ $user = SecurityManager::getUser();
                             <li class="nav-item d-lg-none ms-2">
                                 <a class="nav-link" href="/shop/products/list">Il mio negozio</a>
                             </li>
+                        <?php else: ?>
+                            <li class="nav-item d-lg-none ms-2">
+                                <a class="nav-link" href="/shop/create/new">Apri un negozio</a>
+                            </li>
                         <?php endif; ?>
                         <!-- search su display grandi -->
                         <li class="nav-item d-none d-lg-inline-block">
@@ -85,7 +89,7 @@ $user = SecurityManager::getUser();
                     <!--User space in sidebar-->
                     <div class="mt-auto mb-3 d-lg-none px-3">
                         <?php if (!is_null($user)) : ?>
-                            <button class="sidebar-account-button mb-3 p-0" aria-label="impostazioni utente">
+                            <button class="sidebar-account-button mb-3 p-0" aria-label="impostazioni utente" aria-controls="sidebar-user-collapse" aria-expanded="false">
                                 <div class="avatar-circle">
                                     <?php if (!is_null($user->getImageId())): ?>
                                         <img src="/images/get?id=<?= $user->getImageId(); ?>" alt=""/>
@@ -96,17 +100,23 @@ $user = SecurityManager::getUser();
                                 <span class="sidebar-account-text ms-2"><?= $user->getFirstName() . " " . $user->getLastName(); ?></span>
                                 <span class="fas fa-chevron-up sidebar-account-collapse-icon ms-2"></span>
                             </button>
-                            <ul class=" sidebar-account-collapse collapse my-0">
+                            <ul id="sidebar-user-collapse" class="sidebar-account-collapse collapse my-0">
                                 <li>
-                                    <a class="sidebar-account-text-small" href="/logout">
-                                        <span class="fas fa-sign-out-alt fa-lg me-2"></span>
-                                        <span>Esci</span>
-                                    </a>
-                                </li>
-                                <li class="mt-3">
                                     <a class="sidebar-account-text-small" href="/user/info">
                                         <span class="fas fa-user fa-lg me-2"></span>
                                         <span>Il mio account</span>
+                                    </a>
+                                </li>
+                                <li class="mt-3">
+                                    <a class="sidebar-account-text-small" href="#">
+                                        <span class="fas fa-bell fa-lg me-2"></span>
+                                        <span>Notifiche</span>
+                                    </a>
+                                </li>
+                                <li class="mt-3">
+                                    <a class="sidebar-account-text-small" href="/logout">
+                                        <span class="fas fa-sign-out-alt fa-lg me-2"></span>
+                                        <span>Esci</span>
                                     </a>
                                 </li>
                             </ul>

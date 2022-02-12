@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-12 col-lg-6">
-        <h1 class="ms-3 my-3">Apri Shop</h1>
+        <h1 class="ms-3 my-3">Apri Negozio</h1>
         <div class="card px-4 pt-5 pb-3">
             <form class="mb-3" method="POST" action="/shop/creation">
 
