@@ -109,7 +109,7 @@ $user = SecurityManager::getUser();
                                     </a>
                                 </li>
                                 <li class="mt-3">
-                                    <a class="sidebar-account-text-small" href="#">
+                                    <a class="sidebar-account-text-small" href="/user/notifications">
                                         <span class="fas fa-bell fa-lg me-2"></span>
                                         <span>Notifiche</span>
                                     </a>
@@ -167,7 +167,7 @@ $user = SecurityManager::getUser();
 
                             <li><a class="dropdown-item" href="/user/orders"><span class="fas fa-shopping-basket me-1"></span>Ordini</a></li>
 
-                            <li><a class="dropdown-item" href="#"><span class="fas fa-bell me-1"></span>Notifiche</a></li>
+                            <li><a class="dropdown-item" href="/user/notifications"><span class="fas fa-bell me-1"></span>Notifiche</a></li>
                             <li><a class="dropdown-item" href="/user/info"><span class="fas fa-user me-1"></span>Informazioni personali</a></li>
                             <li>
                                 <?php if (in_array('ROLE_SELLER', json_decode($user->getRoles()))) : ?>
