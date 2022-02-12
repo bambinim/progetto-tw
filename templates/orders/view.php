@@ -7,10 +7,11 @@
                 $shop = $order->getShop();
             ?>
             <div class="row">
+                <h1>Dettagli ordine</h1>
                 <div class="col-12 col-lg-6">
                     <div class="row">
                         <div class="col-12 card mt-2 pt-2">
-                            <h1 class="fs-2">Informazioni</h1>
+                            <h2>Informazioni</h2>
                             <table class="table">
                                 <tr>
                                     <th class="fw-bold">Numero ordine:</th>
@@ -27,7 +28,7 @@
                             </table>
                         </div>
                         <div class="col-12 card mt-2 pt-2">
-                            <h1 class="fs-2">Prodotti ordinati</h1>
+                            <h2>Prodotti ordinati</h2>
                             <ul class="products-list mt-2">
                                 <?php foreach ($order->getProducts() as $product): ?>
                                     <li>
@@ -41,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 card mt-2 pt-2 pb-3">
-                    <h1 class="fs-2">Stato ordine</h1>
+                    <h2>Stato ordine</h2>
                     <ul aria-label="progress" class="steps-container">
                         <li class="step active" <?= $order->getStatus() == 0 ? 'aria-current="true"': ''; ?>>
                             <div class="step-circle"></div>
@@ -62,7 +63,7 @@
                     </ul>
                 </div>
                 <div class="col-12 card mt-2 pt-2 pb-3 d-block">
-                    <h1 class="fs-2">Informazioni sul venditore</h1>
+                    <h2>Informazioni sul venditore</h2>
                     <a class="shop-circle-link" href="/user/shop/info?id=<?= $shop->getId(); ?>">
                         <div class="avatar-circle">
                             <?php if (!is_null($shop->getImageId())): ?>
