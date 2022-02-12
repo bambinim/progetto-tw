@@ -19,7 +19,7 @@ if (!empty($router)) {
         $template = [
             'title' => 'Recensioni negozio',
             'template' => 'shop/review.php',
-            'css' => [''],
+            'css' => ['/assets/css/shop-reviews.css'],
             'reviews' => $reviews
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');

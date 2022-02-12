@@ -19,7 +19,7 @@
                 </div>
                 <div class="d-flex">
                     <p class="fw-bold">Totale: &nbsp;</p>
-                    <p><?php echo number_format($order->getTotal(), 2); ?></p>
+                    <p><?php echo number_format($order->getTotal(), 2); ?>€</p>
                 </div>
                 <hr>
                 <div class="row">
