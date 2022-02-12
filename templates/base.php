@@ -33,7 +33,7 @@ $user = SecurityManager::getUser();
                 <span class="fas fa-bars fa-2x"></span>
             </button>
             <!--Brand-->
-            <a class="navbar-brand" href="/home"> <img src="/img/logo.png" alt=""> </a>
+            <a class="navbar-brand logo" href="/home"><span class="visually-hidden">Unibo Reselling</span></a>
 
             <div class="navbar-collapse offcanvas-collapse">
                 <div class="offcanvas-header">
@@ -73,14 +73,15 @@ $user = SecurityManager::getUser();
                         <li class="nav-item d-none d-lg-inline-block">
                             <form class="d-flex p-1 search-form" action="/search">
                                 <div class="input-group">
-                                    <select class="form-select" aria-label="categoria" name="category">
+                                    <label for="category-lg" class="visually-hidden">Seleziona una categoria</label>
+                                    <select class="form-select" aria-label="categoria" name="category" id="category-lg">
                                         <option selected disabled>Categoria</option>
                                         <?php foreach ($categories as $i) : ?>
                                             <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
                                         <?php endforeach; ?>
                                     </select>
-
-                                    <input class="form-control me-2" type="search" name="query" placeholder="Cerca" aria-label="query ricerca" required />
+                                    <label for="query-lg" class="visually-hidden">Cerca</label>
+                                    <input class="form-control me-2" type="search" id="query-lg" name="query" placeholder="Cerca" aria-label="query ricerca" required />
                                 </div>
                                 <button class="btn btn-primary" type="submit">Cerca</button>
                             </form>
@@ -145,7 +146,8 @@ $user = SecurityManager::getUser();
                 <?php
                 $cartCount = Cart::countProducts();
                 ?>
-                <a href="/cart/view" class="btn btn-link link-dark shadow-none" aria-label="carrello">
+                <a href="/cart/view" class="btn btn-link link-dark shadow-none">
+                    <span class="visually-hidden">Vai al carrello</span>
                     <span class="fas fa-shopping-cart fa-2x me-3 position-relative">
                         <?php if ($cartCount > 0) : ?>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -192,13 +194,15 @@ $user = SecurityManager::getUser();
     <div class="bg-menu-color d-lg-none">
         <form class="d-flex justify-content-center p-2 search-form" action="/search">
             <div class="input-group">
-                <select class="form-select" aria-label="categoria" name="category">
+                <label for="category" class="visually-hidden">Seleziona una categoria</label>
+                <select class="form-select" aria-label="categoria" name="category" id="category">
                     <option selected disabled>Categoria</option>
                     <?php foreach ($categories as $i) : ?>
                         <option value="<?= $i->getId(); ?>"><?= $i->getName(); ?></option>
                     <?php endforeach; ?>
                 </select>
-                <input class="form-control" type="search" placeholder="Cerca" aria-label="query ricerca" name="query" required>
+                <label for="query" class="visually-hidden">Cerca</label>
+                <input class="form-control" type="search" placeholder="Cerca" aria-label="query ricerca" id="query" name="query" required>
             </div>
         </form>
     </div>
