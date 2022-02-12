@@ -16,6 +16,12 @@ class User extends Entity {
     private ?string $roles = null;
     private ?int $imageId = null;
 
+    public function __construct($isNew = true)
+    {
+        parent::__construct($isNew);
+        $this->registrationDate = date_format(new \DateTime(), 'Y-m-d H:i:s');
+    }
+
     /**
      * @return int
      */
@@ -150,6 +156,11 @@ class User extends Entity {
     public function getOrders(): array
     {
         return Database::getRepository(Order::class)->find(['user_id' => $this->getId()]);
+    }
+
+    public function getShop(): Shop
+    {
+        return Database::getRepository(Shop::class)->findOne(['user_id' => $this->getId()]);
     }
 
     public static function _getColumns(): array

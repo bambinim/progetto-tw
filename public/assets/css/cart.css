@@ -1,0 +1,16 @@
+ul img {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}

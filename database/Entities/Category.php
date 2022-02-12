@@ -2,6 +2,7 @@
 
 namespace App\Database\Entities;
 
+use App\Database\Database;
 use App\Database\Entity;
 
 class Category extends Entity
@@ -78,10 +79,26 @@ class Category extends Entity
     {
         $this->imageId = $imageId;
     }
-    
 
-
+    public function getProducts($quantity = -1): array
+    {
+        $res = null;
+        if($quantity < 0){
+            $res = Database::getRepository(Product::class)->find(['category_id' => $this->id], ['creation_date' => 'DESC']);
+        }
+        else{
+            $res = Database::getRepository(Product::class)->find(['category_id' => $this->id], ['creation_date' => 'DESC'], $quantity);
+        }
+        return $res;
+        
+    }
+    public function getActiveProducts($quantity = null): array
+    {
+        
+        return Database::getRepository(Product::class)->find(['category_id' => $this->id, 'status' => 0], ['creation_date' => 'DESC'], $quantity);
     
+    }
+
 
 
     public static function _getColumns(): array

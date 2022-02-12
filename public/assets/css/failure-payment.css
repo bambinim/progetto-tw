@@ -1,0 +1,16 @@
+div.card>p {
+    font-size: 30pt;
+    font-weight: bold;
+}
+
+span.fa-shopping-bag{
+    color:#b33224!important;
+}
+
+
+div.card>img {
+    max-width: 200px;
+    max-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}

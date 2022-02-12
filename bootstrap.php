@@ -19,10 +19,15 @@ require_once PROJECT_ROOT . "/Router/SimpleRouter.php";
 require_once PROJECT_ROOT . "/Router/Route.php";
 
 use App\Database\Database;
+use App\SecurityManager;
 
 Database::setHost('db.matteobambini.net');
-Database::setDatabase('progettotw');
+Database::setDatabase('ptwprod');
 Database::setUser('matteo');
 Database::setPassword('password');
 
 session_start();
+
+if (!SecurityManager::isUserLogged() && isset($_COOKIE['AUTHTOKEN'])) {
+    SecurityManager::authenticateUserWithAuthToken();
+}

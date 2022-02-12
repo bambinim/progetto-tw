@@ -1,0 +1,16 @@
+.img-avatar {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover !important;
+}
+
+div.card {
+    margin: 2% !important;
+    padding: 25px;
+}
+
+a {
+    text-decoration: none;
+}

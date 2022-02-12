@@ -1,0 +1,17 @@
+body {
+    background-color: var(--primary-color)!important;
+}
+
+div.card {
+    border-radius: 55px;
+}
+
+footer {
+    background-color: var(--primary-color);
+}
+
+@media  (min-width: 992px){
+    div.row {
+        margin-top: 9vh;
+    }
+}

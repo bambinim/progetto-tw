@@ -1,0 +1,25 @@
+div.col-2>img {
+    max-width: 150px;
+    max-height: 150px;
+    min-height: 50px;
+    min-width: 50px;
+}
+
+div.items {
+    float: right;
+    margin-left: 30%;
+}
+
+div.items>p {
+    float: right;
+    width: 100%
+}
+
+@media(min-width: 992px) {
+    div.prodotto {
+        height: 170px;
+    }
+    div.items {
+        margin-right: -100%;
+    }
+}

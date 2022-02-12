@@ -24,7 +24,7 @@ abstract class Entity
             if ($i == $class::_getPrimaryKeyColName() && $this->isNew) {
                 $arr[$i] = -1;
             } else {
-                $arr[$i] = $this->{Entity::toCamelCase("get" . $i)}();
+                $arr[$i] = $this->{Entity::toCamelCase("get_" . $i)}();
             }
         }
         return $arr;
@@ -85,7 +85,6 @@ abstract class Entity
                 }
             }
             $query = substr($query, 0, -2) . ");";
-            $this->isNew = false;
         } else {
             $query = "UPDATE $table SET ";
             foreach ($columns as $i) {
@@ -96,8 +95,30 @@ abstract class Entity
         }
         $conn = Database::getConnection();
         $stmt = $conn->prepare($query);
-        $stmt->execute($params);
-        $this->{Entity::toCamelCase("set_" . $pk)}(intval($conn->lastInsertId()));
+        try {
+            $stmt->execute($params);
+        } catch (\Exception $e) {
+            echo $stmt->debugDumpParams();
+        }
+        if ($this->isNew) {
+            $this->{Entity::toCamelCase("set_" . $pk)}(intval($conn->lastInsertId()));
+            $this->isNew = false;
+        }
+    }
+
+    public function delete()
+    {
+        $class = get_class($this);
+        $pk = $class::_getPrimaryKeyColName();
+        $table = $class::_getTableName();
+        $values = $this->toArray();
+        if ($values[$pk] != -1) {
+            $query = "DELETE FROM $table WHERE $pk = $values[$pk];";
+            $conn = Database::getConnection();
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            $this->{Entity::toCamelCase("set_" . $pk)}(-1);
+        }
     }
 
     private static function toCamelCase(string $str): string

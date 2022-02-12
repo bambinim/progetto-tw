@@ -1,0 +1,17 @@
+.products-list {
+    padding: 0;
+}
+.products-list>li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.products-list>li>img {
+    max-width: 50px;
+    max-height: 50px;
+}

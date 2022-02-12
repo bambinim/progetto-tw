@@ -2,6 +2,7 @@
 
 namespace App\Database\Entities;
 
+use App\Database\Database;
 use App\Database\Entity;
 
 class Order extends Entity
@@ -12,7 +13,13 @@ class Order extends Entity
     private float $total;
     private int $status = 0;
     private int $userId;
-    private int $courierId;
+    private ?int $courierId = null;
+
+    public function __construct($isNew = true)
+    {
+        parent::__construct($isNew);
+        $this->date = date_format(new \DateTime(), 'Y-m-d H:i:s');
+    }
 
     /**
      * @return int
@@ -78,6 +85,26 @@ class Order extends Entity
         $this->status = $status;
     }
 
+    public function getStatusAsString(): string
+    {
+        $response = "Sconosciuto";
+        switch ($this->status) {
+            case 0:
+                $response = "Accettato";
+                break;
+            case 1:
+                $response = "In preparazione";
+                break;
+            case 2:
+                $response = "Spedito";
+                break;
+            case 3:
+                $response = "Consegnato";
+                break;
+        }
+        return $response;
+    }
+
     /**
      * @return int
      */
@@ -95,19 +122,46 @@ class Order extends Entity
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getCourierId(): int
+    public function getCourierId(): ?int
     {
         return $this->courierId;
     }
 
     /**
-     * @param int $courierId
+     * @param ?int $courierId
      */
-    public function setCourierId(int $courierId): void
+    public function setCourierId(?int $courierId): void
     {
         $this->courierId = $courierId;
+    }
+
+    public function getUser(): User
+    {
+        return Database::getRepository(User::class)->findOne(['id' => $this->getUserId()]);
+    }
+
+    public function getProducts(): array
+    {
+        $query = "SELECT * FROM products WHERE id IN (SELECT product_id FROM orders_products WHERE order_id = ".$this->getId().");";
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $products = [];
+        foreach ($stmt->fetchAll() as $i) {
+            array_push($products, Entity::createFromQueryResult($i, Product::class));
+        }
+        return $products;
+    }
+
+    public function getShop(): Shop
+    {
+        $query = "SELECT * FROM shops WHERE id = (SELECT shop_id FROM products WHERE id = (SELECT product_id FROM orders_products WHERE order_id = :oid LIMIT 1));";
+        $conn = Database::getConnection();
+        $cursor = $conn->prepare($query);
+        $cursor->execute([':oid' => $this->getId()]);
+        return Entity::createFromQueryResult($cursor->fetchAll()[0], Shop::class);
     }
 
     public static function _getColumns(): array
