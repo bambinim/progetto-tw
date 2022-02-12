@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-12 card mt-2 pt-2 pb-3 d-block">
                     <h1 class="fs-2">Informazioni sul venditore</h1>
-                    <a class="shop-circle-link" href="#">
+                    <a class="shop-circle-link" href="/user/shop/info?id=<?= $shop->getId(); ?>">
                         <div class="avatar-circle">
                             <?php if (!is_null($shop->getImageId())): ?>
                                 <img src="/images/get?id=<?= $shop->getImageId(); ?>" alt=""/>
