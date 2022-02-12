@@ -13,7 +13,7 @@ use App\Database\Entities\Image;
 if (!empty($router)) {
     $router->get('/shop/reviews', function () {
         //get user's shop 
-        $shop = SecurityManager::getUser()->getShop();
+        $shop =SecurityManager::getUser()->getShop();
         //get all shop's reviews
         $reviews = Database::getRepository(Review::class)->find(['shop_id' => $shop->getId()], ['date' => 'DESC']);
         $template = [
@@ -24,7 +24,7 @@ if (!empty($router)) {
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
-
+    
     $router->get('/shop/sales', function () {
         //get user's shop 
         $shop = SecurityManager::getUser()->getShop();
@@ -38,8 +38,8 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
 
-    $router->get('/shop/sales/view', function () {
-        $order = isset($_GET['id']) ? Database::getRepository(Order::class)->findOne(['id' => $_GET['id']]) : null;
+    $router->get('/shop/sales/view', function() {
+        $order = isset($_GET['id']) ?  Database::getRepository(Order::class)->findOne(['id' => $_GET['id']]) : null;
         if (!is_null($order) && $order->getShop()->getId() != SecurityManager::getUser()->getShop()->getId()) {
             $order = null;
         }
@@ -52,7 +52,7 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
 
-    $router->post('/shop/sales/change-status', function () {
+    $router->post('/shop/sales/change-status', function() {
         $order = isset($_POST['order']) && isset($_POST['status']) ? Database::getRepository(Order::class)->findOne(['id' => $_POST['order']]) : null;
         if (!is_null($order) && $order->getShop()->getId() == SecurityManager::getUser()->getShop()->getId()) {
             $status = intval($_POST['status']);
@@ -82,18 +82,18 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
 
-    $router->get('/shop/create/new', function () {
+    $router->get('/shop/create/new', function() {
         $template = [
             'title' => 'Apri Shop',
             'template' => 'shop/shop-new.php',
             'js' => ['/assets/js/images-uploader-profile.js'],
-            'css' => ['/assets/css/center-card.css', '/assets/css/images-uploader.css', '/assets/css/registration.css']
-
+            'css' => ['/assets/css/center-card.css','/assets/css/images-uploader.css', '/assets/css/registration.css']
+            
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
-    }, 'ROLE_USER');
+    },'ROLE_USER');
 
-    $router->post('/shop/creation', function () {
+    $router->post('/shop/creation', function() {
         $registrationFields = ['name', 'address', 'addressNumber', 'zip', 'city'];
         // check if all fields are in the request
         $template = [
@@ -109,92 +109,102 @@ if (!empty($router)) {
             }
             $template[$i] = $_POST[$i];
         }
-        if (!$allFieldsOk) {
+         if (!$allFieldsOk) {
             // if not all fields are sent show error message into registration page
             $template['error'] = 'Campi mancanti';
             require_once(PROJECT_ROOT . '/templates/base.php');
-        } else if (!is_null(Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager:: getUser()->getId()]))) {
+        } else if(!is_null(Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager :: getUser()->getId()]))){
             $template['error'] = 'non puoi aprire più di uno shop';
             require_once(PROJECT_ROOT . '/templates/base.php');
-        } else {
+        }
+        else{
             $shop = new Shop();
             $shop->setName($_POST['name']);
             $shop->setStreet($_POST['address']);
             $shop->setStreetNumber($_POST['addressNumber']);
             $shop->setZip($_POST['zip']);
             $shop->setCity($_POST['city']);
-            $user = SecurityManager:: getUser();
+            $user = SecurityManager :: getUser();
             $shop->setUserId($user->getId());
-            if (isset($_POST['images']) && $_POST['images'] != "") {
-                $shop->setImageId($_POST['images']);
-            } else {
-                $shop->setImageId(NULL);
+           if(isset($_POST['images']) && $_POST['images']!=""){
+                $shop -> setImageId($images[0]);
+            }else{
+                $shop -> setImageId(NULL);
             }
-
-
+            
+            
             $shop->save();
             $user->save();
-
+            
             header('location: /shop/info');
             $template['message'] = 'shop creato';
         }
-    }, 'ROLE_USER');
+    },'ROLE_USER');
 
-    $router->get('/shop/info', function () {
+    $router->get('/shop/info', function() {
         $template = [
             'title' => 'Informazioni Shop',
             'template' => 'shop/shop-info.php',
             'js' => ['/assets/js/images-uploader-profile.js'],
-            'css' => ['/assets/css/images-uploader.css', '/assets/css/info.css'],
-
-
+            'css' => [ '/assets/css/images-uploader.css','/assets/css/info.css'],
+            
+            
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
-    }, "ROLE_SELLER");
+    },"ROLE_SELLER");
 
-    $router->post('/shop/update', function () {
+    $router->post('/shop/update', function() {
         $template = [
             'title' => 'Il tuo negozio',
             'template' => 'shop/shop-info.php',
             'js' => ['/assets/js/images-uploader-profile.js'],
             'css' => ['/assets/css/images-uploader.css'],
-
+            
         ];
-        $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager:: getUser()->getId()]);
+        $shop = Database::getRepository(Shop::class)->findOne(['user_id' => SecurityManager :: getUser()->getId()]);
         $name = $_POST['name'];
-        if ($name != "") {
-            $shop->setName($name);
+        if($name!=""){
+                $shop->setName($name);
         }
         $address = $_POST['address'];
-        if ($address != "") {
-            $shop->setStreet($address);
+        if($address!=""){
+             $shop->setStreet($address);
         }
         $addressNum = $_POST['addressNumber'];
-        if ($addressNum != "") {
-            $shop->setStreetNumber($addressNum);
+        if($addressNum!="")
+        {
+             $shop->setStreetNumber($addressNum);
         }
         $zip = $_POST['zip'];
-        if ($zip != "") {
-            $shop->setZip($zip);
+        if($zip!="")
+        {
+             $shop->setZip($zip);
         }
         $city = $_POST['city'];
-        if ($city != "") {
-            $shop->setCity($city);
+        if($city!="")
+        {
+             $shop->setCity($city);
         }
-        $oldImage = Database::getRepository(Image::class)->findOne(['id' => $shop->getImageId()]);
-        if (isset($_POST['images'])) {
-            $shop->setImageId($_POST['images']);
-            if (!is_null($oldImage)) {
-                unlink(PROJECT_ROOT . "/images/{$oldImage->getId()}.{$oldImage->getExtension()}");
-                $oldImage->delete();
+       
+        $oldImage=Database::getRepository(Image::class)->findOne(['id' => $shop->getImageId()]);
+        if(isset($_POST['images'])&& $_POST['images']!="")
+        {
+            if(!is_null($oldImage)){
+            $shop->setImageId(null);
+            $shop->save();
+            
+                        unlink(PROJECT_ROOT . "/images/{$oldImage->getId()}.{$oldImage->getExtension()}");
+                        $oldImage->delete();
             }
+             $shop->setImageId($_POST['images']);
+
         }
         $shop->save();
         $template['message'] = 'informazioni shop aggiornate';
         require_once(PROJECT_ROOT . '/templates/base.php');
-
-
-    }, "ROLE_SELLER");
+       
+    
+    },"ROLE_SELLER");
 
     $router->get('/shop/products/new', function () {
         $template = [
@@ -206,7 +216,7 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
 
-    $router->post('/shop/products/new', function () {
+    $router->post('/shop/products/new', function() {
         $productFields = ['name', 'category', 'price', 'condition', 'description', 'images'];
         $template = [
             'title' => 'Aggiungi Prodotto',
@@ -245,7 +255,7 @@ if (!empty($router)) {
         require_once(PROJECT_ROOT . '/templates/base.php');
     }, 'ROLE_SELLER');
 
-    $router->get('/shop/products/edit', function () {
+    $router->get('/shop/products/edit', function() {
         $product = isset($_GET['id']) ? Database::getRepository(Product::class)->findOne(['id' => $_GET['id']]) : null;
         if (!is_null($product) && $product->getShop()->getId() == SecurityManager::getUser()->getShop()->getId() && $product->getIsSold() == 0) {
             $template = [
@@ -260,7 +270,7 @@ if (!empty($router)) {
                 'price' => $product->getPrice(),
                 'condition' => $product->getStatus(),
                 'description' => $product->getDescription(),
-                'images' => array_map(function ($el) {
+                'images' => array_map(function($el) {
                     return $el->getId();
                 }, $product->getImages())
             ];
@@ -270,7 +280,7 @@ if (!empty($router)) {
         }
     }, 'ROLE_SELLER');
 
-    $router->post('/shop/products/edit', function () {
+    $router->post('/shop/products/edit', function() {
         $product = isset($_POST['id']) ? Database::getRepository(Product::class)->findOne(['id' => $_POST['id']]) : null;
         if (!is_null($product) && $product->getShop()->getId() == SecurityManager::getUser()->getShop()->getId() && $product->getIsSold() == 0) {
             $productFields = ['id', 'name', 'category', 'price', 'condition', 'description', 'images'];
@@ -308,7 +318,7 @@ if (!empty($router)) {
                     }
                 }
                 // add new images
-                $oldImages = array_map(function ($el) {
+                $oldImages = array_map(function($el) {
                     return $el->getId();
                 }, $oldImages);
                 foreach ($sentImages as $i) {

@@ -88,8 +88,8 @@ if (!empty($router)) {
         {
              $user->setPassword(SecurityManager::createPasswordHash($_POST['password']));
         }
-        $images=$_POST['images'];
-        if($images!=""){
+    
+        if(isset($_POST['images'])&& $_POST['images']!=""){
 
             $oldImage=Database::getRepository(Image::class)->findOne(['id' => $user->getImageId()]);
             if(!is_null($oldImage))
@@ -97,8 +97,10 @@ if (!empty($router)) {
             $user->save();
             unlink(PROJECT_ROOT . "/images/{$oldImage->getId()}.{$oldImage->getExtension()}");
             $oldImage->delete();}
-          $user->setImageId($images[0]);
+          $user->setImageId($_POST['images']);
 
+        }else{
+            $user->setImageId($_POST['images']);
         }
     
         $user->save();

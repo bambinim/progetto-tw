@@ -25,24 +25,24 @@ $user = SecurityManager::getUser();
 
 
 
-                <div class=" mb-3" id="images-uploader">
-                    <input id="input-upload" type="file" name="images" class="d-none" accept=".jpg,.jpeg,.png" />
-                    <label for="input-upload" class="btn btn-primary"><span class="fas fa-upload me-2"></span>Aggiungi Immagine</label>
-                    <ul class="mt-3">
-                        <?php if (isset($template['images'])) : ?>
+            <div class=" mb-3" id="images-uploader">
+                        <input id="input-upload" type="file" class="d-none" accept=".jpg,.jpeg,.png" />
+                        <label for="input-upload" class="btn btn-primary"><span class="fas fa-upload me-2"></span>Aggiungi Immagine</label>
+                        <ul class="mt-3">
+                            <?php if (isset($template['images'])) : ?>
 
-                            <li id="uploaded-image-<?= $template['images']; ?>" class="position-relative m-2">
-                                <input name="images" <?php echo "value=\"${template['images']};\"" ?>class="d-none">
-                                <img src="/images/get?id=<?= $template['images']; ?>" class="image-preview" alt="uploaded-image">
-                                <button type="button" class="btn btn-link shadow-none position-absolute top-0 start-100 translate-middle" aria-label="elimina immagine" onclick="removeUploadedImage(<?= $template['images']; ?>)">
-                                    <span class="fas fa-times"></span>
-                                </button>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
+                                <li id="uploaded-image-<?= $template['images']; ?>" class="position-relative m-2">
+                                    <input name="images" <?php echo "value=\"${template['images']};\"" ?>class="d-none">
+                                    <img src="/images/get?id=<?= $template['images']; ?>" class="image-preview" alt="uploaded image">
+                                    <button type="button" class="btn btn-link shadow-none position-absolute top-0 start-100 translate-middle" aria-label="elimina immagine" onclick="removeUploadedImage(<?= $template['images']; ?>)">
+                                        <span class="fas fa-times"></span>
+                                    </button>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
 
 
-                </div>
+                    </div>
                 <div class="mb-3">
                     <label for="input-name" class="form-label">Nome</label>
                     <input id="input-name" name="name" type="text" class="form-control" <?php if (!is_null($user)) {
