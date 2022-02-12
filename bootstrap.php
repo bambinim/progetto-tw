@@ -22,7 +22,7 @@ use App\Database\Database;
 use App\SecurityManager;
 
 Database::setHost('db.matteobambini.net');
-Database::setDatabase('progettotw');
+Database::setDatabase('ptwprod');
 Database::setUser('matteo');
 Database::setPassword('password');
 

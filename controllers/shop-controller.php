@@ -124,17 +124,15 @@ if (!empty($router)) {
             $shop->setZip($_POST['zip']);
             $shop->setCity($_POST['city']);
             $user = SecurityManager:: getUser();
+            $user->setRoles('["ROLE_USER", "ROLE_SELLER"]');
             $shop->setUserId($user->getId());
             if (isset($_POST['images']) && $_POST['images'] != "") {
                 $shop->setImageId($_POST['images']);
             } else {
                 $shop->setImageId(NULL);
             }
-
-
             $shop->save();
             $user->save();
-
             header('location: /shop/info');
             $template['message'] = 'shop creato';
         }
