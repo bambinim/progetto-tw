@@ -61,7 +61,8 @@ if (!empty($router)) {
         $template = [
             'title' => 'Recensioni Negozio',
             'template' => 'user/view-reviews.php',
-            'reviews' => is_null($shop) ? [] : Database::getRepository(Review::class)->find(['shop_id' => $shop->getId()], ['id' => 'DESC'])
+            'reviews' => is_null($shop) ? [] : Database::getRepository(Review::class)->find(['shop_id' => $shop->getId()], ['id' => 'DESC']),
+            'shop_name' => $shop->getName()
         ];
         require_once(PROJECT_ROOT . '/templates/base.php');
     });
