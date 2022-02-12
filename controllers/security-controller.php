@@ -104,10 +104,6 @@ if (!empty($router)) {
             $user->setEmail($_POST['email']);
             $user->setPassword(SecurityManager::createPasswordHash($_POST['password']));
             $user->setRoles('["ROLE_USER"]');
-            $image = $_POST['images'];
-            if ($image != "") {
-                $user->setImageId($image[0]);
-            }
             $user->save();
             header('location: /registration/confirm');
         }

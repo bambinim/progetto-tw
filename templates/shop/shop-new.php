@@ -6,7 +6,7 @@
             <form class="mb-3" method="POST" action="/shop/creation">
 
                 <div class=" mb-3" id="images-uploader">
-                    <input id="input-upload" type="file" name=images class="d-none" accept=".jpg,.jpeg,.png" />
+                    <input id="input-upload" type="file" name="images" class="d-none" accept=".jpg,.jpeg,.png" />
                     <label for="input-upload" class="btn btn-primary"><span class="fas fa-upload me-2"></span>Aggiungi Immagine</label>
                     <ul class="mt-3">
                         <?php if (isset($template['images'])) : ?>
