@@ -89,7 +89,9 @@ class SimpleRouter
                     http_response_code(403);
                     exit;
                     */
-                    $_SESSION['loginRedirect'] = $_SERVER['REQUEST_URI'];
+                    if (explode('/', $_SERVER['REQUEST_URI'])[1] != 'api') {
+                        $_SESSION['loginRedirect'] = $_SERVER['REQUEST_URI'];
+                    }
                     header('location: /login');
                 } else {
                     // execute if role is required and user is authorized
