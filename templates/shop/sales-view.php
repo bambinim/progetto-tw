@@ -7,10 +7,11 @@
                 $user = $order->getUser();
             ?>
             <div class="row">
+                <h1>Dettagli Ordine</h1>
                 <div class="col-12 col-lg-6">
                     <div class="row">
                         <div class="col-12 card mt-2 pt-2">
-                            <h1 class="fs-2">Informazioni</h1>
+                            <h2>Informazioni</h2>
                             <table class="table">
                                 <tr>
                                     <th class="fw-bold">Numero ordine:</th>
@@ -27,7 +28,7 @@
                             </table>
                         </div>
                         <div class="col-12 card mt-2 pt-2">
-                            <h1 class="fs-2">Prodotti ordinati</h1>
+                            <h2>Prodotti ordinati</h2>
                             <ul class="products-list mt-2">
                                 <?php foreach ($order->getProducts() as $product): ?>
                                     <li>
@@ -41,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 card mt-2 pt-2 pb-3">
-                    <h1 class="fs-2">Stato ordine</h1>
+                    <h2>Stato ordine</h2>
                     <form method="POST" action="/shop/sales/change-status">
                         <input name="order" class="d-none" value="<?= $order->getId(); ?>" />
                         <label for="select-status" class="form-label">Stato ordine</label>
@@ -55,7 +56,7 @@
                     </form>
                 </div>
                 <div class="col-12 card mt-2 pt-2 pb-3 d-block">
-                    <h1 class="fs-2">Informazioni acquirente</h1>
+                    <h2>Informazioni acquirente</h2>
                     <div class="avatar-circle">
                         <span><?= $user->getFirstName()[0] . $user->getLastName()[0]; ?></span>
                     </div>
